@@ -1,0 +1,6 @@
+name: accessPointId
+in: query
+description: >-
+  Identifier of access point, reference "definitions" for string format
+required: false
+type: string
