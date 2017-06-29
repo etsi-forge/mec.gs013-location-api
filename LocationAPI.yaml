@@ -6,13 +6,9 @@ info:
     Zonal Presence
   version: 1.0.0
   title: MEC Location API
-  termsOfService: TBD
-  contact:
-    name: TBD
-    url: TBD
   license:
-    name: ETSI MEC
-    url: TBD
+    name: ETSI Forge copyright notice
+    url: 'https://forge.etsi.org/etsi-forge-copyright-notice.txt'
 externalDocs:
   description: ETSI MEC013 V1.0.1 Location Service API
   url: 'https://docbox.etsi.org/ISG/MEC/70-Draft/0013LocationApi'
