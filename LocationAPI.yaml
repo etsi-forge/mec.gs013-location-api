@@ -1,17 +1,14 @@
 swagger: '2.0'
 info:
-  description: >-
-    The MEC-013 Location API described using OpenAPI, which is
-    based on the Open Mobile Alliance's specification RESTful Network API for
-    Zonal Presence
-  version: 1.0.0
-  title: MEC Location API
+  title: MEC-012 Location API
+  version: 1.1.1
+  description: 'The MEC-012 Location API described using OpenAPI, which is based on the Open Mobile Alliance''s specification RESTful Network API for Zonal Presence'
   license:
     name: ETSI Forge copyright notice
     url: 'https://forge.etsi.org/etsi-forge-copyright-notice.txt'
 externalDocs:
-  description: ETSI MEC013 V1.0.1 Location Service API
-  url: 'https://docbox.etsi.org/ISG/MEC/70-Draft/0013LocationApi'
+  description: ETSI MEC013 V1.1.1 Location Service API
+  url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/01.01.01_60/gs_mec013v010101p.pdf'
 host: '127.0.0.1:8081'
 basePath: /exampleAPI/location/v1/
 schemes:
@@ -22,32 +19,73 @@ consumes:
 produces:
   - application/json
 parameters:
-  ZoneId:
+  Body.UserTrackingSubscription:
+    name: userTrackingSubscription
+    in: body
+    description: User Tracking Subscription
+    required: true
+    schema:
+      $ref: '#/definitions/UserTrackingSubscription'
+  Body.ZonalTrafficSubscription:
+    name: zonalTrafficSubscription
+    in: body
+    description: Zonal Traffic Subscription
+    required: true
+    schema:
+      $ref: '#/definitions/ZonalTrafficSubscription'
+  Body.ZoneStatusSubscription:
+    name: zoneStatusSubscription
+    in: body
+    description: Zone Status Subscription
+    required: true
+    schema:
+      $ref: '#/definitions/ZoneStatusSubscription'
+  Path.AccessPointId:
+    name: accessPointId
+    in: path
+    description: Access Point ID
+    required: true
+    type: string
+  Path.SubscriptionId:
+    name: subscriptionId
+    in: path
+    description: Subscription ID
+    required: true
+    type: string
+  Path.UserId:
+    name: userId
+    in: path
+    description: User ID
+    required: true
+    type: string
+  Path.ZoneId:
     name: zoneId
-    in: query
+    in: path
     description: Zone ID
     required: true
     type: string
-  AccessPointId:
+  Query.AccessPointId:
     name: accessPointId
     in: query
     description: 'Identifier of access point, reference "definitions" for string format'
     required: false
     type: string
-  InterestRealm:
+  Query.InterestRealm:
     name: interestRealm
     in: query
-    description: >-
-      Interest realm of access point (e.g. geographical area, a type of industry
-      etc.).
+    description: 'Interest realm of access point (e.g. geographical area, a type of industry etc.).'
     required: false
+    type: string
+  Query.ZoneId:
+    name: zoneId
+    in: query
+    description: Zone ID
+    required: true
     type: string
 paths:
   /zones:
     get:
-      description: >-
-        Used to get a list of identifiers for zones authorized for use by the
-        application.
+      description: Used to get a list of identifiers for zones authorized for use by the application.
       produces:
         - application/json
       responses:
@@ -56,53 +94,7 @@ paths:
           schema:
             properties:
               zoneList:
-                description: Collection of the zone information list.
-                required:
-                  - resourceURL
-                properties:
-                  zone:
-                    description: Collection of the zone information list.
-                    type: array
-                    items:
-                      description: A type containing zone information.
-                      required:
-                        - zoneId
-                        - numberOfAccessPoints
-                        - numberOfUnservicableAccessPoints
-                        - numberOfUsers
-                        - resourceURL
-                      properties:
-                        zoneId:
-                          description: Identifier of zone
-                          type: string
-                          example: zone01
-                        numberOfAccessPoints:
-                          description: The number of access points within the zone
-                          type: integer
-                          format: uint32
-                          example: '10'
-                        numberOfUnservicableAccessPoints:
-                          description: Number of inoperable access points within the zone.
-                          type: integer
-                          format: uint32
-                          example: '9'
-                        numberOfUsers:
-                          description: The number of users currently on the access point.
-                          type: integer
-                          format: uint32
-                          example: '7'
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/ZoneList'
           examples:
             application/json:
               zoneList:
@@ -124,50 +116,14 @@ paths:
       produces:
         - application/json
       parameters:
-        - name: zoneId
-          in: path
-          description: Zone ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.ZoneId'
       responses:
         '200':
           description: Successful response to a query regarding the status of a zone
           schema:
             properties:
               zoneInfo:
-                description: A type containing zone information.
-                required:
-                  - zoneId
-                  - numberOfAccessPoints
-                  - numberOfUnservicableAccessPoints
-                  - numberOfUsers
-                  - resourceURL
-                properties:
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  numberOfAccessPoints:
-                    description: The number of access points within the zone
-                    type: integer
-                    format: uint32
-                    example: '10'
-                  numberOfUnservicableAccessPoints:
-                    description: Number of inoperable access points within the zone.
-                    type: integer
-                    format: uint32
-                    example: '9'
-                  numberOfUsers:
-                    description: The number of users currently on the access point.
-                    type: integer
-                    format: uint32
-                    example: '7'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/ZoneInfo'
           examples:
             application/json:
               zoneInfo:
@@ -178,123 +134,19 @@ paths:
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01'
   '/zones/{zoneId}/accessPoints':
     get:
-      description: >-
-        Access point status can be retrieved for sets of access points matching
-        attribute in the request.
+      description: Access point status can be retrieved for sets of access points matching attribute in the request.
       produces:
         - application/json
       parameters:
-        - name: zoneId
-          in: path
-          description: Zone ID
-          required: true
-          type: string
-        - name: interestRealm
-          in: query
-          description: >-
-            Interest realm of access point (e.g. geographical area, a type of
-            industry etc.).
-          required: false
-          type: string
+        - $ref: '#/parameters/Path.ZoneId'
+        - $ref: '#/parameters/Query.InterestRealm'
       responses:
         '200':
-          description: >-
-            Successful response to a query a named set of access point status
-            request
+          description: Successful response to a query a named set of access point status request
           schema:
             properties:
               accessPointList:
-                required:
-                  - zoneId
-                  - resourceURL
-                properties:
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  accessPoint:
-                    description: Collection of the access point information list.
-                    type: array
-                    items:
-                      required:
-                        - accessPointId
-                        - connectionType
-                        - operationStatus
-                        - numberOfUsers
-                        - resourceURL
-                      properties:
-                        accessPointId:
-                          description: >-
-                            Identifier of access point, <E-CGI><Cell Portion ID>
-                            (reference ETSI TS 129 171). Where the E-CGI is made
-                            up of the PLMN and Cell Identity (28 bit string).
-                            Then the PLMN is made up of the 3 digit MCC & 2 or 3
-                            digit MNC. The Cell Portion is an optional element
-                          type: string
-                          example: '001010000000000000000000000000001'
-                        locationInfo:
-                          description: >-
-                            A type containing location information with
-                            latitude, longitude and altitude, in addition the
-                            accuracy of the information are provided.
-                          type: object
-                          required:
-                            - latitude
-                            - longitude
-                            - accuracy
-                          properties:
-                            latitude:
-                              type: number
-                              format: float
-                              example: '80.123'
-                            longitude:
-                              type: number
-                              format: float
-                              example: '70.123'
-                            altitude:
-                              type: number
-                              format: float
-                              example: '10.0'
-                            accuracy:
-                              type: integer
-                              format: int32
-                              example: '10'
-                        connectionType:
-                          description: The connection type for the access point
-                          type: string
-                          example: Macro
-                        operationStatus:
-                          description: The operation status of the access point
-                          type: string
-                          example: Serviceable
-                        numberOfUsers:
-                          description: The number of users currently on the access point.
-                          type: integer
-                          format: uint32
-                          example: '7'
-                        timezone:
-                          description: Time zone of access point
-                          type: string
-                          format: date-time
-                          example: '2017-01-01T02:51:43Z'
-                        interestRealm:
-                          description: >-
-                            Interest realm of access point (e.g. geographical
-                            area, a type of industry etc.).
-                          type: string
-                          example: LA
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/AccessPointList'
           examples:
             application/json:
               accessPointList:
@@ -310,8 +162,7 @@ paths:
                     operationStatus: Serviceable
                     numberOfUsers: '5'
                     interestRealm: LA
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap001
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap001'
                   - accessPointId: '001010000000000000000000000000010'
                     locationInfo:
                       latitude: '91.123'
@@ -322,8 +173,7 @@ paths:
                     operationStatus: Unserviceable
                     numberOfUsers: '0'
                     interestRealm: DC
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap002
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap002'
                   - accessPointId: '001010000000000000000000000000011'
                     locationInfo:
                       latitude: '93.123'
@@ -334,109 +184,23 @@ paths:
                     operationStatus: Serviceable
                     numberOfUsers: '5'
                     interestRealm: NJ
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap003
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap003'
+                resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints'
   '/zones/{zoneId}/accessPoints/{accessPointId}':
     get:
-      description: >-
-        Access point status can be retrieved for sets of access points matching
-        attribute in the request.
+      description: Access point status can be retrieved for sets of access points matching attribute in the request.
       produces:
         - application/json
       parameters:
-        - name: zoneId
-          in: path
-          description: Zone ID
-          required: true
-          type: string
-        - name: accessPointId
-          in: path
-          description: Access Point ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.ZoneId'
+        - $ref: '#/parameters/Path.AccessPointId'
       responses:
         '200':
-          description: >-
-            Successful response to a query a named set of access point status
-            request
+          description: Successful response to a query a named set of access point status request
           schema:
             properties:
               accessPointInfo:
-                required:
-                  - accessPointId
-                  - connectionType
-                  - operationStatus
-                  - numberOfUsers
-                  - resourceURL
-                properties:
-                  accessPointId:
-                    description: >-
-                      Identifier of access point, <E-CGI><Cell Portion ID>
-                      (reference ETSI TS 129 171). Where the E-CGI is made up of
-                      the PLMN and Cell Identity (28 bit string). Then the PLMN
-                      is made up of the 3 digit MCC & 2 or 3 digit MNC. The Cell
-                      Portion is an optional element
-                    type: string
-                    example: '001010000000000000000000000000001'
-                  locationInfo:
-                    description: >-
-                      A type containing location information with latitude,
-                      longitude and altitude, in addition the accuracy of the
-                      information are provided.
-                    type: object
-                    required:
-                      - latitude
-                      - longitude
-                      - accuracy
-                    properties:
-                      latitude:
-                        type: number
-                        format: float
-                        example: '80.123'
-                      longitude:
-                        type: number
-                        format: float
-                        example: '70.123'
-                      altitude:
-                        type: number
-                        format: float
-                        example: '10.0'
-                      accuracy:
-                        type: integer
-                        format: int32
-                        example: '10'
-                  connectionType:
-                    description: The connection type for the access point
-                    type: string
-                    example: Macro
-                  operationStatus:
-                    description: The operation status of the access point
-                    type: string
-                    example: Serviceable
-                  numberOfUsers:
-                    description: The number of users currently on the access point.
-                    type: integer
-                    format: uint32
-                    example: '7'
-                  timezone:
-                    description: Time zone of access point
-                    type: string
-                    format: date-time
-                    example: '2017-01-01T02:51:43Z'
-                  interestRealm:
-                    description: >-
-                      Interest realm of access point (e.g. geographical area, a
-                      type of industry etc.).
-                    type: string
-                    example: LA
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/AccessPointInfo'
           examples:
             application/json:
               accessPointInfo:
@@ -450,124 +214,22 @@ paths:
                 operationStatus: Serviceable
                 numberOfUsers: '5'
                 interestRealm: LA
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/zones/zone001/accessPoints/ap001
+                resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone001/accessPoints/ap001'
   /users:
     get:
-      description: >-
-        Users currently using a zone may be retrieved for sets of access points
-        matching attribute in the request
+      description: Users currently using a zone may be retrieved for sets of access points matching attribute in the request
       produces:
         - application/json
       parameters:
-        - name: zoneId
-          in: query
-          description: Zone ID
-          required: true
-          type: string
-        - name: accessPointId
-          in: query
-          description: >-
-            Identifier of access point, reference "definitions" for string
-            format
-          required: false
-          type: string
+        - $ref: '#/parameters/Query.ZoneId'
+        - $ref: '#/parameters/Query.AccessPointId'
       responses:
         '200':
           description: Successful response to a query users within a zone request
           schema:
             properties:
               userList:
-                description: A type containing list of users.
-                required:
-                  - resourceURL
-                properties:
-                  user:
-                    description: Collection of the zone information list.
-                    type: array
-                    items:
-                      required:
-                        - address
-                        - accessPointId
-                        - zoneId
-                        - resourceURL
-                      properties:
-                        address:
-                          description: >-
-                            Address of user (e.g. "sip" URI, "tel" URI, "acr"
-                            URI).
-                          type: string
-                          format: uri
-                          example: 'acr:192.0.2.1'
-                        accessPointId:
-                          description: >-
-                            Identifier of access point, <E-CGI><Cell Portion ID>
-                            (reference ETSI TS 129 171). Where the E-CGI is made
-                            up of the PLMN and Cell Identity (28 bit string).
-                            Then the PLMN is made up of the 3 digit MCC & 2 or 3
-                            digit MNC. The Cell Portion is an optional element
-                          type: string
-                          example: '001010000000000000000000000000001'
-                        zoneId:
-                          description: Identifier of zone
-                          type: string
-                          example: zone01
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                        locationInfo:
-                          description: >-
-                            A type containing location information with
-                            latitude, longitude and altitude, in addition the
-                            accuracy of the information are provided.
-                          type: object
-                          required:
-                            - latitude
-                            - longitude
-                            - accuracy
-                          properties:
-                            latitude:
-                              type: number
-                              format: float
-                              example: '80.123'
-                            longitude:
-                              type: number
-                              format: float
-                              example: '70.123'
-                            altitude:
-                              type: number
-                              format: float
-                              example: '10.0'
-                            accuracy:
-                              type: integer
-                              format: int32
-                              example: '10'
-                        contextLocationInfo:
-                          description: >-
-                            Contextual information of a user location (e.g.,
-                            aisle, floor, room number, etc.)
-                          type: string
-                          example: GroundFoor
-                        ancillaryInfo:
-                          required:
-                            - address
-                          properties:
-                            address:
-                              description: >-
-                                Address of user (e.g. "sip" URI, "tel" URI,
-                                "acr" URI).
-                              type: string
-                              format: uri
-                              example: 'acr:192.0.2.1'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/UserList'
           examples:
             application/json:
               userList:
@@ -575,130 +237,45 @@ paths:
                   - address: 'acr:192.0.2.1'
                     accessPointId: '001010000000000000000000000000001'
                     zoneId: zone01
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.1
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.1'
                   - address: 'acr:192.0.2.2'
                     accessPointId: '001010000000000000000000000000001'
                     zoneId: zone01
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.2
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.2'
                   - address: 'acr:192.0.2.3'
                     accessPointId: '001010000000000000000000000000010'
                     zoneId: zone01
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.3
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.3'
                   - address: 'acr:192.0.2.4'
                     accessPointId: '001010000000000000000000000000001'
                     zoneId: zone02
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.4
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.4'
                   - address: 'acr:192.0.2.5'
                     accessPointId: '001010000000000000000000000000010'
                     zoneId: zone02
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.5
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.5'
                 resourceURL: 'http://example.com/exampleAPI/location/v1/users'
   '/users/{userId}':
     get:
-      description: >-
-        Users currently using a zone may be retrieved for sets of access points
-        matching attribute in the request
+      description: Users currently using a zone may be retrieved for sets of access points matching attribute in the request
       produces:
         - application/json
       parameters:
-        - name: userId
-          in: path
-          description: User ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.UserId'
       responses:
         '200':
           description: Successful response to a query users within a zone request
           schema:
             properties:
               userInfo:
-                required:
-                  - address
-                  - accessPointId
-                  - zoneId
-                  - resourceURL
-                properties:
-                  address:
-                    description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                    type: string
-                    format: uri
-                    example: 'acr:192.0.2.1'
-                  accessPointId:
-                    description: >-
-                      Identifier of access point, <E-CGI><Cell Portion ID>
-                      (reference ETSI TS 129 171). Where the E-CGI is made up of
-                      the PLMN and Cell Identity (28 bit string). Then the PLMN
-                      is made up of the 3 digit MCC & 2 or 3 digit MNC. The Cell
-                      Portion is an optional element
-                    type: string
-                    example: '001010000000000000000000000000001'
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  locationInfo:
-                    description: >-
-                      A type containing location information with latitude,
-                      longitude and altitude, in addition the accuracy of the
-                      information are provided.
-                    type: object
-                    required:
-                      - latitude
-                      - longitude
-                      - accuracy
-                    properties:
-                      latitude:
-                        type: number
-                        format: float
-                        example: '80.123'
-                      longitude:
-                        type: number
-                        format: float
-                        example: '70.123'
-                      altitude:
-                        type: number
-                        format: float
-                        example: '10.0'
-                      accuracy:
-                        type: integer
-                        format: int32
-                        example: '10'
-                  contextLocationInfo:
-                    description: >-
-                      Contextual information of a user location (e.g., aisle,
-                      floor, room number, etc.)
-                    type: string
-                    example: GroundFoor
-                  ancillaryInfo:
-                    required:
-                      - address
-                    properties:
-                      address:
-                        description: >-
-                          Address of user (e.g. "sip" URI, "tel" URI, "acr"
-                          URI).
-                        type: string
-                        format: uri
-                        example: 'acr:192.0.2.1'
+                $ref: '#/definitions/UserInfo'
           examples:
             application/json:
               userInfo:
                 address: 'acr:192.0.2.1'
                 accessPointId: '001010000000000000000000000000001'
                 zoneId: zone01
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.1
+                resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.1'
                 locationInfo:
                   latitude: '90.123'
                   longitude: '80.123'
@@ -707,9 +284,7 @@ paths:
                 contextLocationInfo: GroundFloor
   /subscriptions/zonalTraffic:
     get:
-      description: >-
-        This operation is used for retrieving all active subscriptions to zonal
-        traffic change notifications.
+      description: This operation is used for retrieving all active subscriptions to zonal traffic change notifications.
       produces:
         - application/json
       responses:
@@ -724,277 +299,46 @@ paths:
                   zonalTrafficSubscription:
                     type: array
                     items:
-                      description: A type containing zonal traffic subscription
-                      type: object
-                      required:
-                        - callbackReference
-                        - zoneId
-                      properties:
-                        clientCorrelator:
-                          description: >-
-                            Uniquely identifies this create subscription
-                            request. If there is a communication failure during
-                            the request, using the same clientCorrelator when
-                            retrying the request allows the operator to avoid
-                            creating a duplicate subscription.
-                          type: string
-                          example: '0123'
-                        callbackReference:
-                          required:
-                            - notifyURL
-                          properties:
-                            notifyURL:
-                              description: The URL of your own listener application.
-                              type: string
-                              format: url
-                              example: >-
-                                http://clientApp.example.com/location_notifications/123456
-                        zoneId:
-                          description: Identifier of zone
-                          type: string
-                          example: zone01
-                        interestRealm:
-                          description: >-
-                            Interest realms of access points within a zone (e.g.
-                            geographical area, a type of industry etc.).
-                          type: array
-                          items:
-                            description: >-
-                              Interest realm of access point (e.g. geographical
-                              area, a type of industry etc.).
-                            type: string
-                            example: LA
-                        userEventCriteria:
-                          description: >-
-                            List of user event values to generate notifications
-                            for (these apply to zone identifier or all interest
-                            realms within zone identifier specified). If this
-                            element is missing, a notification is requested to
-                            be generated for any change in user event.
-                          type: array
-                          items:
-                            description: User event
-                            type: string
-                            example: Entering
-                        duration:
-                          description: >-
-                            Period (in seconds) of time notifications are
-                            provided for. If set to "0" (zero), a default
-                            duration time, which is specified by the service
-                            policy, will be used. If the parameter is omitted,
-                            the notifications will continue until the maximum
-                            duration time, which is specified by the service
-                            policy, unless the notifications are stopped by
-                            deletion of subscription for notifications. This
-                            element MAY be given by the client during resource
-                            creation in order to signal the desired lifetime of
-                            the subscription. The server MUST return in this
-                            element the period of time for which the
-                            subscription will still be valid.
-                          type: string
-                          example: '0'
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                      $ref: '#/definitions/ZonalTrafficSubscription'
                   resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                    $ref: '#/definitions/ResourceURL'
           examples:
             application/json:
               notificationSubscriptionList:
                 zonalTrafficSubscription:
                   - clientCorrelator: '0123'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123456
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                     zoneId: zone01
                     interestRealm: LA
                     userEventCriteria: Transferring
                   - clientCorrelator: '0124'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription124
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription124'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123457
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123457'
                     zoneId: zone02
                     interestRealm: LA
                     userEventCriteria: Transferring
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zonalTraffic'
     post:
-      description: >-
-        This operation is used for creating a new subscription to zonal traffic
-        change notification.
+      description: This operation is used for creating a new subscription to zonal traffic change notification.
       produces:
         - application/json
       parameters:
-        - name: zonalTrafficSubscription
-          in: body
-          description: Zonal Traffic Subscription
-          required: true
-          schema:
-            description: A type containing zonal traffic subscription
-            type: object
-            required:
-              - callbackReference
-              - zoneId
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              zoneId:
-                description: Identifier of zone
-                type: string
-                example: zone01
-              interestRealm:
-                description: >-
-                  Interest realms of access points within a zone (e.g.
-                  geographical area, a type of industry etc.).
-                type: array
-                items:
-                  description: >-
-                    Interest realm of access point (e.g. geographical area, a
-                    type of industry etc.).
-                  type: string
-                  example: LA
-              userEventCriteria:
-                description: >-
-                  List of user event values to generate notifications for (these
-                  apply to zone identifier or all interest realms within zone
-                  identifier specified). If this element is missing, a
-                  notification is requested to be generated for any change in
-                  user event.
-                type: array
-                items:
-                  description: User event
-                  type: string
-                  example: Entering
-              duration:
-                description: >-
-                  Period (in seconds) of time notifications are provided for. If
-                  set to "0" (zero), a default duration time, which is specified
-                  by the service policy, will be used. If the parameter is
-                  omitted, the notifications will continue until the maximum
-                  duration time, which is specified by the service policy,
-                  unless the notifications are stopped by deletion of
-                  subscription for notifications. This element MAY be given by
-                  the client during resource creation in order to signal the
-                  desired lifetime of the subscription. The server MUST return
-                  in this element the period of time for which the subscription
-                  will still be valid.
-                type: string
-                example: '0'
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        - $ref: '#/parameters/Body.ZonalTrafficSubscription'
       responses:
         '201':
           description: Response to create new zonal traffic subscription
           schema:
             properties:
               zonalTrafficSubscription:
-                description: A type containing zonal traffic subscription
-                type: object
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  interestRealm:
-                    description: >-
-                      Interest realms of access points within a zone (e.g.
-                      geographical area, a type of industry etc.).
-                    type: array
-                    items:
-                      description: >-
-                        Interest realm of access point (e.g. geographical area,
-                        a type of industry etc.).
-                      type: string
-                      example: LA
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to zone identifier or all interest realms
-                      within zone identifier specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  duration:
-                    description: >-
-                      Period (in seconds) of time notifications are provided
-                      for. If set to "0" (zero), a default duration time, which
-                      is specified by the service policy, will be used. If the
-                      parameter is omitted, the notifications will continue
-                      until the maximum duration time, which is specified by the
-                      service policy, unless the notifications are stopped by
-                      deletion of subscription for notifications. This element
-                      MAY be given by the client during resource creation in
-                      order to signal the desired lifetime of the subscription.
-                      The server MUST return in this element the period of time
-                      for which the subscription will still be valid.
-                    type: string
-                    example: '0'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/ZonalTrafficSubscription'
           examples:
             application/json:
               zonalTrafficSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
@@ -1002,303 +346,64 @@ paths:
                 userEventCriteria: Transferring
   '/subscriptions/zonalTraffic/{subscriptionId}':
     get:
-      description: >-
-        This operation is used for updating an individual subscription to zonal
-        traffic change notification.
+      description: This operation is used for updating an individual subscription to zonal traffic change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual zonal traffic subscription
           schema:
             properties:
               zonalTrafficSubscription:
-                description: A type containing zonal traffic subscription
-                type: object
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  interestRealm:
-                    description: >-
-                      Interest realms of access points within a zone (e.g.
-                      geographical area, a type of industry etc.).
-                    type: array
-                    items:
-                      description: >-
-                        Interest realm of access point (e.g. geographical area,
-                        a type of industry etc.).
-                      type: string
-                      example: LA
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to zone identifier or all interest realms
-                      within zone identifier specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  duration:
-                    description: >-
-                      Period (in seconds) of time notifications are provided
-                      for. If set to "0" (zero), a default duration time, which
-                      is specified by the service policy, will be used. If the
-                      parameter is omitted, the notifications will continue
-                      until the maximum duration time, which is specified by the
-                      service policy, unless the notifications are stopped by
-                      deletion of subscription for notifications. This element
-                      MAY be given by the client during resource creation in
-                      order to signal the desired lifetime of the subscription.
-                      The server MUST return in this element the period of time
-                      for which the subscription will still be valid.
-                    type: string
-                    example: '0'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/ZonalTrafficSubscription'
           examples:
             application/json:
               zonalTrafficSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
                 interestRealm: LA
                 userEventCriteria: Transferring
     put:
-      description: >-
-        This operation is used for updating an individual subscription to zonal
-        traffic change notification.
+      description: This operation is used for updating an individual subscription to zonal traffic change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
-        - name: zonalTrafficSubscription
-          in: body
-          description: Zonal Traffic Subscription
-          required: true
-          schema:
-            description: A type containing zonal traffic subscription
-            type: object
-            required:
-              - callbackReference
-              - zoneId
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              zoneId:
-                description: Identifier of zone
-                type: string
-                example: zone01
-              interestRealm:
-                description: >-
-                  Interest realms of access points within a zone (e.g.
-                  geographical area, a type of industry etc.).
-                type: array
-                items:
-                  description: >-
-                    Interest realm of access point (e.g. geographical area, a
-                    type of industry etc.).
-                  type: string
-                  example: LA
-              userEventCriteria:
-                description: >-
-                  List of user event values to generate notifications for (these
-                  apply to zone identifier or all interest realms within zone
-                  identifier specified). If this element is missing, a
-                  notification is requested to be generated for any change in
-                  user event.
-                type: array
-                items:
-                  description: User event
-                  type: string
-                  example: Entering
-              duration:
-                description: >-
-                  Period (in seconds) of time notifications are provided for. If
-                  set to "0" (zero), a default duration time, which is specified
-                  by the service policy, will be used. If the parameter is
-                  omitted, the notifications will continue until the maximum
-                  duration time, which is specified by the service policy,
-                  unless the notifications are stopped by deletion of
-                  subscription for notifications. This element MAY be given by
-                  the client during resource creation in order to signal the
-                  desired lifetime of the subscription. The server MUST return
-                  in this element the period of time for which the subscription
-                  will still be valid.
-                type: string
-                example: '0'
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        - $ref: '#/parameters/Path.SubscriptionId'
+        - $ref: '#/parameters/Body.ZonalTrafficSubscription'
       responses:
         '200':
           description: Response to update individual zonal traffic subscription
           schema:
             properties:
               zonalTrafficSubscription:
-                description: A type containing zonal traffic subscription
-                type: object
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  interestRealm:
-                    description: >-
-                      Interest realms of access points within a zone (e.g.
-                      geographical area, a type of industry etc.).
-                    type: array
-                    items:
-                      description: >-
-                        Interest realm of access point (e.g. geographical area,
-                        a type of industry etc.).
-                      type: string
-                      example: LA
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to zone identifier or all interest realms
-                      within zone identifier specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  duration:
-                    description: >-
-                      Period (in seconds) of time notifications are provided
-                      for. If set to "0" (zero), a default duration time, which
-                      is specified by the service policy, will be used. If the
-                      parameter is omitted, the notifications will continue
-                      until the maximum duration time, which is specified by the
-                      service policy, unless the notifications are stopped by
-                      deletion of subscription for notifications. This element
-                      MAY be given by the client during resource creation in
-                      order to signal the desired lifetime of the subscription.
-                      The server MUST return in this element the period of time
-                      for which the subscription will still be valid.
-                    type: string
-                    example: '0'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/ZonalTrafficSubscription'
           examples:
             application/json:
               zonalTrafficSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
                 interestRealm: LA
                 userEventCriteria: Transferring
     delete:
-      description: >-
-        This operation is used for cancelling a subscription and stopping
-        corresponding notifications.
+      description: This operation is used for cancelling a subscription and stopping corresponding notifications.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '204':
           description: No content
   /subscriptions/userTracking:
     get:
-      description: >-
-        This operation is used for retrieving all active subscriptions to user
-        tracking change notifications.
+      description: This operation is used for retrieving all active subscriptions to user tracking change notifications.
       produces:
         - application/json
       responses:
@@ -1313,409 +418,106 @@ paths:
                   userTrackingSubscription:
                     type: array
                     items:
-                      required:
-                        - callbackReference
-                        - address
-                      properties:
-                        clientCorrelator:
-                          description: >-
-                            Uniquely identifies this create subscription
-                            request. If there is a communication failure during
-                            the request, using the same clientCorrelator when
-                            retrying the request allows the operator to avoid
-                            creating a duplicate subscription.
-                          type: string
-                          example: '0123'
-                        callbackReference:
-                          required:
-                            - notifyURL
-                          properties:
-                            notifyURL:
-                              description: The URL of your own listener application.
-                              type: string
-                              format: url
-                              example: >-
-                                http://clientApp.example.com/location_notifications/123456
-                        address:
-                          description: >-
-                            Address of user (e.g. "sip" URI, "tel" URI, "acr"
-                            URI).
-                          type: string
-                          format: uri
-                          example: 'acr:192.0.2.1'
-                        userEventCriteria:
-                          description: >-
-                            List of user event values to generate notifications
-                            for (these apply to address specified). If this
-                            element is missing, a notification is requested to
-                            be generated for any change in user event.
-                          type: array
-                          items:
-                            description: User event
-                            type: string
-                            example: Entering
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                      $ref: '#/definitions/UserTrackingSubscription'
                   resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                    $ref: '#/definitions/ResourceURL'
           examples:
             application/json:
               notificationSubscriptionList:
                 userTrackingSubscription:
                   - clientCorrelator: '0123'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123456
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                     address: 'acr:192.0.2.1'
                     userEventCriteria: Transferring
                   - clientCorrelator: '0124'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription124
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription124'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123456
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                     address: 'acr:192.0.2.2'
                     userEventCriteria: Transferring
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking'
     post:
-      description: >-
-        This operation is used for creating a new subscription to user tracking
-        change notification
+      description: This operation is used for creating a new subscription to user tracking change notification
       produces:
         - application/json
       parameters:
-        - name: userTrackingSubscription
-          in: body
-          description: User Tracking Subscription
-          required: true
-          schema:
-            required:
-              - callbackReference
-              - address
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              address:
-                description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                type: string
-                format: uri
-                example: 'acr:192.0.2.1'
-              userEventCriteria:
-                description: >-
-                  List of user event values to generate notifications for (these
-                  apply to address specified). If this element is missing, a
-                  notification is requested to be generated for any change in
-                  user event.
-                type: array
-                items:
-                  description: User event
-                  type: string
-                  example: Entering
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        - $ref: '#/parameters/Body.UserTrackingSubscription'
       responses:
         '201':
           description: Response to create new user tracking subscription
           schema:
             properties:
               userTrackingSubscription:
-                required:
-                  - callbackReference
-                  - address
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  address:
-                    description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                    type: string
-                    format: uri
-                    example: 'acr:192.0.2.1'
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to address specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/UserTrackingSubscription'
           examples:
             application/json:
               userTrackingSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
   '/subscriptions/userTracking/{subscriptionId}':
     get:
-      description: >-
-        This operation is used for retrieving an individual subscription to user
-        tracking change notification.
+      description: This operation is used for retrieving an individual subscription to user tracking change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual user tracking subscription
           schema:
             properties:
               userTrackingSubscription:
-                required:
-                  - callbackReference
-                  - address
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  address:
-                    description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                    type: string
-                    format: uri
-                    example: 'acr:192.0.2.1'
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to address specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/UserTrackingSubscription'
           examples:
             application/json:
               userTrackingSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
     put:
-      description: >-
-        This operation is used for updating an individual subscription to user
-        tracking change notification.
+      description: This operation is used for updating an individual subscription to user tracking change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
-        - name: userTrackingSubscription
-          in: body
-          description: User Tracking Subscription
-          required: true
-          schema:
-            required:
-              - callbackReference
-              - address
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              address:
-                description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                type: string
-                format: uri
-                example: 'acr:192.0.2.1'
-              userEventCriteria:
-                description: >-
-                  List of user event values to generate notifications for (these
-                  apply to address specified). If this element is missing, a
-                  notification is requested to be generated for any change in
-                  user event.
-                type: array
-                items:
-                  description: User event
-                  type: string
-                  example: Entering
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        - $ref: '#/parameters/Path.SubscriptionId'
+        - $ref: '#/parameters/Body.UserTrackingSubscription'
       responses:
         '200':
           description: Response to update individual user tracking subscription
           schema:
             properties:
               userTrackingSubscription:
-                required:
-                  - callbackReference
-                  - address
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  address:
-                    description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                    type: string
-                    format: uri
-                    example: 'acr:192.0.2.1'
-                  userEventCriteria:
-                    description: >-
-                      List of user event values to generate notifications for
-                      (these apply to address specified). If this element is
-                      missing, a notification is requested to be generated for
-                      any change in user event.
-                    type: array
-                    items:
-                      description: User event
-                      type: string
-                      example: Entering
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                $ref: '#/definitions/UserTrackingSubscription'
           examples:
             application/json:
               userTrackingSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
     delete:
-      description: >-
-        This operation is used for retrieving an individual subscription to user
-        tracking change notification.
+      description: This operation is used for retrieving an individual subscription to user tracking change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '204':
           description: No Content
   /subscriptions/zonalStatus:
     get:
-      description: >-
-        This operation is used for creating a new subscription to zone status
-        change notification.
+      description: This operation is used for creating a new subscription to zone status change notification.
       produces:
         - application/json
       responses:
@@ -1730,226 +532,46 @@ paths:
                   zonalTrafficSubscription:
                     type: array
                     items:
-                      required:
-                        - callbackReference
-                        - zoneId
-                      properties:
-                        clientCorrelator:
-                          description: >-
-                            Uniquely identifies this create subscription
-                            request. If there is a communication failure during
-                            the request, using the same clientCorrelator when
-                            retrying the request allows the operator to avoid
-                            creating a duplicate subscription.
-                          type: string
-                          example: '0123'
-                        resourceURL:
-                          description: Self referring URL.
-                          type: string
-                          format: uri
-                          example: >-
-                            http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                        callbackReference:
-                          required:
-                            - notifyURL
-                          properties:
-                            notifyURL:
-                              description: The URL of your own listener application.
-                              type: string
-                              format: url
-                              example: >-
-                                http://clientApp.example.com/location_notifications/123456
-                        zoneId:
-                          description: Identifier of zone
-                          type: string
-                          example: zone01
-                        numberOfUsersZoneThreshold:
-                          description: >-
-                            Threshold number of users in a zone which if crossed
-                            shall cause a notification.
-                          type: integer
-                          format: uint32
-                          example: '40'
-                        numberOfUsersAPThreshold:
-                          description: >-
-                            Threshold number of users in an access point which
-                            if crossed shall cause a notification.
-                          type: integer
-                          format: uint32
-                          example: '20'
-                        operationStatus:
-                          description: >-
-                            List of operation status values to generate
-                            notifications for (these apply to all access points
-                            within a zone).
-                          type: array
-                          items:
-                            description: The operation status of the access point
-                            type: string
-                            example: Serviceable
+                      $ref: '#/definitions/ZoneStatusSubscription'
                   resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+                    $ref: '#/definitions/ResourceURL'
           examples:
             application/json:
               notificationSubscriptionList:
                 zoneStatusSubscription:
                   - clientCorrelator: '0123'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123456
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                     zoneId: zone01
                     numberOfUsersZoneThreshold: '500'
                     operationStatus: Serviceable
                   - clientCorrelator: '0124'
-                    resourceURL: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription124
+                    resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription124'
                     callbackReference:
-                      notifyURL: >-
-                        http://clientApp.example.com/location_notifications/123457
+                      notifyURL: 'http://clientApp.example.com/location_notifications/123457'
                     zoneId: zone02
                     numberOfUsersAPThreshold: '50'
                     operationStatus: Serviceable
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus'
     post:
-      description: >-
-        This operation is used for creating a new subscription to zone status
-        change notification.
+      description: This operation is used for creating a new subscription to zone status change notification.
       produces:
         - application/json
       parameters:
-        - name: zoneStatusSubscription
-          in: body
-          description: Zone Status Subscription
-          required: true
-          schema:
-            required:
-              - callbackReference
-              - zoneId
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              zoneId:
-                description: Identifier of zone
-                type: string
-                example: zone01
-              numberOfUsersZoneThreshold:
-                description: >-
-                  Threshold number of users in a zone which if crossed shall
-                  cause a notification.
-                type: integer
-                format: uint32
-                example: '40'
-              numberOfUsersAPThreshold:
-                description: >-
-                  Threshold number of users in an access point which if crossed
-                  shall cause a notification.
-                type: integer
-                format: uint32
-                example: '20'
-              operationStatus:
-                description: >-
-                  List of operation status values to generate notifications for
-                  (these apply to all access points within a zone).
-                type: array
-                items:
-                  description: The operation status of the access point
-                  type: string
-                  example: Serviceable
+        - $ref: '#/parameters/Body.ZoneStatusSubscription'
       responses:
         '201':
           description: Response to create new zone status subscription
           schema:
             properties:
               zonalTrafficSubscription:
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  numberOfUsersZoneThreshold:
-                    description: >-
-                      Threshold number of users in a zone which if crossed shall
-                      cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '40'
-                  numberOfUsersAPThreshold:
-                    description: >-
-                      Threshold number of users in an access point which if
-                      crossed shall cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '20'
-                  operationStatus:
-                    description: >-
-                      List of operation status values to generate notifications
-                      for (these apply to all access points within a zone).
-                    type: array
-                    items:
-                      description: The operation status of the access point
-                      type: string
-                      example: Serviceable
+                $ref: '#/definitions/ZoneStatusSubscription'
           examples:
             application/json:
               zoneStatusSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
@@ -1957,242 +579,69 @@ paths:
                 operationStatus: Serviceable
   '/subscriptions/zoneStatus/{subscriptionId}':
     get:
-      description: >-
-        This operation is used for retrieving an individual subscription to zone
-        status change notification.
+      description: This operation is used for retrieving an individual subscription to zone status change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
+        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual zone status subscription
           schema:
             properties:
               zoneStatusSubscription:
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  numberOfUsersZoneThreshold:
-                    description: >-
-                      Threshold number of users in a zone which if crossed shall
-                      cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '40'
-                  numberOfUsersAPThreshold:
-                    description: >-
-                      Threshold number of users in an access point which if
-                      crossed shall cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '20'
-                  operationStatus:
-                    description: >-
-                      List of operation status values to generate notifications
-                      for (these apply to all access points within a zone).
-                    type: array
-                    items:
-                      description: The operation status of the access point
-                      type: string
-                      example: Serviceable
+                $ref: '#/definitions/ZoneStatusSubscription'
           examples:
             application/json:
               zoneStatusSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
                 numberOfUsersZoneThreshold: '500'
                 operationStatus: Serviceable
     put:
-      description: >-
-        This operation is used for updating an individual subscription to zone
-        status change notification.
+      description: This operation is used for updating an individual subscription to zone status change notification.
       produces:
         - application/json
       parameters:
-        - name: subscriptionId
-          in: path
-          description: Subscription ID
-          required: true
-          type: string
-        - name: zoneStatusSubscription
-          in: body
-          description: Zone Status Subscription
-          required: true
-          schema:
-            required:
-              - callbackReference
-              - zoneId
-            properties:
-              clientCorrelator:
-                description: >-
-                  Uniquely identifies this create subscription request. If there
-                  is a communication failure during the request, using the same
-                  clientCorrelator when retrying the request allows the operator
-                  to avoid creating a duplicate subscription.
-                type: string
-                example: '0123'
-              resourceURL:
-                description: Self referring URL.
-                type: string
-                format: uri
-                example: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-              callbackReference:
-                required:
-                  - notifyURL
-                properties:
-                  notifyURL:
-                    description: The URL of your own listener application.
-                    type: string
-                    format: url
-                    example: 'http://clientApp.example.com/location_notifications/123456'
-              zoneId:
-                description: Identifier of zone
-                type: string
-                example: zone01
-              numberOfUsersZoneThreshold:
-                description: >-
-                  Threshold number of users in a zone which if crossed shall
-                  cause a notification.
-                type: integer
-                format: uint32
-                example: '40'
-              numberOfUsersAPThreshold:
-                description: >-
-                  Threshold number of users in an access point which if crossed
-                  shall cause a notification.
-                type: integer
-                format: uint32
-                example: '20'
-              operationStatus:
-                description: >-
-                  List of operation status values to generate notifications for
-                  (these apply to all access points within a zone).
-                type: array
-                items:
-                  description: The operation status of the access point
-                  type: string
-                  example: Serviceable
+        - $ref: '#/parameters/Path.SubscriptionId'
+        - $ref: '#/parameters/Body.ZoneStatusSubscription'
       responses:
         '200':
           description: Response to update individual zone status subscription
           schema:
             properties:
               zoneStatusSubscription:
-                required:
-                  - callbackReference
-                  - zoneId
-                properties:
-                  clientCorrelator:
-                    description: >-
-                      Uniquely identifies this create subscription request. If
-                      there is a communication failure during the request, using
-                      the same clientCorrelator when retrying the request allows
-                      the operator to avoid creating a duplicate subscription.
-                    type: string
-                    example: '0123'
-                  resourceURL:
-                    description: Self referring URL.
-                    type: string
-                    format: uri
-                    example: >-
-                      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-                  callbackReference:
-                    required:
-                      - notifyURL
-                    properties:
-                      notifyURL:
-                        description: The URL of your own listener application.
-                        type: string
-                        format: url
-                        example: >-
-                          http://clientApp.example.com/location_notifications/123456
-                  zoneId:
-                    description: Identifier of zone
-                    type: string
-                    example: zone01
-                  numberOfUsersZoneThreshold:
-                    description: >-
-                      Threshold number of users in a zone which if crossed shall
-                      cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '40'
-                  numberOfUsersAPThreshold:
-                    description: >-
-                      Threshold number of users in an access point which if
-                      crossed shall cause a notification.
-                    type: integer
-                    format: uint32
-                    example: '20'
-                  operationStatus:
-                    description: >-
-                      List of operation status values to generate notifications
-                      for (these apply to all access points within a zone).
-                    type: array
-                    items:
-                      description: The operation status of the access point
-                      type: string
-                      example: Serviceable
+                $ref: '#/definitions/ZoneStatusSubscription'
           examples:
             application/json:
               zoneStatusSubscription:
                 clientCorrelator: '0123'
-                resourceURL: >-
-                  http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123
+                resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus/subscription123'
                 callbackReference:
                   notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                 zoneId: zone01
                 numberOfUsersZoneThreshold: '500'
                 operationStatus: Serviceable
+    delete:
+      description: This operation is used for cancelling a subscription and stopping corresponding notifications.
+      produces:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/Path.SubscriptionId'
+      responses:
+        '204':
+          description: No content
 definitions:
   AccessPointId:
-    description: >-
-      Identifier of access point, <E-CGI><Cell Portion ID> (reference ETSI TS
-      129 171). Where the E-CGI is made up of the PLMN and Cell Identity (28 bit
-      string). Then the PLMN is made up of the 3 digit MCC & 2 or 3 digit MNC.
-      The Cell Portion is an optional element
+    description: 'Identifier of access point, <E-CGI><Cell Portion ID> (reference ETSI TS 129 171). Where the E-CGI is made up of the PLMN and Cell Identity (28 bit string). Then the PLMN is made up of the 3 digit MCC & 2 or 3 digit MNC. The Cell Portion is an optional element'
     type: string
     example: '001010000000000000000000000000001'
   AccessPointInfo:
+    description: A type containing access point information.
+    type: object
     required:
       - accessPointId
       - connectionType
@@ -2201,197 +650,59 @@ definitions:
       - resourceURL
     properties:
       accessPointId:
-        description: >-
-          Identifier of access point, <E-CGI><Cell Portion ID> (reference ETSI
-          TS 129 171). Where the E-CGI is made up of the PLMN and Cell Identity
-          (28 bit string). Then the PLMN is made up of the 3 digit MCC & 2 or 3
-          digit MNC. The Cell Portion is an optional element
-        type: string
-        example: '001010000000000000000000000000001'
+        $ref: '#/definitions/AccessPointId'
       locationInfo:
-        description: >-
-          A type containing location information with latitude, longitude and
-          altitude, in addition the accuracy of the information are provided.
-        type: object
-        required:
-          - latitude
-          - longitude
-          - accuracy
-        properties:
-          latitude:
-            type: number
-            format: float
-            example: '80.123'
-          longitude:
-            type: number
-            format: float
-            example: '70.123'
-          altitude:
-            type: number
-            format: float
-            example: '10.0'
-          accuracy:
-            type: integer
-            format: int32
-            example: '10'
+        $ref: '#/definitions/LocationInfo'
       connectionType:
-        description: The connection type for the access point
-        type: string
-        example: Macro
+        $ref: '#/definitions/ConnectionType'
       operationStatus:
-        description: The operation status of the access point
-        type: string
-        example: Serviceable
+        $ref: '#/definitions/OperationStatus'
       numberOfUsers:
-        description: The number of users currently on the access point.
-        type: integer
-        format: uint32
-        example: '7'
+        $ref: '#/definitions/NumberOfUsers'
       timezone:
-        description: Time zone of access point
-        type: string
-        format: date-time
-        example: '2017-01-01T02:51:43Z'
+        $ref: '#/definitions/Timezone'
       interestRealm:
-        description: >-
-          Interest realm of access point (e.g. geographical area, a type of
-          industry etc.).
-        type: string
-        example: LA
+        $ref: '#/definitions/InterestRealm'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   AccessPointList:
+    description: A type containing list of access points.
+    type: object
     required:
       - zoneId
       - resourceURL
     properties:
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       accessPoint:
         description: Collection of the access point information list.
         type: array
         items:
-          required:
-            - accessPointId
-            - connectionType
-            - operationStatus
-            - numberOfUsers
-            - resourceURL
-          properties:
-            accessPointId:
-              description: >-
-                Identifier of access point, <E-CGI><Cell Portion ID> (reference
-                ETSI TS 129 171). Where the E-CGI is made up of the PLMN and
-                Cell Identity (28 bit string). Then the PLMN is made up of the 3
-                digit MCC & 2 or 3 digit MNC. The Cell Portion is an optional
-                element
-              type: string
-              example: '001010000000000000000000000000001'
-            locationInfo:
-              description: >-
-                A type containing location information with latitude, longitude
-                and altitude, in addition the accuracy of the information are
-                provided.
-              type: object
-              required:
-                - latitude
-                - longitude
-                - accuracy
-              properties:
-                latitude:
-                  type: number
-                  format: float
-                  example: '80.123'
-                longitude:
-                  type: number
-                  format: float
-                  example: '70.123'
-                altitude:
-                  type: number
-                  format: float
-                  example: '10.0'
-                accuracy:
-                  type: integer
-                  format: int32
-                  example: '10'
-            connectionType:
-              description: The connection type for the access point
-              type: string
-              example: Macro
-            operationStatus:
-              description: The operation status of the access point
-              type: string
-              example: Serviceable
-            numberOfUsers:
-              description: The number of users currently on the access point.
-              type: integer
-              format: uint32
-              example: '7'
-            timezone:
-              description: Time zone of access point
-              type: string
-              format: date-time
-              example: '2017-01-01T02:51:43Z'
-            interestRealm:
-              description: >-
-                Interest realm of access point (e.g. geographical area, a type
-                of industry etc.).
-              type: string
-              example: LA
-            resourceURL:
-              description: Self referring URL.
-              type: string
-              format: uri
-              example: >-
-                http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+          $ref: '#/definitions/AccessPointInfo'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   Address:
     description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
     type: string
     format: uri
     example: 'acr:192.0.2.1'
   AncillaryInfo:
-    required:
-      - address
-    properties:
-      address:
-        description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-        type: string
-        format: uri
-        example: 'acr:192.0.2.1'
+    description: Reserved for future use.
+    type: string
   CallbackData:
-    description: >-
-      CallBackData if passed by the application during the associated
-      ZonalTrafficSubscription and UserTrackingSubscription operation. See
-      [REST_NetAPI_Common].
+    description: 'CallBackData if passed by the application during the associated ZonalTrafficSubscription and UserTrackingSubscription operation. See [REST_NetAPI_Common].'
     type: string
     example: '1234'
   CallbackReference:
+    description: Notification callback definition.
+    type: object
     required:
       - notifyURL
     properties:
       notifyURL:
-        description: The URL of your own listener application.
-        type: string
-        format: url
-        example: 'http://clientApp.example.com/location_notifications/123456'
+        $ref: '#/definitions/NotifyURL'
   ClientCorrelator:
-    description: >-
-      Uniquely identifies this create subscription request. If there is a
-      communication failure during the request, using the same clientCorrelator
-      when retrying the request allows the operator to avoid creating a
-      duplicate subscription.
+    description: 'Uniquely identifies this create subscription request. If there is a communication failure during the request, using the same clientCorrelator when retrying the request allows the operator to avoid creating a duplicate subscription.'
     type: string
     example: '0123'
   ConnectionType:
@@ -2399,35 +710,24 @@ definitions:
     type: string
     example: Macro
   ContextLocationInfo:
-    description: >-
-      Contextual information of a user location (e.g., aisle, floor, room
-      number, etc.)
+    description: 'Contextual information of a user location (e.g., aisle, floor, room number, etc.)'
     type: string
-    example: GroundFoor
+    example: GroundFloor
   CurrentAccessPointId:
     description: Zone ID
     type: string
     example: zone01
   Duration:
-    description: >-
-      Period (in seconds) of time notifications are provided for. If set to "0"
-      (zero), a default duration time, which is specified by the service policy,
-      will be used. If the parameter is omitted, the notifications will continue
-      until the maximum duration time, which is specified by the service policy,
-      unless the notifications are stopped by deletion of subscription for
-      notifications. This element MAY be given by the client during resource
-      creation in order to signal the desired lifetime of the subscription. The
-      server MUST return in this element the period of time for which the
-      subscription will still be valid.
+    description: 'Period (in seconds) of time notifications are provided for. If set to "0" (zero), a default duration time, which is specified by the service policy, will be used. If the parameter is omitted, the notifications will continue until the maximum duration time, which is specified by the service policy, unless the notifications are stopped by deletion of subscription for notifications. This element MAY be given by the client during resource creation in order to signal the desired lifetime of the subscription. The server MUST return in this element the period of time for which the subscription will still be valid.'
     type: string
     example: '0'
   InterestRealm:
-    description: >-
-      Interest realm of access point (e.g. geographical area, a type of industry
-      etc.).
+    description: 'Interest realm of access point (e.g. geographical area, a type of industry etc.).'
     type: string
     example: LA
   Link:
+    description: Link to other resources
+    type: object
     required:
       - rel
       - href
@@ -2441,9 +741,7 @@ definitions:
         type: object
         format: anyURI
   LocationInfo:
-    description: >-
-      A type containing location information with latitude, longitude and
-      altitude, in addition the accuracy of the information are provided.
+    description: 'A type containing location information with latitude, longitude and altitude, in addition the accuracy of the information are provided.'
     type: object
     required:
       - latitude
@@ -2487,32 +785,22 @@ definitions:
     format: uint32
     example: '7'
   NumberOfUsersAPThreshold:
-    description: >-
-      Threshold number of users in an access point which if crossed shall cause
-      a notification.
+    description: Threshold number of users in an access point which if crossed shall cause a notification.
     type: integer
     format: uint32
     example: '20'
   NumberOfUsersInAP:
-    description: >-
-      This element shall be present when ZoneStatusSubscription includes
-      numberOfUsersAPThreshold element and the number of users in an access
-      point exceeds the threshold defined in the subscription.
+    description: This element shall be present when ZoneStatusSubscription includes numberOfUsersAPThreshold element and the number of users in an access point exceeds the threshold defined in the subscription.
     type: integer
     format: uint32
     example: '12'
   NumberOfUsersInZone:
-    description: >-
-      This element shall be present when ZoneStatusSubscription includes
-      numberOfUsersZoneThreshold element and the number of users in a zone
-      exceeds the threshold defined in this subscription.
+    description: This element shall be present when ZoneStatusSubscription includes numberOfUsersZoneThreshold element and the number of users in a zone exceeds the threshold defined in this subscription.
     type: integer
     format: uint32
     example: '20'
   NumberOfUsersZoneThreshold:
-    description: >-
-      Threshold number of users in a zone which if crossed shall cause a
-      notification.
+    description: Threshold number of users in a zone which if crossed shall cause a notification.
     type: integer
     format: uint32
     example: '40'
@@ -2528,8 +816,7 @@ definitions:
     description: Self referring URL.
     type: string
     format: uri
-    example: >-
-      http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+    example: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123'
   Timestamp:
     description: Indicates the time of day for zonal presence notification.
     type: string
@@ -2541,20 +828,17 @@ definitions:
     format: date-time
     example: '2017-01-01T02:51:43Z'
   UserEventCriteria:
-    description: >-
-      List of user event values to generate notifications for (these apply to
-      address specified). If this element is missing, a notification is
-      requested to be generated for any change in user event.
+    description: 'List of user event values to generate notifications for (these apply to address specified). If this element is missing, a notification is requested to be generated for any change in user event.'
     type: array
     items:
-      description: User event
-      type: string
-      example: Entering
+      $ref: '#/definitions/UserEventType'
   UserEventType:
     description: User event
     type: string
     example: Entering
   UserInfo:
+    description: A type containing user information.
+    type: object
     required:
       - address
       - accessPointId
@@ -2562,71 +846,22 @@ definitions:
       - resourceURL
     properties:
       address:
-        description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-        type: string
-        format: uri
-        example: 'acr:192.0.2.1'
+        $ref: '#/definitions/Address'
       accessPointId:
-        description: >-
-          Identifier of access point, <E-CGI><Cell Portion ID> (reference ETSI
-          TS 129 171). Where the E-CGI is made up of the PLMN and Cell Identity
-          (28 bit string). Then the PLMN is made up of the 3 digit MCC & 2 or 3
-          digit MNC. The Cell Portion is an optional element
-        type: string
-        example: '001010000000000000000000000000001'
+        $ref: '#/definitions/AccessPointId'
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
       locationInfo:
-        description: >-
-          A type containing location information with latitude, longitude and
-          altitude, in addition the accuracy of the information are provided.
-        type: object
-        required:
-          - latitude
-          - longitude
-          - accuracy
-        properties:
-          latitude:
-            type: number
-            format: float
-            example: '80.123'
-          longitude:
-            type: number
-            format: float
-            example: '70.123'
-          altitude:
-            type: number
-            format: float
-            example: '10.0'
-          accuracy:
-            type: integer
-            format: int32
-            example: '10'
+        $ref: '#/definitions/LocationInfo'
       contextLocationInfo:
-        description: >-
-          Contextual information of a user location (e.g., aisle, floor, room
-          number, etc.)
-        type: string
-        example: GroundFoor
+        $ref: '#/definitions/ContextLocationInfo'
       ancillaryInfo:
-        required:
-          - address
-        properties:
-          address:
-            description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-            type: string
-            format: uri
-            example: 'acr:192.0.2.1'
+        $ref: '#/definitions/AncillaryInfo'
   UserList:
     description: A type containing list of users.
+    type: object
     required:
       - resourceURL
     properties:
@@ -2634,128 +869,29 @@ definitions:
         description: Collection of the zone information list.
         type: array
         items:
-          required:
-            - address
-            - accessPointId
-            - zoneId
-            - resourceURL
-          properties:
-            address:
-              description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-              type: string
-              format: uri
-              example: 'acr:192.0.2.1'
-            accessPointId:
-              description: >-
-                Identifier of access point, <E-CGI><Cell Portion ID> (reference
-                ETSI TS 129 171). Where the E-CGI is made up of the PLMN and
-                Cell Identity (28 bit string). Then the PLMN is made up of the 3
-                digit MCC & 2 or 3 digit MNC. The Cell Portion is an optional
-                element
-              type: string
-              example: '001010000000000000000000000000001'
-            zoneId:
-              description: Identifier of zone
-              type: string
-              example: zone01
-            resourceURL:
-              description: Self referring URL.
-              type: string
-              format: uri
-              example: >-
-                http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
-            locationInfo:
-              description: >-
-                A type containing location information with latitude, longitude
-                and altitude, in addition the accuracy of the information are
-                provided.
-              type: object
-              required:
-                - latitude
-                - longitude
-                - accuracy
-              properties:
-                latitude:
-                  type: number
-                  format: float
-                  example: '80.123'
-                longitude:
-                  type: number
-                  format: float
-                  example: '70.123'
-                altitude:
-                  type: number
-                  format: float
-                  example: '10.0'
-                accuracy:
-                  type: integer
-                  format: int32
-                  example: '10'
-            contextLocationInfo:
-              description: >-
-                Contextual information of a user location (e.g., aisle, floor,
-                room number, etc.)
-              type: string
-              example: GroundFoor
-            ancillaryInfo:
-              required:
-                - address
-              properties:
-                address:
-                  description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-                  type: string
-                  format: uri
-                  example: 'acr:192.0.2.1'
+          $ref: '#/definitions/UserInfo'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   UserTrackingSubscription:
+    description: A type containing user tracking subscription.
+    type: object
     required:
       - callbackReference
       - address
     properties:
       clientCorrelator:
-        description: >-
-          Uniquely identifies this create subscription request. If there is a
-          communication failure during the request, using the same
-          clientCorrelator when retrying the request allows the operator to
-          avoid creating a duplicate subscription.
-        type: string
-        example: '0123'
+        $ref: '#/definitions/ClientCorrelator'
       callbackReference:
-        required:
-          - notifyURL
-        properties:
-          notifyURL:
-            description: The URL of your own listener application.
-            type: string
-            format: url
-            example: 'http://clientApp.example.com/location_notifications/123456'
+        $ref: '#/definitions/CallbackReference'
       address:
-        description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-        type: string
-        format: uri
-        example: 'acr:192.0.2.1'
+        $ref: '#/definitions/Address'
       userEventCriteria:
-        description: >-
-          List of user event values to generate notifications for (these apply
-          to address specified). If this element is missing, a notification is
-          requested to be generated for any change in user event.
-        type: array
-        items:
-          description: User event
-          type: string
-          example: Entering
+        $ref: '#/definitions/UserEventCriteria'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   ZonalPresenceNotification:
+    description: A type containing zonal presence notification
+    type: object
     required:
       - zoneId
       - address
@@ -2764,67 +900,27 @@ definitions:
       - timestamp
     properties:
       callbackData:
-        description: >-
-          CallBackData if passed by the application during the associated
-          ZonalTrafficSubscription and UserTrackingSubscription operation. See
-          [REST_NetAPI_Common].
-        type: string
-        example: '1234'
+        $ref: '#/definitions/CallbackData'
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       address:
-        description: 'Address of user (e.g. "sip" URI, "tel" URI, "acr" URI).'
-        type: string
-        format: uri
-        example: 'acr:192.0.2.1'
+        $ref: '#/definitions/Address'
       interestRealm:
-        description: >-
-          Interest realm of access point (e.g. geographical area, a type of
-          industry etc.).
-        type: string
-        example: LA
+        $ref: '#/definitions/InterestRealm'
       userEventType:
-        description: User event
-        type: string
-        example: Entering
+        $ref: '#/definitions/UserEventType'
       currentAccessPointId:
-        description: Zone ID
-        type: string
-        example: zone01
+        $ref: '#/definitions/CurrentAccessPointId'
       previousAccessPointId:
-        description: Zone ID
-        type: string
-        example: zone02
+        $ref: '#/definitions/PreviousAccessPointId'
       timestamp:
-        description: Indicates the time of day for zonal presence notification.
-        type: string
-        format: date-time
-        example: '2017-01-01T02:51:43Z'
+        $ref: '#/definitions/Timestamp'
       link:
-        description: >-
-          Link to other resources that are in relationship with this
-          notification. The server SHOULD include a link to the related
-          subscription. No other links are required or suggested by this
-          specification.
+        description: Link to other resources that are in relationship with this notification. The server SHOULD include a link to the related subscription. No other links are required or suggested by this specification.
         type: array
         items:
-          required:
-            - rel
-            - href
-          properties:
-            rel:
-              description: Describes the relationship between the URI and the resource.
-              type: object
-              format: string
-            href:
-              description: URI
-              type: object
-              format: anyURI
-        example: >-
-          rel="ZonalTrafficSubscription"
-          href="http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/sub123"/
+          $ref: '#/definitions/Link'
+        example: 'rel="ZonalTrafficSubscription" href="http://example.com/exampleAPI/location/v1/subscriptions/zonalTraffic/sub123"/'
   ZonalTrafficSubscription:
     description: A type containing zonal traffic subscription
     type: object
@@ -2833,73 +929,32 @@ definitions:
       - zoneId
     properties:
       clientCorrelator:
-        description: >-
-          Uniquely identifies this create subscription request. If there is a
-          communication failure during the request, using the same
-          clientCorrelator when retrying the request allows the operator to
-          avoid creating a duplicate subscription.
-        type: string
-        example: '0123'
+        $ref: '#/definitions/ClientCorrelator'
       callbackReference:
-        required:
-          - notifyURL
-        properties:
-          notifyURL:
-            description: The URL of your own listener application.
-            type: string
-            format: url
-            example: 'http://clientApp.example.com/location_notifications/123456'
+        $ref: '#/definitions/CallbackReference'
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       interestRealm:
-        description: >-
-          Interest realms of access points within a zone (e.g. geographical
-          area, a type of industry etc.).
+        description: 'Interest realms of access points within a zone (e.g. geographical area, a type of industry etc.).'
         type: array
         items:
-          description: >-
-            Interest realm of access point (e.g. geographical area, a type of
-            industry etc.).
-          type: string
-          example: LA
+          $ref: '#/definitions/InterestRealm'
       userEventCriteria:
-        description: >-
-          List of user event values to generate notifications for (these apply
-          to zone identifier or all interest realms within zone identifier
-          specified). If this element is missing, a notification is requested to
-          be generated for any change in user event.
+        description: 'List of user event values to generate notifications for (these apply to zone identifier or all interest realms within zone identifier specified). If this element is missing, a notification is requested to be generated for any change in user event.'
         type: array
         items:
-          description: User event
-          type: string
-          example: Entering
+          $ref: '#/definitions/UserEventType'
       duration:
-        description: >-
-          Period (in seconds) of time notifications are provided for. If set to
-          "0" (zero), a default duration time, which is specified by the service
-          policy, will be used. If the parameter is omitted, the notifications
-          will continue until the maximum duration time, which is specified by
-          the service policy, unless the notifications are stopped by deletion
-          of subscription for notifications. This element MAY be given by the
-          client during resource creation in order to signal the desired
-          lifetime of the subscription. The server MUST return in this element
-          the period of time for which the subscription will still be valid.
-        type: string
-        example: '0'
+        $ref: '#/definitions/Duration'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   ZoneId:
     description: Identifier of zone
     type: string
     example: zone01
   ZoneInfo:
     description: A type containing zone information.
+    type: object
     required:
       - zoneId
       - numberOfAccessPoints
@@ -2908,32 +963,18 @@ definitions:
       - resourceURL
     properties:
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       numberOfAccessPoints:
-        description: The number of access points within the zone
-        type: integer
-        format: uint32
-        example: '10'
+        $ref: '#/definitions/NumberOfAccessPoints'
       numberOfUnservicableAccessPoints:
-        description: Number of inoperable access points within the zone.
-        type: integer
-        format: uint32
-        example: '9'
+        $ref: '#/definitions/NumberOfUnserviceableAccessPoints'
       numberOfUsers:
-        description: The number of users currently on the access point.
-        type: integer
-        format: uint32
-        example: '7'
+        $ref: '#/definitions/NumberOfUsers'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   ZoneList:
     description: Collection of the zone information list.
+    type: object
     required:
       - resourceURL
     properties:
@@ -2941,170 +982,57 @@ definitions:
         description: Collection of the zone information list.
         type: array
         items:
-          description: A type containing zone information.
-          required:
-            - zoneId
-            - numberOfAccessPoints
-            - numberOfUnservicableAccessPoints
-            - numberOfUsers
-            - resourceURL
-          properties:
-            zoneId:
-              description: Identifier of zone
-              type: string
-              example: zone01
-            numberOfAccessPoints:
-              description: The number of access points within the zone
-              type: integer
-              format: uint32
-              example: '10'
-            numberOfUnservicableAccessPoints:
-              description: Number of inoperable access points within the zone.
-              type: integer
-              format: uint32
-              example: '9'
-            numberOfUsers:
-              description: The number of users currently on the access point.
-              type: integer
-              format: uint32
-              example: '7'
-            resourceURL:
-              description: Self referring URL.
-              type: string
-              format: uri
-              example: >-
-                http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+          $ref: '#/definitions/ZoneInfo'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
   ZoneStatusNotification:
+    description: A type containing zone status notification.
+    type: object
     required:
       - zoneId
       - timestamp
     properties:
       callbackData:
-        description: >-
-          CallBackData if passed by the application during the associated
-          ZonalTrafficSubscription and UserTrackingSubscription operation. See
-          [REST_NetAPI_Common].
-        type: string
-        example: '1234'
+        $ref: '#/definitions/CallbackData'
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       accessPointId:
-        description: >-
-          Identifier of access point, <E-CGI><Cell Portion ID> (reference ETSI
-          TS 129 171). Where the E-CGI is made up of the PLMN and Cell Identity
-          (28 bit string). Then the PLMN is made up of the 3 digit MCC & 2 or 3
-          digit MNC. The Cell Portion is an optional element
-        type: string
-        example: '001010000000000000000000000000001'
+        $ref: '#/definitions/AccessPointId'
       numberOfUsersInZone:
-        description: >-
-          This element shall be present when ZoneStatusSubscription includes
-          numberOfUsersZoneThreshold element and the number of users in a zone
-          exceeds the threshold defined in this subscription.
-        type: integer
-        format: uint32
-        example: '20'
+        $ref: '#/definitions/NumberOfUsersInZone'
       numberOfUsersInAP:
-        description: >-
-          This element shall be present when ZoneStatusSubscription includes
-          numberOfUsersAPThreshold element and the number of users in an access
-          point exceeds the threshold defined in the subscription.
-        type: integer
-        format: uint32
-        example: '12'
+        $ref: '#/definitions/NumberOfUsersInAP'
       operationStatus:
-        description: The operation status of the access point
-        type: string
-        example: Serviceable
+        $ref: '#/definitions/OperationStatus'
       timestamp:
-        description: Indicates the time of day for zonal presence notification.
-        type: string
-        format: date-time
-        example: '2017-01-01T02:51:43Z'
+        $ref: '#/definitions/Timestamp'
       link:
-        description: >-
-          Link to other resources that are in relationship with this
-          notification. The server SHOULD include a link to the related
-          subscription. No other links are required or suggested by this
-          specification.
+        description: Link to other resources that are in relationship with this notification. The server SHOULD include a link to the related subscription. No other links are required or suggested by this specification.
         type: array
         items:
-          required:
-            - rel
-            - href
-          properties:
-            rel:
-              description: Describes the relationship between the URI and the resource.
-              type: object
-              format: string
-            href:
-              description: URI
-              type: object
-              format: anyURI
-        example: >-
-          rel="ZonalStatusSubscription"
-          href="http://example.com/exampleAPI/location/v1/subscriptions/zonalStatus/sub123"
+          $ref: '#/definitions/Link'
+        example: 'rel="ZonalStatusSubscription" href="http://example.com/exampleAPI/location/v1/subscriptions/zonalStatus/sub123"'
   ZoneStatusSubscription:
+    description: A type containing zone status subscription.
+    type: object
     required:
       - callbackReference
       - zoneId
     properties:
       clientCorrelator:
-        description: >-
-          Uniquely identifies this create subscription request. If there is a
-          communication failure during the request, using the same
-          clientCorrelator when retrying the request allows the operator to
-          avoid creating a duplicate subscription.
-        type: string
-        example: '0123'
+        $ref: '#/definitions/ClientCorrelator'
       resourceURL:
-        description: Self referring URL.
-        type: string
-        format: uri
-        example: >-
-          http://example.com/exampleAPI/location/v1/subscriptions/userTracking/subscription123
+        $ref: '#/definitions/ResourceURL'
       callbackReference:
-        required:
-          - notifyURL
-        properties:
-          notifyURL:
-            description: The URL of your own listener application.
-            type: string
-            format: url
-            example: 'http://clientApp.example.com/location_notifications/123456'
+        $ref: '#/definitions/CallbackReference'
       zoneId:
-        description: Identifier of zone
-        type: string
-        example: zone01
+        $ref: '#/definitions/ZoneId'
       numberOfUsersZoneThreshold:
-        description: >-
-          Threshold number of users in a zone which if crossed shall cause a
-          notification.
-        type: integer
-        format: uint32
-        example: '40'
+        $ref: '#/definitions/NumberOfUsersZoneThreshold'
       numberOfUsersAPThreshold:
-        description: >-
-          Threshold number of users in an access point which if crossed shall
-          cause a notification.
-        type: integer
-        format: uint32
-        example: '20'
+        $ref: '#/definitions/NumberOfUsersAPThreshold'
       operationStatus:
-        description: >-
-          List of operation status values to generate notifications for (these
-          apply to all access points within a zone).
+        description: List of operation status values to generate notifications for (these apply to all access points within a zone).
         type: array
         items:
-          description: The operation status of the access point
-          type: string
-          example: Serviceable
-
+          $ref: '#/definitions/OperationStatus'
