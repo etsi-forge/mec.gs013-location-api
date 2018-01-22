@@ -13,4 +13,4 @@ done
 
 echo "-- Final validator returns $fres."
 
-!exit $fres
+exit $fres
