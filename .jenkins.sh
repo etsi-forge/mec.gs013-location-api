@@ -12,5 +12,5 @@ for i in $specfiles ; do
 done
 
 echo "-- Final validator returns $fres."
-read -p "Press [Enter] key to continue..."
+
 !exit $fres
