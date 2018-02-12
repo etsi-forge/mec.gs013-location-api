@@ -1094,6 +1094,18 @@
     "ConnectionType": {
       "description": "The connection type for the access point",
       "type": "string",
+      "enum": [
+        "Femto",
+        "LTE-femto",
+        "Smallcell",
+        "LTE-smallcell",
+        "Wifi",
+        "Pico",
+        "Micro",
+        "Macro",
+        "Wimax",
+        "Unknown"
+      ],
       "example": "Macro"
     },
     "ContextLocationInfo": {

@@ -708,6 +708,16 @@ definitions:
   ConnectionType:
     description: The connection type for the access point
     type: string
+    enum:
+      - LTE-femto
+      - Smallcell
+      - LTE-smallcell
+      - Wifi
+      - Pico
+      - Micro
+      - Macro
+      - Wimax
+      - Unknown
     example: Macro
   ContextLocationInfo:
     description: 'Contextual information of a user location (e.g., aisle, floor, room number, etc.)'
