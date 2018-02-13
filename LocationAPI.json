@@ -1270,6 +1270,11 @@
     "UserEventType": {
       "description": "User event",
       "type": "string",
+      "enum": [
+        "Entering",
+        "Leaving",
+        "Transferring"
+      ],
       "example": "Entering"
     },
     "UserInfo": {
