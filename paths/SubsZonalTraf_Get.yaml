@@ -1,8 +1,10 @@
+tags: 
+- subscriptions
+operationId: zonalTrafficSubGet
 description:
   This operation is used for retrieving all active subscriptions to zonal traffic change notifications.
 produces:
 - application/json
-
 responses:
   200:
     description: Response to retrieve zonal traffic subscriptions
@@ -18,7 +20,6 @@ responses:
                     $ref: '#/definitions/ZonalTrafficSubscription'
               resourceURL:
                 $ref: '#/definitions/ResourceURL'
-
     examples:
       application/json:
         $ref: '../examples/NotiSubsListZonaTraf.json'

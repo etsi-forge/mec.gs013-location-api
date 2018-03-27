@@ -1,10 +1,10 @@
+tags: 
+- subscriptions
+operationId: zoneStatusGetById
 description:
   This operation is used for retrieving an individual subscription to zone status change notification.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
-
 responses:
   200:
     description: Response to retrieve individual zone status subscription
@@ -12,7 +12,6 @@ responses:
       properties:
         zoneStatusSubscription:
           $ref: '#/definitions/ZoneStatusSubscription'
-
     examples:
       application/json:
         $ref: '../examples/ZoneStatusSubscription.json'

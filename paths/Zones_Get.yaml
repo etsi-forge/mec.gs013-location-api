@@ -1,7 +1,9 @@
+tags: 
+- zones
+operationId: zonesGet
 description: Used to get a list of identifiers for zones authorized for use by the application.
 produces:
 - application/json
-
 responses:
   200:
     description: Successful response to a query regarding the status of a zone
@@ -9,7 +11,6 @@ responses:
       properties:
         zoneList:
           $ref: '#/definitions/ZoneList'
-      
     examples:
       application/json:
         $ref: '../examples/ZoneList.json'

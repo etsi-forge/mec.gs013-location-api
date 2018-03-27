@@ -1,10 +1,12 @@
+tags: 
+- subscriptions
+operationId: zoneStatusPost
 description:
   This operation is used for creating a new subscription to zone status change notification.
 produces:
 - application/json
 parameters:
 - $ref: '#/parameters/Body.ZoneStatusSubscription'
-
 responses:
   201:
     description: Response to create new zone status subscription
@@ -12,7 +14,6 @@ responses:
       properties: 
         zonalTrafficSubscription:
           $ref: '#/definitions/ZoneStatusSubscription'
-
     examples:
       application/json:
         $ref: '../examples/ZoneStatusSubscription.json'

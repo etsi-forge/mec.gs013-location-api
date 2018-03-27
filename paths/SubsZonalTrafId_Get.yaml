@@ -1,10 +1,10 @@
+tags: 
+- subscriptions
+operationId: zonalTrafficSubGetById
 description:
   This operation is used for updating an individual subscription to zonal traffic change notification.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
-
 responses:
   200:
     description: Response to retrieve individual zonal traffic subscription
@@ -12,7 +12,6 @@ responses:
       properties:
         zonalTrafficSubscription:
           $ref: '#/definitions/ZonalTrafficSubscription'
-
     examples:
       application/json:
         $ref: '../examples/ZonalTrafficSubscription.json'

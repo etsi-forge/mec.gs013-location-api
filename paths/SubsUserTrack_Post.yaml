@@ -1,10 +1,12 @@
+tags: 
+- subscriptions
+operationId: userTrackingSubPost
 description:
   This operation is used for creating a new subscription to user tracking change notification
 produces:
 - application/json
 parameters:
 - $ref: '#/parameters/Body.UserTrackingSubscription'
-
 responses:
   201:
     description: Response to create new user tracking subscription
@@ -12,7 +14,6 @@ responses:
       properties:
         userTrackingSubscription:
           $ref: '#/definitions/UserTrackingSubscription'
-
     examples:
       application/json:
         $ref: '../examples/UserTrackingSubscription.json'

@@ -1,8 +1,10 @@
+tags: 
+- subscriptions
+operationId: userTrackingSubGet
 description:
   This operation is used for retrieving all active subscriptions to user tracking change notifications.
 produces:
 - application/json
-
 responses:
   200:
     description: Response to retrieve user tracking subscriptions
@@ -18,7 +20,6 @@ responses:
                     $ref: '#/definitions/UserTrackingSubscription'
               resourceURL:
                 $ref: '#/definitions/ResourceURL'
-
     examples:
       application/json:
         $ref: '../examples/NotiSubsListUserTrac.json'

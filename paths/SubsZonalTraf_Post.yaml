@@ -1,10 +1,12 @@
+tags: 
+- subscriptions
+operationId: zonalTrafficSubPost
 description:
   This operation is used for creating a new subscription to zonal traffic change notification.
 produces:
 - application/json
 parameters:
-- $ref: '#/parameters/Body.ZonalTrafficSubscription'
-      
+- $ref: '#/parameters/Body.ZonalTrafficSubscription'   
 responses:
   201:
     description: Response to create new zonal traffic subscription
@@ -12,7 +14,6 @@ responses:
       properties:
         zonalTrafficSubscription:
           $ref: '#/definitions/ZonalTrafficSubscription'
-
     examples:
       application/json:
         $ref: '../examples/ZonalTrafficSubscription.json'

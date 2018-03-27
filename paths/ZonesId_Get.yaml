@@ -1,10 +1,10 @@
+tags: 
+- zones
+operationId: zonesGetById
 description: 
   Used to get the status of a zone.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.ZoneId'
-
 responses:
   200:
     description: Successful response to a query regarding the status of a zone
@@ -12,7 +12,6 @@ responses:
       properties:
         zoneInfo:
           $ref: '#/definitions/ZoneInfo'
-      
     examples:
       application/json:
         $ref: '../examples/ZoneInfo.json'

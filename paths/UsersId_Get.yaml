@@ -1,10 +1,10 @@
+tags: 
+- users
+operationId: usersGetById
 description:
   Users currently using a zone may be retrieved for sets of access points matching attribute in the request
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.UserId'
-  
 responses:
   200:
     description: Successful response to a query users within a zone request
@@ -12,7 +12,6 @@ responses:
       properties:
         userInfo:
           $ref: '#/definitions/UserInfo'
-
     examples:
       application/json:
         $ref: '../examples/UserInfo.json'

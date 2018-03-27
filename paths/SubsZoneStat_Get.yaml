@@ -1,8 +1,10 @@
+tags: 
+- subscriptions
+operationId: zoneStatusGet
 description:
   This operation is used for creating a new subscription to zone status change notification.
 produces:
 - application/json
-
 responses:
   200:
     description: Response to retrieve zone status subscriptions
@@ -18,7 +20,6 @@ responses:
                     $ref: '#/definitions/ZoneStatusSubscription'
               resourceURL:
                 $ref: '#/definitions/ResourceURL'
-                
     examples:
       application/json:
         $ref: '../examples/NotiSubsListZoneStat.json'

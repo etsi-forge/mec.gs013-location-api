@@ -1,2 +1,4 @@
+parameters:
+- $ref: '#/parameters/Path.UserId'
 get:
   $ref: ./UsersId_Get.yaml

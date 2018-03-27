@@ -1,10 +1,10 @@
+tags: 
+- subscriptions
+operationId: zoneStatusDelById
 description:
   This operation is used for cancelling a subscription and stopping corresponding notifications.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
-
 responses:
   204:
     description: No content

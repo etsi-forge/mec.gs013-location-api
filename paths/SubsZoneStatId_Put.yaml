@@ -1,11 +1,12 @@
+tags: 
+- subscriptions
+operationId: zoneStatusPutById
 description:
   This operation is used for updating an individual subscription to zone status change notification.
 produces:
 - application/json
 parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
 - $ref: '#/parameters/Body.ZoneStatusSubscription'
-
 responses:
   200:
     description: Response to update individual zone status subscription
@@ -13,7 +14,6 @@ responses:
       properties:
         zoneStatusSubscription:
           $ref: '#/definitions/ZoneStatusSubscription'
-
     examples:
       application/json:
         $ref: '../examples/ZoneStatusSubscription.json'

@@ -2,15 +2,15 @@ swagger: '2.0'
 info:
   title: Location API
   version: 1.1.1
-  description: 'The ETSI MEC ISG MEC013 Location API described using OpenAPI. The API is based on the Open Mobile Alliance''s specification RESTful Network API for Zonal Presence'
+  description: The ETSI MEC ISG MEC012 Location API described using OpenAPI. The API is based on the Open Mobile Alliance's specification RESTful Network API for Zonal Presence
   license:
     name: ETSI Forge copyright notice
     url: 'https://forge.etsi.org/etsi-forge-copyright-notice.txt'
 externalDocs:
-  description: ETSI GS MEC013 Location Service API, V1.1.1
+  description: ETSI MEC013 V1.1.1 Location Service API
   url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/01.01.01_60/gs_mec013v010101p.pdf'
 host: '127.0.0.1:8081'
-basePath: /exampleAPI/location/v1/
+basePath: /exampleAPI/location/v1
 schemes:
   - http
   - https
@@ -18,6 +18,10 @@ consumes:
   - application/json
 produces:
   - application/json
+tags:
+  - name: zones
+  - name: users
+  - name: subscriptions
 parameters:
   Body.UserTrackingSubscription:
     name: userTrackingSubscription
@@ -85,6 +89,9 @@ parameters:
 paths:
   /zones:
     get:
+      tags:
+        - zones
+      operationId: zonesGet
       description: Used to get a list of identifiers for zones authorized for use by the application.
       produces:
         - application/json
@@ -111,12 +118,15 @@ paths:
                     resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone02'
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zones'
   '/zones/{zoneId}':
+    parameters:
+      - $ref: '#/parameters/Path.ZoneId'
     get:
+      tags:
+        - zones
+      operationId: zonesGetById
       description: Used to get the status of a zone.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.ZoneId'
       responses:
         '200':
           description: Successful response to a query regarding the status of a zone
@@ -133,12 +143,16 @@ paths:
                 numberOfUsers: '10'
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01'
   '/zones/{zoneId}/accessPoints':
+    parameters:
+      - $ref: '#/parameters/Path.ZoneId'
     get:
+      tags:
+        - zones
+      operationId: zonesByIdGetAps
       description: Access point status can be retrieved for sets of access points matching attribute in the request.
       produces:
         - application/json
       parameters:
-        - $ref: '#/parameters/Path.ZoneId'
         - $ref: '#/parameters/Query.InterestRealm'
       responses:
         '200':
@@ -187,13 +201,16 @@ paths:
                     resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints/ap003'
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone01/accessPoints'
   '/zones/{zoneId}/accessPoints/{accessPointId}':
+    parameters:
+      - $ref: '#/parameters/Path.ZoneId'
+      - $ref: '#/parameters/Path.AccessPointId'
     get:
+      tags:
+        - zones
+      operationId: zonesByIdGetApsById
       description: Access point status can be retrieved for sets of access points matching attribute in the request.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.ZoneId'
-        - $ref: '#/parameters/Path.AccessPointId'
       responses:
         '200':
           description: Successful response to a query a named set of access point status request
@@ -217,6 +234,9 @@ paths:
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zones/zone001/accessPoints/ap001'
   /users:
     get:
+      tags:
+        - users
+      operationId: usersGet
       description: Users currently using a zone may be retrieved for sets of access points matching attribute in the request
       produces:
         - application/json
@@ -256,12 +276,15 @@ paths:
                     resourceURL: 'http://example.com/exampleAPI/location/v1/users/acr%3A192.0.2.5'
                 resourceURL: 'http://example.com/exampleAPI/location/v1/users'
   '/users/{userId}':
+    parameters:
+      - $ref: '#/parameters/Path.UserId'
     get:
+      tags:
+        - users
+      operationId: usersGetById
       description: Users currently using a zone may be retrieved for sets of access points matching attribute in the request
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.UserId'
       responses:
         '200':
           description: Successful response to a query users within a zone request
@@ -284,6 +307,9 @@ paths:
                 contextLocationInfo: GroundFloor
   /subscriptions/zonalTraffic:
     get:
+      tags:
+        - subscriptions
+      operationId: zonalTrafficSubGet
       description: This operation is used for retrieving all active subscriptions to zonal traffic change notifications.
       produces:
         - application/json
@@ -322,6 +348,9 @@ paths:
                     userEventCriteria: Transferring
                 resourceURL: 'http://example.com/exampleAPI/location/v1/zonalTraffic'
     post:
+      tags:
+        - subscriptions
+      operationId: zonalTrafficSubPost
       description: This operation is used for creating a new subscription to zonal traffic change notification.
       produces:
         - application/json
@@ -345,12 +374,15 @@ paths:
                 interestRealm: LA
                 userEventCriteria: Transferring
   '/subscriptions/zonalTraffic/{subscriptionId}':
+    parameters:
+      - $ref: '#/parameters/Path.SubscriptionId'
     get:
+      tags:
+        - subscriptions
+      operationId: zonalTrafficSubGetById
       description: This operation is used for updating an individual subscription to zonal traffic change notification.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual zonal traffic subscription
@@ -369,11 +401,13 @@ paths:
                 interestRealm: LA
                 userEventCriteria: Transferring
     put:
+      tags:
+        - subscriptions
+      operationId: zonalTrafficSubPutById
       description: This operation is used for updating an individual subscription to zonal traffic change notification.
       produces:
         - application/json
       parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
         - $ref: '#/parameters/Body.ZonalTrafficSubscription'
       responses:
         '200':
@@ -393,16 +427,20 @@ paths:
                 interestRealm: LA
                 userEventCriteria: Transferring
     delete:
+      tags:
+        - subscriptions
+      operationId: zonalTrafficSubDelById
       description: This operation is used for cancelling a subscription and stopping corresponding notifications.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '204':
           description: No content
   /subscriptions/userTracking:
     get:
+      tags:
+        - subscriptions
+      operationId: userTrackingSubGet
       description: This operation is used for retrieving all active subscriptions to user tracking change notifications.
       produces:
         - application/json
@@ -439,6 +477,9 @@ paths:
                     userEventCriteria: Transferring
                 resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/userTracking'
     post:
+      tags:
+        - subscriptions
+      operationId: userTrackingSubPost
       description: This operation is used for creating a new subscription to user tracking change notification
       produces:
         - application/json
@@ -461,12 +502,15 @@ paths:
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
   '/subscriptions/userTracking/{subscriptionId}':
+    parameters:
+      - $ref: '#/parameters/Path.SubscriptionId'
     get:
+      tags:
+        - subscriptions
+      operationId: userTrackingSubGetById
       description: This operation is used for retrieving an individual subscription to user tracking change notification.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual user tracking subscription
@@ -484,11 +528,13 @@ paths:
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
     put:
+      tags:
+        - subscriptions
+      operationId: userTrackingSubPutById
       description: This operation is used for updating an individual subscription to user tracking change notification.
       produces:
         - application/json
       parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
         - $ref: '#/parameters/Body.UserTrackingSubscription'
       responses:
         '200':
@@ -507,16 +553,20 @@ paths:
                 address: 'acr:192.0.2.1'
                 userEventCriteria: Transferring
     delete:
+      tags:
+        - subscriptions
+      operationId: userTrackingSubDelById
       description: This operation is used for retrieving an individual subscription to user tracking change notification.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '204':
           description: No Content
   /subscriptions/zonalStatus:
     get:
+      tags:
+        - subscriptions
+      operationId: zoneStatusGet
       description: This operation is used for creating a new subscription to zone status change notification.
       produces:
         - application/json
@@ -555,6 +605,9 @@ paths:
                     operationStatus: Serviceable
                 resourceURL: 'http://example.com/exampleAPI/location/v1/subscriptions/zoneStatus'
     post:
+      tags:
+        - subscriptions
+      operationId: zoneStatusPost
       description: This operation is used for creating a new subscription to zone status change notification.
       produces:
         - application/json
@@ -578,12 +631,15 @@ paths:
                 numberOfUsersZoneThreshold: '500'
                 operationStatus: Serviceable
   '/subscriptions/zoneStatus/{subscriptionId}':
+    parameters:
+      - $ref: '#/parameters/Path.SubscriptionId'
     get:
+      tags:
+        - subscriptions
+      operationId: zoneStatusGetById
       description: This operation is used for retrieving an individual subscription to zone status change notification.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '200':
           description: Response to retrieve individual zone status subscription
@@ -602,11 +658,13 @@ paths:
                 numberOfUsersZoneThreshold: '500'
                 operationStatus: Serviceable
     put:
+      tags:
+        - subscriptions
+      operationId: zoneStatusPutById
       description: This operation is used for updating an individual subscription to zone status change notification.
       produces:
         - application/json
       parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
         - $ref: '#/parameters/Body.ZoneStatusSubscription'
       responses:
         '200':
@@ -626,11 +684,12 @@ paths:
                 numberOfUsersZoneThreshold: '500'
                 operationStatus: Serviceable
     delete:
+      tags:
+        - subscriptions
+      operationId: zoneStatusDelById
       description: This operation is used for cancelling a subscription and stopping corresponding notifications.
       produces:
         - application/json
-      parameters:
-        - $ref: '#/parameters/Path.SubscriptionId'
       responses:
         '204':
           description: No content
@@ -709,6 +768,7 @@ definitions:
     description: The connection type for the access point
     type: string
     enum:
+      - Femto
       - LTE-femto
       - Smallcell
       - LTE-smallcell

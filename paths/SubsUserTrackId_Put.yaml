@@ -1,11 +1,12 @@
+tags: 
+- subscriptions
+operationId: userTrackingSubPutById
 description:
   This operation is used for updating an individual subscription to user tracking change notification.
 produces:
 - application/json
 parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
 - $ref: '#/parameters/Body.UserTrackingSubscription'
-
 responses:
   200:
     description: Response to update individual user tracking subscription
@@ -13,7 +14,6 @@ responses:
       properties:
         userTrackingSubscription:
           $ref: '#/definitions/UserTrackingSubscription'
-
     examples:
       application/json:
         $ref: '../examples/UserTrackingSubscription.json'

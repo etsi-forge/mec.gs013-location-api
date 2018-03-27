@@ -1,10 +1,10 @@
+tags: 
+- subscriptions
+operationId: userTrackingSubGetById
 description:
   This operation is used for retrieving an individual subscription to user tracking change notification.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
-
 responses:
   200:
     description: Response to retrieve individual user tracking subscription
@@ -12,7 +12,6 @@ responses:
       properties:
         userTrackingSubscription:
           $ref: '#/definitions/UserTrackingSubscription'
-
     examples:
       application/json:
         $ref: '../examples/UserTrackingSubscription.json'

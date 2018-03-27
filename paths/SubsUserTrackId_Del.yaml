@@ -1,10 +1,10 @@
+tags: 
+- subscriptions
+operationId: userTrackingSubDelById
 description:
   This operation is used for retrieving an individual subscription to user tracking change notification.
 produces:
 - application/json
-parameters:
-- $ref: '#/parameters/Path.SubscriptionId'
-
 responses:
   204:
     description: No Content

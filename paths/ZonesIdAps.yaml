@@ -1,2 +1,4 @@
+parameters:
+- $ref: '#/parameters/Path.ZoneId'
 get:
   $ref: ./ZonesIdAps_Get.yaml

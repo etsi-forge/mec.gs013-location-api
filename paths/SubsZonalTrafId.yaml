@@ -1,3 +1,6 @@
+parameters:
+- $ref: '#/parameters/Path.SubscriptionId'
+
 get:
   $ref: ./SubsZonalTrafId_Get.yaml
 
