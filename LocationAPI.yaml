@@ -4,8 +4,8 @@ info:
   version: 1.1.1
   description: The ETSI MEC ISG MEC012 Location API described using OpenAPI. The API is based on the Open Mobile Alliance's specification RESTful Network API for Zonal Presence
   license:
-    name: ETSI Forge copyright notice
-    url: 'https://forge.etsi.org/etsi-forge-copyright-notice.txt'
+    name: BSD-3-Clause
+    url: 'https://forge.etsi.org/legal-matters'
 externalDocs:
   description: ETSI MEC013 V1.1.1 Location Service API
   url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/01.01.01_60/gs_mec013v010101p.pdf'
