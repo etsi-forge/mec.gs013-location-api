@@ -1,6 +1,0 @@
-name: zoneStatusSubscription
-in: body
-description: Zone Status Subscription
-required: true
-schema: 
-  $ref: '#/definitions/ZoneStatusSubscription'

@@ -1,6 +1,0 @@
-name: zonalTrafficSubscription
-in: body
-description: Zonal Traffic Subscription
-required: true
-schema:
-  $ref: '#/definitions/ZonalTrafficSubscription'
