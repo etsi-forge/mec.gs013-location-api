@@ -1,5 +1,7 @@
 openapi: 3.0.0
 info:
+  contact:
+    url: https://forge.etsi.org/rep/mec/gs013-location-api
   title: ETSI GS MEC 013 - Location API
   version: 2.1.1
   description: The ETSI MEC ISG MEC013 WLAN Access Information API described using OpenAPI.
@@ -10,12 +12,14 @@ externalDocs:
   description: ETSI MEC013 V2.1.1 Location API
   url: 'http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/02.01.01_60/gs_mec013v020101p.pdf'
 servers:
-  - url: 'https://{apiRoot}/location/v2/'
+  - url: 'https://localhost/location/v2'
+tags:
+- name: 'location'
 paths:
   /queries/distance:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'UE Distance Lookup of a specific UE'
       description: 'UE Distance Lookup between terminals or a terminal and a location'
       operationId: distanceGET
@@ -49,8 +53,8 @@ paths:
       x-swagger-router-controller: 'queries'
   /queries/users:
     get:
-      tags: 
-      - ''
+      tags:
+      - 'location'
       summary: 'UE Location Lookup of a specific UE or group of UEs'
       description: 'UE Location Lookup of a specific UE or group of UEs'
       operationId: usersGET
@@ -84,7 +88,7 @@ paths:
   /queries/zones:
     get:
       tags:
-        - ''
+        - 'location'
       summary: 'Zones information Lookup'
       description: 'Used to get a list of identifiers for zones authorized for use by the application.'
       operationId: zonesGET
@@ -114,7 +118,7 @@ paths:
   /queries/zones/{zoneId}:
     get:
       tags:
-        - ''
+        - 'location'
       summary: 'Zones information Lookup'
       description: 'Used to get the information for an authorized zone for use by the application.'
       operationId: zonesGetById
@@ -146,7 +150,7 @@ paths:
   /queries/zones/{zoneId}/accessPoints:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Radio Node Location Lookup'
       description: 'Radio Node Location Lookup to retrieve a list of radio nodes associated to a zone.'
       operationId: apGET
@@ -179,7 +183,7 @@ paths:
   /queries/zones/{zoneId}/accessPoints/{accessPointId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Radio Node Location Lookup'
       description: 'Radio Node Location Lookup to retrieve a radio node associated to a zone.'
       operationId: apByIdGET
@@ -212,7 +216,7 @@ paths:
   /subscriptions/area/circle:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to area change notifications'
       description: 'This operation is used for retrieving all active subscriptions to area change notifications.'
       operationId: areaCircleSubListGET
@@ -247,7 +251,7 @@ paths:
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/area/circle'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for area change notification'
       description: 'Creates a subscription to the Location Service for an area change notification.'
       operationId: areaCircleSubPOST
@@ -316,7 +320,10 @@ paths:
         notification:
           '{$request.body#/circleNotificationSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: circleNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -330,7 +337,7 @@ paths:
                         subscriptionNotification:
                           enteringLeavingCriteria: 'Entering'
                           isFinalNotification: false,
-                          link: 
+                          link:
                             rel: CircleNotificationSubscription
                             href: 'http://meAppServer.example.com/location/v2/subscriptions/area/circle/sub123'
                           terminalLocation:
@@ -351,7 +358,7 @@ paths:
   /subscriptions/area/circle/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
       operationId: areaCircleSubGET
@@ -399,7 +406,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: areaCircleSubPUT
@@ -474,7 +481,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: areaCircleSubDELETE
@@ -495,7 +502,7 @@ paths:
   /subscriptions/distance:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to distance change notifications'
       description: 'This operation is used for retrieving all active subscriptions to a distance change notifications.'
       operationId: distanceSubListGET
@@ -518,7 +525,7 @@ paths:
                       callbackReference:
                         callbackData: '1234'
                         notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                      monitoredAddress: 
+                      monitoredAddress:
                       - 'acr:10.0.0.1'
                       - 'acr:10.0.0.2'
                       checkImmediate: true
@@ -531,7 +538,7 @@ paths:
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/distance'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for distance change notification'
       description: 'Creates a subscription to the Location Service for a distance change notification.'
       operationId: distanceSubPOST
@@ -551,7 +558,7 @@ paths:
                   callbackReference:
                     callbackData: '1234'
                     notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                  monitoredAddress: 
+                  monitoredAddress:
                   - 'acr:10.0.0.1'
                   - 'acr:10.0.0.2'
                   checkImmediate: true
@@ -576,7 +583,7 @@ paths:
                     callbackReference:
                       callbackData: '1234'
                       notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                    monitoredAddress: 
+                    monitoredAddress:
                     - 'acr:10.0.0.1'
                     - 'acr:10.0.0.2'
                     checkImmediate: true
@@ -602,7 +609,10 @@ paths:
         notification:
           '{$request.body#/distanceNotificationSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: distanceNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -616,7 +626,7 @@ paths:
                         subscriptionNotification:
                           distanceCriteria: 'AllWithinDistance'
                           isFinalNotification: false,
-                          link: 
+                          link:
                             rel: DistanceNotificationSubscription
                             href: 'http://meAppServer.example.com/location/v2/subscriptions/distance/sub123'
                           terminalLocation:
@@ -647,7 +657,7 @@ paths:
   /subscriptions/distance/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
       operationId: distanceSubGET
@@ -671,7 +681,7 @@ paths:
                     callbackReference:
                       callbackData: '1234'
                       notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                    monitoredAddress: 
+                    monitoredAddress:
                     - 'acr:10.0.0.1'
                     - 'acr:10.0.0.2'
                     checkImmediate: true
@@ -696,7 +706,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: distanceSubPUT
@@ -716,7 +726,7 @@ paths:
                   callbackReference:
                     callbackData: '1234'
                     notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                  monitoredAddress: 
+                  monitoredAddress:
                   - 'acr:10.0.0.1'
                   - 'acr:10.0.0.2'
                   checkImmediate: true
@@ -744,7 +754,7 @@ paths:
                     callbackReference:
                       callbackData: '1234'
                       notifyURL: 'http://clientApp.example.com/location_notifications/123456'
-                    monitoredAddress: 
+                    monitoredAddress:
                     - 'acr:10.0.0.1'
                     - 'acr:10.0.0.2'
                     checkImmediate: true
@@ -773,7 +783,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: distanceSubDELETE
@@ -794,7 +804,7 @@ paths:
   /subscriptions/periodic:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to periodic notifications'
       description: 'This operation is used for retrieving all active subscriptions to periodic notifications.'
       operationId: periodicSubListGET
@@ -824,7 +834,7 @@ paths:
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/periodic'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for periodic notification'
       description: 'Creates a subscription to the Location Service for a periodic notification.'
       operationId: periodicSubPOST
@@ -883,7 +893,10 @@ paths:
         notification:
           '{$request.body#/periodicNotificationSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: periodicNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -896,7 +909,7 @@ paths:
                       example:
                         subscriptionNotification:
                           isFinalNotification: false,
-                          link: 
+                          link:
                             rel: PeriodicNotificationSubscription
                             href: 'http://meAppServer.example.com/location/v2/subscriptions/periodic/sub123'
                           terminalLocation:
@@ -917,7 +930,7 @@ paths:
   /subscriptions/periodic/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
       operationId: periodicSubGET
@@ -960,7 +973,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: periodicSubPUT
@@ -1025,7 +1038,7 @@ paths:
       x-swagger-router-controller: "subscriptions"
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: periodicSubDELETE
@@ -1046,7 +1059,7 @@ paths:
   /subscriptions/userTracking:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to user tracking notifications'
       description: 'This operation is used for retrieving all active subscriptions to user tracking notifications.'
       operationId: userTrackingSubListGET
@@ -1080,7 +1093,7 @@ paths:
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/userTracking'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for user tracking notification'
       description: 'Creates a subscription to the Location Service for user tracking change notification.'
       operationId: userTrackingSubPOST
@@ -1135,7 +1148,10 @@ paths:
         notification:
           '{$request.body#/userTrackingSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: userTrackingNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -1153,7 +1169,7 @@ paths:
                           userEventType: 'Transferring'
                           currentAccessPointId: 'ap2'
                           previousAccessPointId: 'ap1'
-                          timestamp: 
+                          timestamp:
                             seconds: 1483231138
                             nanoseconds: 0
                           link:
@@ -1166,7 +1182,7 @@ paths:
   /subscriptions/userTracking/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
       operationId: userTrackingSubGET
@@ -1207,7 +1223,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: userTrackingSubPUT
@@ -1268,7 +1284,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: userTrackingSubDELETE
@@ -1289,7 +1305,7 @@ paths:
   /subscriptions/zonalTraffic:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to zonal traffic notifications'
       description: 'This operation is used for retrieving all active subscriptions to zonal traffic change notifications.'
       operationId: zonalTrafficSubListGET
@@ -1323,7 +1339,7 @@ paths:
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for zonal traffic notification'
       description: 'Creates a subscription to the Location Service for zonal traffic change notification.'
       operationId: zonalTrafficSubPOST
@@ -1378,7 +1394,10 @@ paths:
         notification:
           '{$request.body#/zonalTrafficSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: zonalTrafficNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -1396,7 +1415,7 @@ paths:
                           userEventType: 'Transferring'
                           currentAccessPointId: 'ap2'
                           previousAccessPointId: 'ap1'
-                          timestamp: 
+                          timestamp:
                             seconds: 1483231138
                             nanoseconds: 0
                           link:
@@ -1409,10 +1428,10 @@ paths:
   /subscriptions/zonalTraffic/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
-      operationId: ZonalTrafficSubGET
+      operationId: zonalTrafficSubGET
       parameters:
         - $ref: '#/components/parameters/Path.SubscrId'
       responses:
@@ -1450,7 +1469,7 @@ paths:
       x-swagger-router-controller: "subscriptions"
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: zonalTrafficSubPUT
@@ -1511,7 +1530,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: zonalTrafficSubDELETE
@@ -1532,7 +1551,7 @@ paths:
   /subscriptions/zoneStatus:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieves all active subscriptions to zone status notifications'
       description: 'This operation is used for retrieving all active subscriptions to zone status change notifications.'
       operationId: zoneStatusSubListGET
@@ -1557,11 +1576,11 @@ paths:
                         notifyURL: 'http://clientApp.example.com/location_notifications/123456'
                       zoneId: 'zone01'
                       numberOfUsersZoneThreshold: 500
-                      operationStatus: 'Serviceable'
+                      operationStatus: ['Serviceable']
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zoneStatus'
     post:
       tags:
-      - ''
+      - 'location'
       summary: 'Creates a subscription for zone status notification'
       description: 'Creates a subscription to the Location Service for zone status change notification.'
       operationId: zoneStatusSubPOST
@@ -1582,7 +1601,7 @@ paths:
                     notifyURL: 'http://my.callback.com/location_notifications/some-id'
                   zoneId: 'zone01'
                   numberOfUsersZoneThreshold: 500
-                  operationStatus: 'Serviceable'
+                  operationStatus: ['Serviceable']
       responses:
         '201':
           description: 'Successful subscription'
@@ -1600,7 +1619,7 @@ paths:
                       notifyURL: 'http://my.callback.com/location_notifications/some-id'
                     zoneId: 'zone01'
                     numberOfUsersZoneThreshold: 500
-                    operationStatus: 'Serviceable'
+                    operationStatus: ['Serviceable']
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123'
         '400':
           $ref: '#/components/responses/400'
@@ -1618,7 +1637,10 @@ paths:
         notification:
           '{$request.body#/zoneStatusSubscription.callbackReference.notifyURL}':
             post:
-              requestBody: 
+              summary: 'Callback POST used to send a notification'
+              description: 'Notification from Location service, content based on subscription type'
+              operationId: zoneStatusNotificationPOST
+              requestBody:
                 description: 'Subscription notification'
                 required: true
                 content:
@@ -1636,7 +1658,7 @@ paths:
                           operationStatus: 'Serviceable'
                           numberOfUsersInZone: '20'
                           numberOfUsersInAP: '12'
-                          timestamp: 
+                          timestamp:
                             seconds: 1483231138
                             nanoseconds: 0
                           link:
@@ -1649,7 +1671,7 @@ paths:
   /subscriptions/zoneStatus/{subscriptionId}:
     get:
       tags:
-      - ''
+      - 'location'
       summary: 'Retrieve subscription information'
       description: 'Get subscription information.'
       operationId: zoneStatusSubGET
@@ -1674,7 +1696,7 @@ paths:
                       notifyURL: 'http://my.callback.com/location_notifications/some-id'
                     zoneId: 'zone01'
                     numberOfUsersZoneThreshold: 500
-                    operationStatus: 'Serviceable'
+                    operationStatus: ['Serviceable']
                     resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123'
         '400':
           $ref: '#/components/responses/400'
@@ -1691,7 +1713,7 @@ paths:
       x-swagger-router-controller: "subscriptions"
     put:
       tags:
-      - ''
+      - 'location'
       summary: 'Updates a subscription information'
       description: 'Updates a subscription.'
       operationId: zoneStatusSubPUT
@@ -1712,7 +1734,7 @@ paths:
                     notifyURL: 'http://my.callback.com/location_notifications/some-id'
                   zoneId: 'zone01'
                   numberOfUsersZoneThreshold: 500
-                  operationStatus: 'Serviceable'
+                  operationStatus: ['Serviceable']
                   resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123'
       parameters:
         - $ref: '#/components/parameters/Path.SubscrId'
@@ -1733,7 +1755,7 @@ paths:
                     notifyURL: 'http://my.callback.com/location_notifications/some-id'
                   zoneId: 'zone01'
                   numberOfUsersZoneThreshold: 500
-                  operationStatus: 'Serviceable'
+                  operationStatus: ['Serviceable']
                   resourceURL: 'http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123'
         '400':
           $ref: '#/components/responses/400'
@@ -1754,7 +1776,7 @@ paths:
       x-swagger-router-controller: 'subscriptions'
     delete:
       tags:
-      - ''
+      - 'location'
       summary: 'Cancel a subscription'
       description: 'Method to delete a subscription.'
       operationId: zoneStatusSubDELETE
@@ -1786,7 +1808,7 @@ components:
             type: object
             properties:
               problemDetails:
-                $ref: '#/components/schemas/ProblemDetails'  
+                $ref: '#/components/schemas/ProblemDetails'
     401:
       description: 'Unauthorized :  used when the client did not submit credentials.'
       content:
@@ -1796,7 +1818,7 @@ components:
             properties:
               problemDetails:
                 $ref: '#/components/schemas/ProblemDetails'
-    403:                
+    403:
       description: 'Forbidden :  operation is not allowed given the current status of the resource.'
       content:
         application/json:
@@ -1993,33 +2015,21 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: string
         connectionType:
-          allOf:
-          - $ref: '#/components/schemas/ConnectionType'
-          description: Connection type of access point.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: ConnectionType
+          $ref: '#/components/schemas/ConnectionType'
         interestRealm:
           description: Interest realm of access point.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         locationInfo:
-          allOf:
-          - $ref: '#/components/schemas/LocationInfo'
-          description: The coordinates of the access point.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: LocationInfo
+          $ref: '#/components/schemas/LocationInfo'
         numberOfUsers:
           description: Number of users currently on the access point.
           type: integer
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: integer
         operationStatus:
-          allOf:
-          - $ref: '#/components/schemas/OperationStatus'
-          description: Operation status of access point.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: OperationStatus
+          $ref: '#/components/schemas/OperationStatus'
         resourceURL:
           description: Self referring URL
           type: string
@@ -2064,21 +2074,12 @@ components:
     CallbackReference:
       properties:
         callbackData:
-          description: Data the application can register with the server when subscribing
-            to notifications, and that are passed back unchanged in each of the related
-            notifications. These data can be used by the application in the processing
-            of the notification, e.g. for correlation purposes.
+          description: Data the application can register with the server when subscribing to notifications, and that are passed back unchanged in each of the related notifications. These data can be used by the application in the processing of the notification, e.g. for correlation purposes.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         notificationFormat:
-          allOf:
-          - $ref: '#/components/schemas/NotificationFormat'
-          description: Application can specify format of the resource representation
-            in notifications that are related to this subscription. The choice is
-            between {XML, JSON}
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: string
+          $ref: '#/components/schemas/NotificationFormat'
         notifyURL:
           description: Notify Callback URL
           type: string
@@ -2088,61 +2089,41 @@ components:
       - notifyURL
       type: object
     CircleNotificationSubscription:
-      description: A type containing data for notifications, when the area is defined
-        as a circle.
+      description: A type containing data for notifications, when the area is defined as a circle.
       properties:
         address:
-          description: Address of terminals to monitor (e.g. "sip" URI, "tel" URI,
-            "acr" URI)
+          description: Address of terminals to monitor (e.g. "sip" URI, "tel" URI, "acr" URI)
           items:
             type: string
           type: array
           x-etsi-mec-cardinality: 1..N
           x-etsi-mec-origin-type: anyURI
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: string
+          $ref: '#/components/schemas/CallbackReference'
         checkImmediate:
           description: Check location immediately after establishing notification.
           type: boolean
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: boolean
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         count:
-          description: Maximum number of notifications per individual address. For
-            no maximum, either do not include this element or specify a value of zero.
-            Default value is 0.
+          description: Maximum number of notifications per individual address. For no maximum, either do not include this element or specify a value of zero. Default value is 0.
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: int
         duration:
-          description: "Period of time (in seconds) notifications are provided for.\
-            \ If set to \u201C0\u201D (zero), a default duration time, which is specified\
-            \ by the service policy, will be used. If the parameter is omitted, the\
-            \ notifications will continue until the maximum duration time, which is\
-            \ specified by the service policy, unless the notifications are stopped\
-            \ by deletion of subscription for notifications."
+          description: "Period of time (in seconds) notifications are provided for. If set to \u201C0\u201D (zero), a default duration time, which is specified by the service policy, will be used. If the parameter is omitted, the notifications will continue until the maximum duration time, which is specified by the service policy, unless the notifications are stopped by deletion of subscription for notifications."
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: int
         enteringLeavingCriteria:
-          allOf:
-          - $ref: '#/components/schemas/EnteringLeavingCriteria'
-          description: Indicates whether the notification should occur when the
-            terminal enters or leaves the target area.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: EnteringLeavingCriteria
+          $ref: '#/components/schemas/EnteringLeavingCriteria'
         frequency:
-          description: Maximum frequency (in seconds) of notifications per subscription
-            (can also be considered minimum time between notifications).
+          description: Maximum frequency (in seconds) of notifications per subscription (can also be considered minimum time between notifications).
           type: integer
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: int
@@ -2172,8 +2153,7 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: float
         requester:
-          description: Identifies the entity that is requesting the information (e.g.
-            "sip" URI, "tel" URI, "acr" URI)
+          description: Identifies the entity that is requesting the information (e.g. "sip" URI, "tel" URI, "acr" URI)
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
@@ -2221,40 +2201,27 @@ components:
       - AnyBeyondDistance
       type: string
     DistanceNotificationSubscription:
-      description: A type containing data for distance subscription, with reference
-        to other devices.
+      description: A type containing data for distance subscription, with reference to other devices.
       properties:
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: string
+          $ref: '#/components/schemas/CallbackReference'
         checkImmediate:
           description: Check location immediately after establishing notification.
           type: boolean
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: boolean
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         count:
-          description: Maximum number of notifications per individual address. For
-            no maximum, either do not include this element or specify a value of zero.
-            Default value is 0.
+          description: Maximum number of notifications per individual address. For no maximum, either do not include this element or specify a value of zero. Default value is 0.
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: int
         criteria:
-          allOf:
-          - $ref: '#/components/schemas/DistanceCriteria'
-          description: Indicates whether the notification should occur when the
-            geographical relationship between monitored and referenced devices changes.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: DistanceCriteria
+          $ref: '#/components/schemas/DistanceCriteria'
         distance:
           description: Distance between devices that shall be monitored.
           format: float
@@ -2262,18 +2229,12 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: float
         duration:
-          description: "Period of time (in seconds) notifications are provided for.\
-            \ If set to \u201C0\u201D (zero), a default duration time, which is specified\
-            \ by the service policy, will be used. If the parameter is omitted, the\
-            \ notifications will continue until the maximum duration time, which is\
-            \ specified by the service policy, unless the notifications are stopped\
-            \ by deletion of subscription for notifications."
+          description: "Period of time (in seconds) notifications are provided for. If set to \u201C0\u201D (zero), a default duration time, which is specified by the service policy, will be used. If the parameter is omitted, the notifications will continue until the maximum duration time, which is specified by the service policy, unless the notifications are stopped by deletion of subscription for notifications."
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: int
         frequency:
-          description: Maximum frequency (in seconds) of notifications per subscription
-            (can also be considered minimum time between notifications).
+          description: Maximum frequency (in seconds) of notifications per subscription (can also be considered minimum time between notifications).
           type: integer
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: int
@@ -2285,25 +2246,21 @@ components:
           x-etsi-mec-cardinality: 0..N
           x-etsi-mec-origin-type: Link
         monitoredAddress:
-          description: Contains addresses of devices to monitor (e.g., 'sip' URI,
-            'tel' URI, 'acr' URI)
+          description: Contains addresses of devices to monitor (e.g., 'sip' URI, 'tel' URI, 'acr' URI)
           items:
             type: string
           type: array
           x-etsi-mec-cardinality: 1..N
           x-etsi-mec-origin-type: anyURI
         referenceAddress:
-          description: Indicates address of each device that will be used as reference
-            devices from which the distances towards monitored devices indicated in
-            the Addresses will be monitored (e.g., 'sip' URI, 'tel' URI, 'acr' URI)
+          description: Indicates address of each device that will be used as reference devices from which the distances towards monitored devices indicated in the Addresses will be monitored (e.g., 'sip' URI, 'tel' URI, 'acr' URI)
           items:
             type: string
           type: array
           x-etsi-mec-cardinality: 0..N
           x-etsi-mec-origin-type: anyURI
         requester:
-          description: Identifies the entity that is requesting the information (e.g.
-            "sip" URI, "tel" URI, "acr" URI)
+          description: Identifies the entity that is requesting the information (e.g. "sip" URI, "tel" URI, "acr" URI)
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
@@ -2349,22 +2306,17 @@ components:
     LocationInfo:
       properties:
         accuracy:
-          description: Horizontal accuracy / (semi-major) uncertainty of location
-            provided in meters, as defined in [14]. Present only if "shape" equals
-            4, 5 or 6
+          description: Horizontal accuracy / (semi-major) uncertainty of location provided in meters, as defined in [14]. Present only if "shape" equals 4, 5 or 6
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         accuracyAltitude:
-          description: Altitude accuracy / uncertainty of location provided in meters,
-            as defined in [14]. Present only if "shape" equals 3 or 4
+          description: Altitude accuracy / uncertainty of location provided in meters, as defined in [14]. Present only if "shape" equals 3 or 4
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         accuracySemiMinor:
-          description: Horizontal accuracy / (semi-major) uncertainty of location
-            provided in meters, as defined in [14]. Present only if "shape" equals
-            4, 5 or 6
+          description: Horizontal accuracy / (semi-major) uncertainty of location provided in meters, as defined in [14]. Present only if "shape" equals 4, 5 or 6
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
@@ -2375,9 +2327,7 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: Float
         confidence:
-          description: Confidence by which the position of a target entity is known
-            to be within the shape description, expressed as a percentage and defined
-            in [14]. Present only if "shape" equals 1, 4 or 6
+          description: Confidence by which the position of a target entity is known to be within the shape description, expressed as a percentage and defined in [14]. Present only if "shape" equals 1, 4 or 6
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
@@ -2392,8 +2342,7 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         latitude:
-          description: "Location latitude, expressed in the range -90\xB0 to +90\xB0\
-            . Cardinality greater than one only if \"shape\" equals 7."
+          description: "Location latitude, expressed in the range -90\xB0 to +90\xB0. Cardinality greater than one only if \"shape\" equals 7."
           items:
             format: float
             type: number
@@ -2402,8 +2351,7 @@ components:
           x-etsi-mec-cardinality: 1..N
           x-etsi-mec-origin-type: Float
         longitude:
-          description: "Location longitude, expressed in the range -180\xB0 to +180\xB0\
-            . Cardinality greater than one only if \"shape\" equals 7."
+          description: "Location longitude, expressed in the range -180\xB0 to +180\xB0. Cardinality greater than one only if \"shape\" equals 7."
           items:
             format: float
             type: number
@@ -2417,50 +2365,27 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         orientationMajorAxis:
-          description: "Angle of orientation of the major axis, expressed in the range\
-            \ 0\xB0 to 180\xB0, as defined in [14]. Present only if \"shape\" equals\
-            \ 4 or 6"
+          description: "Angle of orientation of the major axis, expressed in the range 0\xB0 to 180\xB0, as defined in [14]. Present only if \"shape\" equals 4 or 6"
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         shape:
-          description: 'Shape information, as detailed in [14], associated with the
-            reported location coordinate:
-
-            1 = ELLIPSOID_ARC
-
-            2 = ELLIPSOID_POINT
-
-            3 = ELLIPSOID_POINT_ALTITUDE
-
-            4 = ELLIPSOID_POINT_ALTITUDE_UNCERT_ELLIPSOID
-
-            5 = ELLIPSOID_POINT_UNCERT_CIRCLE
-
-            6 = ELLIPSOID_POINT_UNCERT_ELLIPSE
-
-            7 = POLYGON'
-          type: string
+          description: 'Shape information, as detailed in [14], associated with the reported location coordinate: <p>1 = ELLIPSOID_ARC <p>2 = ELLIPSOID_POINT <p>3 = ELLIPSOID_POINT_ALTITUDE <p>4 = ELLIPSOID_POINT_ALTITUDE_UNCERT_ELLIPSOID <p>5 = ELLIPSOID_POINT_UNCERT_CIRCLE <p>6 = ELLIPSOID_POINT_UNCERT_ELLIPSE <p>7 = POLYGON'
+          type: integer
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: Enum_inlined
         timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimeStamp'
-          description: Date and time that location was collected.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: TimeStamp
+          $ref: '#/components/schemas/TimeStamp'
         uncertaintyRadius:
           description: Present only if "shape" equals 6
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: UnsignedInt
         velocity:
-          description: "Structure with attributes relating to the target entity\u2019\
-            s velocity, as defined in [14]."
+          description: "Structure with attributes relating to the target entity\u2019s velocity, as defined in [14]."
           properties:
             bearing:
-              description: "Bearing, expressed in the range 0\xB0 to 360\xB0, as defined\
-                \ in [14]."
+              description: "Bearing, expressed in the range 0\xB0 to 360\xB0, as defined in [14]."
               type: integer
               x-etsi-mec-cardinality: '1'
               x-etsi-mec-origin-type: UnsignedInt
@@ -2470,34 +2395,22 @@ components:
               x-etsi-mec-cardinality: '1'
               x-etsi-mec-origin-type: UnsignedInt
             uncertainty:
-              description: Horizontal uncertainty, as defined in [14]. Present only
-                if "velocityType" equals 3 or 4
+              description: Horizontal uncertainty, as defined in [14]. Present only if "velocityType" equals 3 or 4
               type: integer
               x-etsi-mec-cardinality: 0..1
               x-etsi-mec-origin-type: UnsignedInt
             velocityType:
-              description: 'Velocity information, as detailed in [14], associated
-                with the reported location coordinate:
-
-                1 = HORIZONTAL
-
-                2 = HORIZONTAL_VERTICAL
-
-                3 = HORIZONTAL_UNCERT
-
-                4 = HORIZONTAL_VERTICAL_UNCERT'
-              type: string
+              description: 'Velocity information, as detailed in [14], associated with the reported location coordinate: <p>1 = HORIZONTAL <p>2 = HORIZONTAL_VERTICAL <p>3 = HORIZONTAL_UNCERT <p>4 = HORIZONTAL_VERTICAL_UNCERT'
+              type: integer
               x-etsi-mec-cardinality: '1'
               x-etsi-mec-origin-type: Enum_inlined
             verticalSpeed:
-              description: Vertical speed, expressed in km/h and defined in [14].
-                Present only if "velocityType" equals 2 or 4
+              description: Vertical speed, expressed in km/h and defined in [14]. Present only if "velocityType" equals 2 or 4
               type: integer
               x-etsi-mec-cardinality: 0..1
               x-etsi-mec-origin-type: Int
             verticalUncertainty:
-              description: Vertical uncertainty, as defined in [14]. Present only
-                if "velocityType" equals 4
+              description: Vertical uncertainty, as defined in [14]. Present only if "velocityType" equals 4
               type: integer
               x-etsi-mec-cardinality: 0..1
               x-etsi-mec-origin-type: UnsignedInt
@@ -2512,7 +2425,6 @@ components:
       - latitude
       - longitude
       - shape
-      - timestamp
       type: object
       x-etsi-ref: 6.5.3
     NotificationFormat:
@@ -2523,8 +2435,7 @@ components:
     NotificationSubscriptionList:
       properties:
         circleNotificationSubscription:
-          description: Collection of CircleNotificationSubscription elements, see
-            note 2.
+          description: Collection of CircleNotificationSubscription elements, see note 2.
           items:
             $ref: '#/components/schemas/CircleNotificationSubscription'
           minItems: 0
@@ -2532,8 +2443,7 @@ components:
           x-etsi-mec-cardinality: 0.. N
           x-etsi-mec-origin-type: CircleNotificationSubscription
         distanceNotificationSubscription:
-          description: Collection of DistanceNotificationSubscription elements, see
-            note 2.
+          description: Collection of DistanceNotificationSubscription elements, see note 2.
           items:
             $ref: '#/components/schemas/DistanceNotificationSubscription'
           minItems: 0
@@ -2541,8 +2451,7 @@ components:
           x-etsi-mec-cardinality: 0.. N
           x-etsi-mec-origin-type: DistanceNotificationSubscription
         periodicNotificationSubscription:
-          description: Collection of PeriodicNotificationSubscription elements, see
-            note 2.
+          description: Collection of PeriodicNotificationSubscription elements, see note 2.
           items:
             $ref: '#/components/schemas/PeriodicNotificationSubscription'
           minItems: 0
@@ -2582,8 +2491,7 @@ components:
       required:
       - resourceURL
       type: object
-      x-etsi-notes: "NOTE 1:\tAs specified in [5], clause 5.2.2.8.\nNOTE 2: \tAs specified\
-        \ in [6], clause 5.2.2.7."
+      x-etsi-notes: "NOTE 1:\tAs specified in [5], clause 5.2.2.8.\nNOTE 2: \tAs specified in [6], clause 5.2.2.7."
       x-etsi-ref: 6.3.3
     OperationStatus:
       enum:
@@ -2595,38 +2503,26 @@ components:
       description: A type containing data for periodic subscription.
       properties:
         address:
-          description: Address of terminals to monitor (e.g. "sip" URI, "tel" URI,
-            "acr" URI)
+          description: Address of terminals to monitor (e.g. "sip" URI, "tel" URI, "acr" URI)
           items:
             type: string
           type: array
           x-etsi-mec-cardinality: 1..N
           x-etsi-mec-origin-type: anyURI
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: string
+          $ref: '#/components/schemas/CallbackReference'
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         duration:
-          description: "Period of time (in seconds) notifications are provided for.\
-            \ If set to \u201C0\u201D (zero), a default duration time, which is specified\
-            \ by the service policy, will be used. If the parameter is omitted, the\
-            \ notifications will continue until the maximum duration time, which is\
-            \ specified by the service policy, unless the notifications are stopped\
-            \ by deletion of subscription for notifications."
+          description: "Period of time (in seconds) notifications are provided for. If set to \u201C0\u201D (zero), a default duration time, which is specified by the service policy, will be used. If the parameter is omitted, the notifications will continue until the maximum duration time, which is specified by the service policy, unless the notifications are stopped by deletion of subscription for notifications."
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: int
         frequency:
-          description: Maximum frequency (in seconds) of notifications (can also be
-            considered minimum time between notifications) per subscription.
+          description: Maximum frequency (in seconds) of notifications (can also be considered minimum time between notifications) per subscription.
           type: integer
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: int
@@ -2643,8 +2539,7 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: int
         requester:
-          description: Identifies the entity that is requesting the information (e.g.
-            "sip" URI, "tel" URI, "acr" URI)
+          description: Identifies the entity that is requesting the information (e.g. "sip" URI, "tel" URI, "acr" URI)
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
@@ -2662,14 +2557,12 @@ components:
     ProblemDetails:
       properties:
         detail:
-          description: A human-readable explanation specific to this occurrence of
-            the problem
+          description: A human-readable explanation specific to this occurrence of the problem
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: String
         instance:
-          description: A URI reference that identifies the specific occurrence of
-            the problem
+          description: A URI reference that identifies the specific occurrence of the problem
           format: uri
           type: string
           x-etsi-mec-cardinality: 0..1
@@ -2686,8 +2579,7 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: String
         type:
-          description: A URI reference according to IETF RFC 3986 that identifies
-            the problem type
+          description: A URI reference according to IETF RFC 3986 that identifies the problem type
           format: uri
           type: string
           x-etsi-mec-cardinality: 0..1
@@ -2699,8 +2591,6 @@ components:
       - NotRetrieved
       - Error
       type: string
-    SerializerTypes:
-      type: string
     ServiceError:
       description: used to indicate a notification termination or cancellation.
       properties:
@@ -2710,8 +2600,7 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: string
         text:
-          description: Message text, with replacement variables marked with %n, where
-            n is an index into the list of <variables> elements, starting at 1
+          description: Message text, with replacement variables marked with %n, where n is an index into the list of <variables> elements, starting at 1
           type: string
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: string
@@ -2735,8 +2624,7 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
         callbackData:
-          description: CallbackData if passed by the application in the receiptRequest
-            element during the associated subscription operation
+          description: CallbackData if passed by the application in the receiptRequest element during the associated subscription operation
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
@@ -2748,11 +2636,7 @@ components:
           x-etsi-mec-cardinality: 0..N
           x-etsi-mec-origin-type: Link
         reason:
-          allOf:
-          - $ref: '#/components/schemas/ServiceError'
-          description: Reason notification is being discontinued.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: ServiceError
+          $ref: '#/components/schemas/ServiceError'
       required:
       - terminalLocation
       type: object
@@ -2760,24 +2644,14 @@ components:
       description: A type containing the notification subscription.
       properties:
         callbackData:
-          description: CallbackData if passed by the application in the receiptRequest
-            element during the associated subscription operation
+          description: CallbackData if passed by the application in the receiptRequest element during the associated subscription operation
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         distanceCriteria:
-          allOf:
-          - $ref: '#/components/schemas/DistanceCriteria'
-          description: Indicates which distance criteria that caused the notification.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: DistanceCriteria
+          $ref: '#/components/schemas/DistanceCriteria'
         enteringLeavingCriteria:
-          allOf:
-          - $ref: '#/components/schemas/EnteringLeavingCriteria'
-          description: Indicates whether the notification was caused by the terminal
-            entering or leaving the target area.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: EnteringLeavingCriteria
+          $ref: '#/components/schemas/EnteringLeavingCriteria'
         isFinalNotification:
           description: Set to true if it is a final notification about location change.
           type: boolean
@@ -2801,9 +2675,7 @@ components:
       - terminalLocation
       type: object
     TerminalDistance:
-      description: A type containing information about the distance from a terminal
-        to a location or between two terminals, in addition the accuracy and a timestamp
-        of the information are provided.
+      description: A type containing information about the distance from a terminal to a location or between two terminals, in addition the accuracy and a timestamp of the information are provided.
       properties:
         accuracy:
           description: Accuracy of the provided distance in meters
@@ -2811,49 +2683,29 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: integer
         distance:
-          description: Distance from terminal to a location or between two terminals
-            specified in meters
+          description: Distance from terminal to a location or between two terminals specified in meters
           type: integer
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: integer
         timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimeStamp'
-          description: Date and time that location from which distance is calculated
-            was collected.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: TimeStamp
+          $ref: '#/components/schemas/TimeStamp'
       required:
       - distance
       type: object
     TerminalLocation:
-      description: A type containing device address, retrieval status and location
-        information.
+      description: A type containing device address, retrieval status and location information.
       properties:
         address:
-          description: Address of the terminal to which the location information applies
-            (e.g., 'sip' URI, 'tel' URI, 'acr' URI).
+          description: Address of the terminal to which the location information applies (e.g., 'sip' URI, 'tel' URI, 'acr' URI).
           type: string
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: anyURI
         currentLocation:
-          allOf:
-          - $ref: '#/components/schemas/LocationInfo'
-          description: Location of terminal.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: LocationInfo
+          $ref: '#/components/schemas/LocationInfo'
         errorInformation:
-          allOf:
-          - $ref: '#/components/schemas/ServiceError'
-          description: This is the reason for error.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: ServiceError
+          $ref: '#/components/schemas/ServiceError'
         locationRetrievalStatus:
-          allOf:
-          - $ref: '#/components/schemas/RetrievalStatus'
-          description: Status of retrieval for this terminal address.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: RetrievalStatus
+          $ref: '#/components/schemas/RetrievalStatus'
       required:
       - address
       - locationRetrievalStatus
@@ -2868,17 +2720,17 @@ components:
     TimeStamp:
       properties:
         nanoSeconds:
-          type: integer
-          format: uint32
           description: 'The nanoseconds part of the time. Time is defined as
             Unix-time since January 1, 1970, 00:00:00 UTC.'
+          format: int32
+          type: integer
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: Uint32
         seconds:
-          type: integer
-          format: uint32
           description: 'The seconds part of the time. Time is defined as
             Unix-time since January 1, 1970, 00:00:00 UTC.'
+          format: int32
+          type: integer
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: Uint32
       required:
@@ -2895,14 +2747,12 @@ components:
     UserInfo:
       properties:
         accessPointId:
-          description: The identity of the access point the user is currently on,
-            see note 1.
+          description: The identity of the access point the user is currently on, see note 1.
           type: string
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: String
         address:
-          description: Address of user (e.g. 'sip' URI, 'tel' URI, 'acr' URI) currently
-            on the access point, see note 1.
+          description: Address of user (e.g. 'sip' URI, 'tel' URI, 'acr' URI) currently on the access point, see note 1.
           format: uri
           type: string
           x-etsi-mec-cardinality: '1'
@@ -2913,31 +2763,21 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: String
         contextLocationInfo:
-          description: Contextual information of a user location (e.g. aisle, floor,
-            room number, etc.).
+          description: Contextual information of a user location (e.g. aisle, floor, room number, etc.).
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: String
         locationInfo:
-          allOf:
-          - $ref: '#/components/schemas/LocationInfo'
-          description: The geographical coordinates where the user is, see note 2.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: LocationInfo
+          $ref: '#/components/schemas/LocationInfo'
         resourceURL:
           description: Self-referring URL, see note 1.
           type: string
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: String
         timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimeStamp'
-          description: Date and time that location was collected.
-          x-etsi-mec-cardinality: '1'
-          x-etsi-mec-origin-type: TimeStamp
+          $ref: '#/components/schemas/TimeStamp'
         zoneId:
-          description: The identity of the zone the user is currently within, see
-            note 1.
+          description: The identity of the zone the user is currently within, see note 1.
           type: string
           x-etsi-mec-cardinality: '1'
           x-etsi-mec-origin-type: String
@@ -2946,10 +2786,9 @@ components:
       - accessPointId
       - zoneId
       - resourceURL
-      - timeStamp
+      - timestamp
       type: object
-      x-etsi-notes: "NOTE 1:\tAs specified in [5], clause 5.2.2.7.\nNOTE 2: \tAs specified\
-        \ in [5], clause 5.2.2.5."
+      x-etsi-notes: "NOTE 1:\tAs specified in [5], clause 5.2.2.7.\nNOTE 2: \tAs specified in [5], clause 5.2.2.5."
       x-etsi-ref: 6.2.2
     UserList:
       description: A type containing list of users.
@@ -2978,14 +2817,9 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: anyURI
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: CallbackReference
+          $ref: '#/components/schemas/CallbackReference'
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
@@ -2995,9 +2829,7 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
         userEventCriteria:
-          description: List of user event values to generate notifications for (these
-            apply to address specified). If this element is missing, a notification
-            is requested to be generated for any change in user event.
+          description: List of user event values to generate notifications for (these apply to address specified). If this element is missing, a notification is requested to be generated for any change in user event.
           items:
             $ref: '#/components/schemas/UserEventType'
           type: array
@@ -3007,8 +2839,6 @@ components:
       - callbackReference
       - address
       type: object
-    VirtualNetworkInterfaceRequirements:
-      type: string
     ZonalPresenceNotification:
       description: A type containing zonal presence notification
       properties:
@@ -3018,8 +2848,7 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: anyURI
         callbackData:
-          description: CallBackData if passed by the application during the associated
-            ZonalTrafficSubscription and UserTrackingSubscription operation. See [REST_NetAPI_Common].
+          description: CallBackData if passed by the application during the associated ZonalTrafficSubscription and UserTrackingSubscription operation. See [REST_NetAPI_Common].
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
@@ -3029,15 +2858,12 @@ components:
           x-etsi-mec-cardinality: 1
           x-etsi-mec-origin-type: string
         interestRealm:
-          description: Interest realm of access point (e.g. geographical area, a type
-            of industry etc.).
+          description: Interest realm of access point (e.g. geographical area, a type of industry etc.).
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         link:
-          description: Link to other resources that are in relationship with this
-            notification. The server SHOULD include a link to the related subscription.
-            No other links are required or suggested by this specification
+          description: Link to other resources that are in relationship with this notification. The server SHOULD include a link to the related subscription. No other links are required or suggested by this specification
           items:
             $ref: '#/components/schemas/Link'
           type: array
@@ -3049,17 +2875,9 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimeStamp'
-          description: Indicates the time of the day for zonal presence notification.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: TimeStamp
+          $ref: '#/components/schemas/TimeStamp'
         userEventType:
-          allOf:
-          - $ref: '#/components/schemas/UserEventType'
-          description: User Event.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: UserEventType
+          $ref: '#/components/schemas/UserEventType'
         zoneId:
           description: Identifier of zone
           type: string
@@ -3076,33 +2894,19 @@ components:
       description: A type containing zonal traffic subscription
       properties:
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: CallbackReference
+          $ref: '#/components/schemas/CallbackReference'
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         duration:
-          description: Period (in seconds) of time notifications are provided for.
-            If set to "0" (zero), a default duration time, which is specified by the
-            service policy, will be used. If the parameter is omitted, the notifications
-            will continue until the maximum duration time, which is specified by the
-            service policy, unless the notifications are stopped by deletion of subscription
-            for notifications. This element MAY be given by the client during resource
-            creation in order to signal the desired lifetime of the subscription.
-            The server MUST return in this element the   period of time for which
-            the subscription will still be valid.
+          description: Period (in seconds) of time notifications are provided for. If set to "0" (zero), a default duration time, which is specified by the service policy, will be used. If the parameter is omitted, the notifications will continue until the maximum duration time, which is specified by the service policy, unless the notifications are stopped by deletion of subscription for notifications. This element MAY be given by the client during resource creation in order to signal the desired lifetime of the subscription. The server MUST return in this element the   period of time for which the subscription will still be valid.
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: unsignedInt
         interestRealm:
-          description: Interest realm of access point (e.g. geographical area, a type
-            of industry etc.).
+          description: Interest realm of access point (e.g. geographical area, a type of industry etc.).
           items:
             type: string
           type: array
@@ -3114,11 +2918,10 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: anyURI
         userEventCriteria:
-          allOf:
-          - $ref: '#/components/schemas/UserEventType'
-          description: List of user event values to generate notifications for (these
-            apply to address specified). If this element is missing, a notification
-            is requested to be generated for any change in user event.
+          description: List of user event values to generate notifications for (these apply to zone identifier or all interest realms within zone identifier specified). If this element is missing, a notification is requested to be generated for any change in user event.
+          items:
+            $ref: '#/components/schemas/UserEventType'
+          type: array
           x-etsi-mec-cardinality: 0..N
           x-etsi-mec-origin-type: UserEventType
         zoneId:
@@ -3190,49 +2993,31 @@ components:
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         callbackData:
-          description: CallBackData if passed by the application during the associated
-            ZoneStatusSubscription operation. See [REST_NetAPI_Common].
+          description: CallBackData if passed by the application during the associated ZoneStatusSubscription operation. See [REST_NetAPI_Common].
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         link:
-          description: Link to other resources that are in relationship with this
-            notification. The server SHOULD include a link to the related subscription.
-            No other links are required or suggested by this specification
+          description: Link to other resources that are in relationship with this notification. The server SHOULD include a link to the related subscription. No other links are required or suggested by this specification
           items:
             $ref: '#/components/schemas/Link'
           type: array
           x-etsi-mec-cardinality: 0..N
           x-etsi-mec-origin-type: Link
         numberOfUsersInAP:
-          description: This element shall be present when ZoneStatusSubscription includes
-            numberOfUsersAPThreshold element and the number of users in an access
-            point exceeds the threshold defined in the subscription.
+          description: This element shall be present when ZoneStatusSubscription includes numberOfUsersAPThreshold element and the number of users in an access point exceeds the threshold defined in the subscription.
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: unsignedInt
         numberOfUsersInZone:
-          description: This element shall be present when ZoneStatusSubscription includes
-            numberOfUsersZoneThreshold element and the number of users in a zone exceeds
-            the threshold defined in this subscription.
+          description: This element shall be present when ZoneStatusSubscription includes numberOfUsersZoneThreshold element and the number of users in a zone exceeds the threshold defined in this subscription.
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: unsignedInt
         operationStatus:
-          allOf:
-          - $ref: '#/components/schemas/OperationStatus'
-          description: This element shall be present when ZoneStatusSubscription
-            includes operationStatus element and the operation status value of an
-            access point meets Serviceable or Unserviceable or Unknown defined in
-            the subscription.
-          x-etsi-mec-cardinality: 0..1
-          x-etsi-mec-origin-type: OperationStatus
+          $ref: '#/components/schemas/OperationStatus'
         timestamp:
-          allOf:
-          - $ref: '#/components/schemas/TimeStamp'
-          description: Indicates the timeof day for zone status notification.
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: TimeStamp
+          $ref: '#/components/schemas/TimeStamp'
         zoneId:
           description: Identifier of zone
           type: string
@@ -3246,32 +3031,24 @@ components:
       description: A type containing zone status subscription.
       properties:
         callbackReference:
-          allOf:
-          - $ref: '#/components/schemas/CallbackReference'
-          description: Notification callback definition
-          x-etsi-mec-cardinality: 1
-          x-etsi-mec-origin-type: string
+          $ref: '#/components/schemas/CallbackReference'
         clientCorrelator:
-          description: A correlator that the client can use to tag this particular
-            resource representation during a request to create a resource on the server.
+          description: A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.
           type: string
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: string
         numberOfUsersAPThreshold:
-          description: Threshold number of users in an access point which if crossed
-            shall cause a notification
+          description: Threshold number of users in an access point which if crossed shall cause a notification
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: unsignedInt
         numberOfUsersZoneThreshold:
-          description: Threshold number of users in a zone which if crossed shall
-            cause a notification
+          description: Threshold number of users in a zone which if crossed shall cause a notification
           type: integer
           x-etsi-mec-cardinality: 0..1
           x-etsi-mec-origin-type: unsignedInt
         operationStatus:
-          description: List of operation status values to generate notifications for
-            (these apply to all access points within a zone).
+          description: List of operation status values to generate notifications for (these apply to all access points within a zone).
           items:
             $ref: '#/components/schemas/OperationStatus'
           type: array
@@ -3291,4 +3068,3 @@ components:
       - callbackReference
       - zoneId
       type: object
-    

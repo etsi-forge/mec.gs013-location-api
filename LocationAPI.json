@@ -1,6 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
+    "contact": {
+      "url": "https://forge.etsi.org/rep/mec/gs013-location-api"
+    },
     "title": "ETSI GS MEC 013 - Location API",
     "version": "2.1.1",
     "description": "The ETSI MEC ISG MEC013 WLAN Access Information API described using OpenAPI.",
@@ -15,14 +18,19 @@
   },
   "servers": [
     {
-      "url": "https://{apiRoot}/location/v2/"
+      "url": "https://localhost/location/v2"
+    }
+  ],
+  "tags": [
+    {
+      "name": "location"
     }
   ],
   "paths": {
     "/queries/distance": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "UE Distance Lookup of a specific UE",
         "description": "UE Distance Lookup between terminals or a terminal and a location",
@@ -82,7 +90,7 @@
     "/queries/users": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "UE Location Lookup of a specific UE or group of UEs",
         "description": "UE Location Lookup of a specific UE or group of UEs",
@@ -139,7 +147,7 @@
     "/queries/zones": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Zones information Lookup",
         "description": "Used to get a list of identifiers for zones authorized for use by the application.",
@@ -185,7 +193,7 @@
     "/queries/zones/{zoneId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Zones information Lookup",
         "description": "Used to get the information for an authorized zone for use by the application.",
@@ -236,7 +244,7 @@
     "/queries/zones/{zoneId}/accessPoints": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Radio Node Location Lookup",
         "description": "Radio Node Location Lookup to retrieve a list of radio nodes associated to a zone.",
@@ -290,7 +298,7 @@
     "/queries/zones/{zoneId}/accessPoints/{accessPointId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Radio Node Location Lookup",
         "description": "Radio Node Location Lookup to retrieve a radio node associated to a zone.",
@@ -344,7 +352,7 @@
     "/subscriptions/area/circle": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to area change notifications",
         "description": "This operation is used for retrieving all active subscriptions to area change notifications.",
@@ -395,7 +403,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for area change notification",
         "description": "Creates a subscription to the Location Service for an area change notification.",
@@ -490,6 +498,9 @@
           "notification": {
             "{$request.body#/circleNotificationSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "circleNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -545,7 +556,7 @@
     "/subscriptions/area/circle/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
@@ -615,7 +626,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -722,7 +733,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -755,7 +766,7 @@
     "/subscriptions/distance": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to distance change notifications",
         "description": "This operation is used for retrieving all active subscriptions to a distance change notifications.",
@@ -808,7 +819,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for distance change notification",
         "description": "Creates a subscription to the Location Service for a distance change notification.",
@@ -907,6 +918,9 @@
           "notification": {
             "{$request.body#/distanceNotificationSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "distanceNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -978,7 +992,7 @@
     "/subscriptions/distance/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
@@ -1050,7 +1064,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -1161,7 +1175,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -1194,7 +1208,7 @@
     "/subscriptions/periodic": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to periodic notifications",
         "description": "This operation is used for retrieving all active subscriptions to periodic notifications.",
@@ -1240,7 +1254,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for periodic notification",
         "description": "Creates a subscription to the Location Service for a periodic notification.",
@@ -1325,6 +1339,9 @@
           "notification": {
             "{$request.body#/periodicNotificationSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "periodicNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -1379,7 +1396,7 @@
     "/subscriptions/periodic/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
@@ -1444,7 +1461,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -1541,7 +1558,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -1574,7 +1591,7 @@
     "/subscriptions/userTracking": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to user tracking notifications",
         "description": "This operation is used for retrieving all active subscriptions to user tracking notifications.",
@@ -1631,7 +1648,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for user tracking notification",
         "description": "Creates a subscription to the Location Service for user tracking change notification.",
@@ -1716,6 +1733,9 @@
           "notification": {
             "{$request.body#/userTrackingSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "userTrackingNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -1765,7 +1785,7 @@
     "/subscriptions/userTracking/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
@@ -1830,7 +1850,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -1927,7 +1947,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -1960,7 +1980,7 @@
     "/subscriptions/zonalTraffic": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to zonal traffic notifications",
         "description": "This operation is used for retrieving all active subscriptions to zonal traffic change notifications.",
@@ -2017,7 +2037,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for zonal traffic notification",
         "description": "Creates a subscription to the Location Service for zonal traffic change notification.",
@@ -2102,6 +2122,9 @@
           "notification": {
             "{$request.body#/zonalTrafficSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "zonalTrafficNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -2151,11 +2174,11 @@
     "/subscriptions/zonalTraffic/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
-        "operationId": "ZonalTrafficSubGET",
+        "operationId": "zonalTrafficSubGET",
         "parameters": [
           {
             "$ref": "#/components/parameters/Path.SubscrId"
@@ -2216,7 +2239,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -2313,7 +2336,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -2346,7 +2369,7 @@
     "/subscriptions/zoneStatus": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieves all active subscriptions to zone status notifications",
         "description": "This operation is used for retrieving all active subscriptions to zone status change notifications.",
@@ -2377,7 +2400,9 @@
                           },
                           "zoneId": "zone01",
                           "numberOfUsersZoneThreshold": 500,
-                          "operationStatus": "Serviceable"
+                          "operationStatus": [
+                            "Serviceable"
+                          ]
                         }
                       ],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus"
@@ -2391,7 +2416,7 @@
       },
       "post": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Creates a subscription for zone status notification",
         "description": "Creates a subscription to the Location Service for zone status change notification.",
@@ -2416,7 +2441,9 @@
                     },
                     "zoneId": "zone01",
                     "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": "Serviceable"
+                    "operationStatus": [
+                      "Serviceable"
+                    ]
                   }
                 }
               }
@@ -2443,7 +2470,9 @@
                       },
                       "zoneId": "zone01",
                       "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": "Serviceable",
+                      "operationStatus": [
+                        "Serviceable"
+                      ],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                     }
                   }
@@ -2474,6 +2503,9 @@
           "notification": {
             "{$request.body#/zoneStatusSubscription.callbackReference.notifyURL}": {
               "post": {
+                "summary": "Callback POST used to send a notification",
+                "description": "Notification from Location service, content based on subscription type",
+                "operationId": "zoneStatusNotificationPOST",
                 "requestBody": {
                   "description": "Subscription notification",
                   "required": true,
@@ -2523,7 +2555,7 @@
     "/subscriptions/zoneStatus/{subscriptionId}": {
       "get": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
@@ -2556,7 +2588,9 @@
                       },
                       "zoneId": "zone01",
                       "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": "Serviceable",
+                      "operationStatus": [
+                        "Serviceable"
+                      ],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                     }
                   }
@@ -2587,7 +2621,7 @@
       },
       "put": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
@@ -2612,7 +2646,9 @@
                     },
                     "zoneId": "zone01",
                     "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": "Serviceable",
+                    "operationStatus": [
+                      "Serviceable"
+                    ],
                     "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                   }
                 }
@@ -2646,7 +2682,9 @@
                     },
                     "zoneId": "zone01",
                     "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": "Serviceable",
+                    "operationStatus": [
+                      "Serviceable"
+                    ],
                     "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                   }
                 }
@@ -2682,7 +2720,7 @@
       },
       "delete": {
         "tags": [
-          ""
+          "location"
         ],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
@@ -3024,14 +3062,7 @@
             "x-etsi-mec-origin-type": "string"
           },
           "connectionType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ConnectionType"
-              }
-            ],
-            "description": "Connection type of access point.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "ConnectionType"
+            "$ref": "#/components/schemas/ConnectionType"
           },
           "interestRealm": {
             "description": "Interest realm of access point.",
@@ -3040,14 +3071,7 @@
             "x-etsi-mec-origin-type": "string"
           },
           "locationInfo": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LocationInfo"
-              }
-            ],
-            "description": "The coordinates of the access point.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "LocationInfo"
+            "$ref": "#/components/schemas/LocationInfo"
           },
           "numberOfUsers": {
             "description": "Number of users currently on the access point.",
@@ -3056,14 +3080,7 @@
             "x-etsi-mec-origin-type": "integer"
           },
           "operationStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OperationStatus"
-              }
-            ],
-            "description": "Operation status of access point.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "OperationStatus"
+            "$ref": "#/components/schemas/OperationStatus"
           },
           "resourceURL": {
             "description": "Self referring URL",
@@ -3127,14 +3144,7 @@
             "x-etsi-mec-origin-type": "string"
           },
           "notificationFormat": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/NotificationFormat"
-              }
-            ],
-            "description": "Application can specify format of the resource representation in notifications that are related to this subscription. The choice is between {XML, JSON}",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "string"
+            "$ref": "#/components/schemas/NotificationFormat"
           },
           "notifyURL": {
             "description": "Notify Callback URL",
@@ -3161,14 +3171,7 @@
             "x-etsi-mec-origin-type": "anyURI"
           },
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "string"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "checkImmediate": {
             "description": "Check location immediately after establishing notification.",
@@ -3195,14 +3198,7 @@
             "x-etsi-mec-origin-type": "int"
           },
           "enteringLeavingCriteria": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EnteringLeavingCriteria"
-              }
-            ],
-            "description": "Indicates whether the notification should occur when the terminal enters or leaves the target area.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "EnteringLeavingCriteria"
+            "$ref": "#/components/schemas/EnteringLeavingCriteria"
           },
           "frequency": {
             "description": "Maximum frequency (in seconds) of notifications per subscription (can also be considered minimum time between notifications).",
@@ -3302,14 +3298,7 @@
         "description": "A type containing data for distance subscription, with reference to other devices.",
         "properties": {
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "string"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "checkImmediate": {
             "description": "Check location immediately after establishing notification.",
@@ -3330,14 +3319,7 @@
             "x-etsi-mec-origin-type": "int"
           },
           "criteria": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DistanceCriteria"
-              }
-            ],
-            "description": "Indicates whether the notification should occur when the geographical relationship between monitored and referenced devices changes.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "DistanceCriteria"
+            "$ref": "#/components/schemas/DistanceCriteria"
           },
           "distance": {
             "description": "Distance between devices that shall be monitored.",
@@ -3522,20 +3504,13 @@
             "x-etsi-mec-origin-type": "UnsignedInt"
           },
           "shape": {
-            "description": "Shape information, as detailed in [14], associated with the reported location coordinate:\n1 = ELLIPSOID_ARC\n2 = ELLIPSOID_POINT\n3 = ELLIPSOID_POINT_ALTITUDE\n4 = ELLIPSOID_POINT_ALTITUDE_UNCERT_ELLIPSOID\n5 = ELLIPSOID_POINT_UNCERT_CIRCLE\n6 = ELLIPSOID_POINT_UNCERT_ELLIPSE\n7 = POLYGON",
-            "type": "string",
+            "description": "Shape information, as detailed in [14], associated with the reported location coordinate: <p>1 = ELLIPSOID_ARC <p>2 = ELLIPSOID_POINT <p>3 = ELLIPSOID_POINT_ALTITUDE <p>4 = ELLIPSOID_POINT_ALTITUDE_UNCERT_ELLIPSOID <p>5 = ELLIPSOID_POINT_UNCERT_CIRCLE <p>6 = ELLIPSOID_POINT_UNCERT_ELLIPSE <p>7 = POLYGON",
+            "type": "integer",
             "x-etsi-mec-cardinality": "1",
             "x-etsi-mec-origin-type": "Enum_inlined"
           },
           "timestamp": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimeStamp"
-              }
-            ],
-            "description": "Date and time that location was collected.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "TimeStamp"
+            "$ref": "#/components/schemas/TimeStamp"
           },
           "uncertaintyRadius": {
             "description": "Present only if \"shape\" equals 6",
@@ -3565,8 +3540,8 @@
                 "x-etsi-mec-origin-type": "UnsignedInt"
               },
               "velocityType": {
-                "description": "Velocity information, as detailed in [14], associated with the reported location coordinate:\n1 = HORIZONTAL\n2 = HORIZONTAL_VERTICAL\n3 = HORIZONTAL_UNCERT\n4 = HORIZONTAL_VERTICAL_UNCERT",
-                "type": "string",
+                "description": "Velocity information, as detailed in [14], associated with the reported location coordinate: <p>1 = HORIZONTAL <p>2 = HORIZONTAL_VERTICAL <p>3 = HORIZONTAL_UNCERT <p>4 = HORIZONTAL_VERTICAL_UNCERT",
+                "type": "integer",
                 "x-etsi-mec-cardinality": "1",
                 "x-etsi-mec-origin-type": "Enum_inlined"
               },
@@ -3596,8 +3571,7 @@
         "required": [
           "latitude",
           "longitude",
-          "shape",
-          "timestamp"
+          "shape"
         ],
         "type": "object",
         "x-etsi-ref": "6.5.3"
@@ -3707,14 +3681,7 @@
             "x-etsi-mec-origin-type": "anyURI"
           },
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "string"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "clientCorrelator": {
             "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.",
@@ -3816,9 +3783,6 @@
         ],
         "type": "string"
       },
-      "SerializerTypes": {
-        "type": "string"
-      },
       "ServiceError": {
         "description": "used to indicate a notification termination or cancellation.",
         "properties": {
@@ -3875,14 +3839,7 @@
             "x-etsi-mec-origin-type": "Link"
           },
           "reason": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServiceError"
-              }
-            ],
-            "description": "Reason notification is being discontinued.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "ServiceError"
+            "$ref": "#/components/schemas/ServiceError"
           }
         },
         "required": [
@@ -3900,24 +3857,10 @@
             "x-etsi-mec-origin-type": "string"
           },
           "distanceCriteria": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/DistanceCriteria"
-              }
-            ],
-            "description": "Indicates which distance criteria that caused the notification.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "DistanceCriteria"
+            "$ref": "#/components/schemas/DistanceCriteria"
           },
           "enteringLeavingCriteria": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/EnteringLeavingCriteria"
-              }
-            ],
-            "description": "Indicates whether the notification was caused by the terminal entering or leaving the target area.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "EnteringLeavingCriteria"
+            "$ref": "#/components/schemas/EnteringLeavingCriteria"
           },
           "isFinalNotification": {
             "description": "Set to true if it is a final notification about location change.",
@@ -3965,14 +3908,7 @@
             "x-etsi-mec-origin-type": "integer"
           },
           "timestamp": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimeStamp"
-              }
-            ],
-            "description": "Date and time that location from which distance is calculated was collected.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "TimeStamp"
+            "$ref": "#/components/schemas/TimeStamp"
           }
         },
         "required": [
@@ -3990,34 +3926,13 @@
             "x-etsi-mec-origin-type": "anyURI"
           },
           "currentLocation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LocationInfo"
-              }
-            ],
-            "description": "Location of terminal.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "LocationInfo"
+            "$ref": "#/components/schemas/LocationInfo"
           },
           "errorInformation": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/ServiceError"
-              }
-            ],
-            "description": "This is the reason for error.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "ServiceError"
+            "$ref": "#/components/schemas/ServiceError"
           },
           "locationRetrievalStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/RetrievalStatus"
-              }
-            ],
-            "description": "Status of retrieval for this terminal address.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "RetrievalStatus"
+            "$ref": "#/components/schemas/RetrievalStatus"
           }
         },
         "required": [
@@ -4038,16 +3953,16 @@
       "TimeStamp": {
         "properties": {
           "nanoSeconds": {
-            "type": "integer",
-            "format": "uint32",
             "description": "The nanoseconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+            "format": "int32",
+            "type": "integer",
             "x-etsi-mec-cardinality": "1",
             "x-etsi-mec-origin-type": "Uint32"
           },
           "seconds": {
-            "type": "integer",
-            "format": "uint32",
             "description": "The seconds part of the time. Time is defined as Unix-time since January 1, 1970, 00:00:00 UTC.",
+            "format": "int32",
+            "type": "integer",
             "x-etsi-mec-cardinality": "1",
             "x-etsi-mec-origin-type": "Uint32"
           }
@@ -4095,14 +4010,7 @@
             "x-etsi-mec-origin-type": "String"
           },
           "locationInfo": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/LocationInfo"
-              }
-            ],
-            "description": "The geographical coordinates where the user is, see note 2.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "LocationInfo"
+            "$ref": "#/components/schemas/LocationInfo"
           },
           "resourceURL": {
             "description": "Self-referring URL, see note 1.",
@@ -4111,14 +4019,7 @@
             "x-etsi-mec-origin-type": "String"
           },
           "timestamp": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimeStamp"
-              }
-            ],
-            "description": "Date and time that location was collected.",
-            "x-etsi-mec-cardinality": "1",
-            "x-etsi-mec-origin-type": "TimeStamp"
+            "$ref": "#/components/schemas/TimeStamp"
           },
           "zoneId": {
             "description": "The identity of the zone the user is currently within, see note 1.",
@@ -4132,7 +4033,7 @@
           "accessPointId",
           "zoneId",
           "resourceURL",
-          "timeStamp"
+          "timestamp"
         ],
         "type": "object",
         "x-etsi-notes": "NOTE 1:\tAs specified in [5], clause 5.2.2.7.\nNOTE 2: \tAs specified in [5], clause 5.2.2.5.",
@@ -4172,14 +4073,7 @@
             "x-etsi-mec-origin-type": "anyURI"
           },
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "CallbackReference"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "clientCorrelator": {
             "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.",
@@ -4208,9 +4102,6 @@
           "address"
         ],
         "type": "object"
-      },
-      "VirtualNetworkInterfaceRequirements": {
-        "type": "string"
       },
       "ZonalPresenceNotification": {
         "description": "A type containing zonal presence notification",
@@ -4255,24 +4146,10 @@
             "x-etsi-mec-origin-type": "string"
           },
           "timestamp": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimeStamp"
-              }
-            ],
-            "description": "Indicates the time of the day for zonal presence notification.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "TimeStamp"
+            "$ref": "#/components/schemas/TimeStamp"
           },
           "userEventType": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserEventType"
-              }
-            ],
-            "description": "User Event.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "UserEventType"
+            "$ref": "#/components/schemas/UserEventType"
           },
           "zoneId": {
             "description": "Identifier of zone",
@@ -4294,14 +4171,7 @@
         "description": "A type containing zonal traffic subscription",
         "properties": {
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "CallbackReference"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "clientCorrelator": {
             "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.",
@@ -4331,12 +4201,11 @@
             "x-etsi-mec-origin-type": "anyURI"
           },
           "userEventCriteria": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/UserEventType"
-              }
-            ],
-            "description": "List of user event values to generate notifications for (these apply to address specified). If this element is missing, a notification is requested to be generated for any change in user event.",
+            "description": "List of user event values to generate notifications for (these apply to zone identifier or all interest realms within zone identifier specified). If this element is missing, a notification is requested to be generated for any change in user event.",
+            "items": {
+              "$ref": "#/components/schemas/UserEventType"
+            },
+            "type": "array",
             "x-etsi-mec-cardinality": "0..N",
             "x-etsi-mec-origin-type": "UserEventType"
           },
@@ -4455,24 +4324,10 @@
             "x-etsi-mec-origin-type": "unsignedInt"
           },
           "operationStatus": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/OperationStatus"
-              }
-            ],
-            "description": "This element shall be present when ZoneStatusSubscription includes operationStatus element and the operation status value of an access point meets Serviceable or Unserviceable or Unknown defined in the subscription.",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "OperationStatus"
+            "$ref": "#/components/schemas/OperationStatus"
           },
           "timestamp": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/TimeStamp"
-              }
-            ],
-            "description": "Indicates the timeof day for zone status notification.",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "TimeStamp"
+            "$ref": "#/components/schemas/TimeStamp"
           },
           "zoneId": {
             "description": "Identifier of zone",
@@ -4491,14 +4346,7 @@
         "description": "A type containing zone status subscription.",
         "properties": {
           "callbackReference": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/CallbackReference"
-              }
-            ],
-            "description": "Notification callback definition",
-            "x-etsi-mec-cardinality": 1,
-            "x-etsi-mec-origin-type": "string"
+            "$ref": "#/components/schemas/CallbackReference"
           },
           "clientCorrelator": {
             "description": "A correlator that the client can use to tag this particular resource representation during a request to create a resource on the server.",
