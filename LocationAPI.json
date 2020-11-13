@@ -2257,7 +2257,7 @@
                   }
                 },
                 "example": {
-                  "zonalTrafiicSubscription": {
+                  "zonalTrafficSubscription": {
                     "clientCorrelator": "0123",
                     "callbackReference": {
                       "notifyURL": "http://my.callback.com/location_notifications/some-id"
@@ -2762,14 +2762,9 @@
       "400": {
         "description": "Bad Request : used to indicate that incorrect parameters were passed to the request.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2777,14 +2772,9 @@
       "401": {
         "description": "Unauthorized :  used when the client did not submit credentials.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2792,17 +2782,9 @@
       "403": {
         "description": "Forbidden :  operation is not allowed given the current status of the resource.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "required": [
-                "problemDetails"
-              ],
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2810,14 +2792,9 @@
       "404": {
         "description": "Not Found :  used when a client provided a URI that cannot be mapped to a valid resource URI.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2825,14 +2802,9 @@
       "406": {
         "description": "Not Acceptable : used to indicate that the server cannot provide the any of the content formats supported by the client.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2840,14 +2812,9 @@
       "412": {
         "description": "Precondition failed :  used when a condition has failed during conditional requests, e.g. when using ETags to avoid write conflicts when using PUT",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2855,14 +2822,9 @@
       "414": {
         "description": "URI Too Long : used to indicate that the server is refusing to process the request because the request URI is longer than the server is willing or able to process.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2870,14 +2832,9 @@
       "415": {
         "description": "Unsupported Media Type :  used to indicate that the server or the client does not support the content type of the entity body.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
@@ -2885,24 +2842,17 @@
       "422": {
         "description": "Unprocessable Entity : used to indicate that the server understands the content type of the request entity and that the syntax of the request entity is correct but that the server is unable to process the contained instructions. This error condition can occur if an JSON request body is syntactically correct but semantically incorrect, for example if the target area for the request is considered too large. This error condition can also occur if the capabilities required by the request are not supported.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             },
             "example": {
               "application/problem+json": {
-                "ProblemDetails": {
-                  "type": "https://meAppServer.example.com/rni/v2/probs/too-many targets",
-                  "title": "Too many targets",
-                  "status": "422",
-                  "detail": "The target area for the request is considered too large",
-                  "instance": "/meAppClient.example.com/77777/msgs/abc"
-                }
+                "type": "https://meAppServer.example.com/rni/v2/probs/too-many targets",
+                "title": "Too many targets",
+                "status": "422",
+                "detail": "The target area for the request is considered too large",
+                "instance": "/meAppClient.example.com/77777/msgs/abc"
               }
             }
           }
@@ -2911,14 +2861,9 @@
       "429": {
         "description": "Too Many Requests : used when a rate limiter has triggered.",
         "content": {
-          "application/json": {
+          "application/problem+json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "problemDetails": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              "$ref": "#/components/schemas/ProblemDetails"
             }
           }
         }
