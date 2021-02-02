@@ -1,3 +1,0 @@
-description: CallBackData if passed by the application during the associated ZonalTrafficSubscription and UserTrackingSubscription operation. See [REST_NetAPI_Common].
-type: string
-example: "1234"

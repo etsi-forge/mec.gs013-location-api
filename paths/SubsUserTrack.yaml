@@ -1,5 +1,0 @@
-get:
-  $ref: ./SubsUserTrack_Get.yaml
-
-post:
-  $ref: ./SubsUserTrack_Post.yaml
