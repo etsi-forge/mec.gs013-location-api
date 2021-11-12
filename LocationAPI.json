@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.1.0",
   "info": {
     "contact": {
       "url": "https://forge.etsi.org/rep/mec/gs013-location-api"
@@ -372,29 +372,31 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "circleNotificationSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "callbackReference": {
-                            "callbackData": "1234",
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "address": "acr:10.0.0.1",
-                          "checkImmediate": true,
-                          "enteringLeavingCriteria": "Entering",
-                          "frequency": 10,
-                          "latitude": -80.88,
-                          "longitude": 41.277,
-                          "radius": 500,
-                          "trackingAccuracy": 10,
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "circleNotificationSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "callbackReference": {
+                              "callbackData": "1234",
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "address": "acr:10.0.0.1",
+                            "checkImmediate": true,
+                            "enteringLeavingCriteria": "Entering",
+                            "frequency": 10,
+                            "latitude": -80.88,
+                            "longitude": 41.277,
+                            "radius": 500,
+                            "trackingAccuracy": 10,
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -420,23 +422,25 @@
                     "$ref": "#/components/schemas/CircleNotificationSubscription"
                   }
                 },
-                "example": {
-                  "circleNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "checkImmediate": true,
-                    "enteringLeavingCriteria": "Entering",
-                    "frequency": 10,
-                    "latitude": -80.88,
-                    "longitude": 41.277,
-                    "radius": 500,
-                    "trackingAccuracy": 10
+                "examples": [
+                  {
+                    "circleNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "checkImmediate": true,
+                      "enteringLeavingCriteria": "Entering",
+                      "frequency": 10,
+                      "latitude": -80.88,
+                      "longitude": 41.277,
+                      "radius": 500,
+                      "trackingAccuracy": 10
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -453,24 +457,26 @@
                       "$ref": "#/components/schemas/CircleNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "circleNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "checkImmediate": true,
-                      "enteringLeavingCriteria": "Entering",
-                      "frequency": 10,
-                      "latitude": -80.88,
-                      "longitude": 41.277,
-                      "radius": 500,
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                  "examples": [
+                    {
+                      "circleNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "checkImmediate": true,
+                        "enteringLeavingCriteria": "Entering",
+                        "frequency": 10,
+                        "latitude": -80.88,
+                        "longitude": 41.277,
+                        "radius": 500,
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -513,30 +519,32 @@
                             "$ref": "#/components/schemas/SubscriptionNotification"
                           }
                         },
-                        "example": {
-                          "subscriptionNotification": {
-                            "enteringLeavingCriteria": "Entering",
-                            "isFinalNotification": "false,",
-                            "link": {
-                              "rel": "CircleNotificationSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/sub123"
-                            },
-                            "terminalLocation": {
-                              "address": "acr:10.0.0.1",
-                              "currentLocation": {
-                                "accuracy": 100,
-                                "altitude": 1001,
-                                "latitude": -80.86302,
-                                "longitude": 41.277306,
-                                "timestamp": {
-                                  "seconds": 1483231138,
-                                  "nanoSeconds\"": 0
-                                }
+                        "examples": [
+                          {
+                            "subscriptionNotification": {
+                              "enteringLeavingCriteria": "Entering",
+                              "isFinalNotification": "false,",
+                              "link": {
+                                "rel": "CircleNotificationSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/sub123"
                               },
-                              "locationRetrievalStatus": "Retrieved"
+                              "terminalLocation": {
+                                "address": "acr:10.0.0.1",
+                                "currentLocation": {
+                                  "accuracy": 100,
+                                  "altitude": 1001,
+                                  "latitude": -80.86302,
+                                  "longitude": 41.277306,
+                                  "timestamp": {
+                                    "seconds": 1483231138,
+                                    "nanoSeconds\"": 0
+                                  }
+                                },
+                                "locationRetrievalStatus": "Retrieved"
+                              }
                             }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -581,24 +589,26 @@
                       "$ref": "#/components/schemas/CircleNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "circleNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "checkImmediate": true,
-                      "enteringLeavingCriteria": "Entering",
-                      "frequency": 10,
-                      "latitude": -80.88,
-                      "longitude": 41.277,
-                      "radius": 500,
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                  "examples": [
+                    {
+                      "circleNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "checkImmediate": true,
+                        "enteringLeavingCriteria": "Entering",
+                        "frequency": 10,
+                        "latitude": -80.88,
+                        "longitude": 41.277,
+                        "radius": 500,
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -643,24 +653,26 @@
                     "$ref": "#/components/schemas/CircleNotificationSubscription"
                   }
                 },
-                "example": {
-                  "circleNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "checkImmediate": true,
-                    "enteringLeavingCriteria": "Entering",
-                    "frequency": 10,
-                    "latitude": -80.88,
-                    "longitude": 41.277,
-                    "radius": 500,
-                    "trackingAccuracy": 10,
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                "examples": [
+                  {
+                    "circleNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "checkImmediate": true,
+                      "enteringLeavingCriteria": "Entering",
+                      "frequency": 10,
+                      "latitude": -80.88,
+                      "longitude": 41.277,
+                      "radius": 500,
+                      "trackingAccuracy": 10,
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -682,24 +694,26 @@
                       "$ref": "#/components/schemas/CircleNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "circleNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "checkImmediate": true,
-                      "enteringLeavingCriteria": "Entering",
-                      "frequency": 10,
-                      "latitude": -80.88,
-                      "longitude": 41.277,
-                      "radius": 500,
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                  "examples": [
+                    {
+                      "circleNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "checkImmediate": true,
+                        "enteringLeavingCriteria": "Entering",
+                        "frequency": 10,
+                        "latitude": -80.88,
+                        "longitude": 41.277,
+                        "radius": 500,
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/area/circle/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -786,31 +800,33 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "distanceNotificationSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "callbackReference": {
-                            "callbackData": "1234",
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "monitoredAddress": [
-                            "acr:10.0.0.1",
-                            "acr:10.0.0.2"
-                          ],
-                          "checkImmediate": true,
-                          "criteria": "AllWithinDistance",
-                          "distance": 100,
-                          "frequency": 10,
-                          "referenceAddress": "acr:10.0.0.3",
-                          "trackingAccuracy": 10,
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/sub123"
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "distanceNotificationSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "callbackReference": {
+                              "callbackData": "1234",
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "monitoredAddress": [
+                              "acr:10.0.0.1",
+                              "acr:10.0.0.2"
+                            ],
+                            "checkImmediate": true,
+                            "criteria": "AllWithinDistance",
+                            "distance": 100,
+                            "frequency": 10,
+                            "referenceAddress": "acr:10.0.0.3",
+                            "trackingAccuracy": 10,
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/sub123"
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -836,25 +852,27 @@
                     "$ref": "#/components/schemas/DistanceNotificationSubscription"
                   }
                 },
-                "example": {
-                  "distanceNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "monitoredAddress": [
-                      "acr:10.0.0.1",
-                      "acr:10.0.0.2"
-                    ],
-                    "checkImmediate": true,
-                    "criteria": "AllWithinDistance",
-                    "distance": 100,
-                    "frequency": 10,
-                    "referenceAddress": "acr:10.0.0.3",
-                    "trackingAccuracy": 10
+                "examples": [
+                  {
+                    "distanceNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "monitoredAddress": [
+                        "acr:10.0.0.1",
+                        "acr:10.0.0.2"
+                      ],
+                      "checkImmediate": true,
+                      "criteria": "AllWithinDistance",
+                      "distance": 100,
+                      "frequency": 10,
+                      "referenceAddress": "acr:10.0.0.3",
+                      "trackingAccuracy": 10
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -871,26 +889,28 @@
                       "$ref": "#/components/schemas/DistanceNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "distanceNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
-                      "checkImmediate": true,
-                      "criteria": "AllWithinDistance",
-                      "distance": 100,
-                      "frequency": 10,
-                      "referenceAddress": "acr:10.0.0.3",
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                  "examples": [
+                    {
+                      "distanceNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "monitoredAddress": [
+                          "acr:10.0.0.1",
+                          "acr:10.0.0.2"
+                        ],
+                        "checkImmediate": true,
+                        "criteria": "AllWithinDistance",
+                        "distance": 100,
+                        "frequency": 10,
+                        "referenceAddress": "acr:10.0.0.3",
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -933,46 +953,48 @@
                             "$ref": "#/components/schemas/SubscriptionNotification"
                           }
                         },
-                        "example": {
-                          "subscriptionNotification": {
-                            "distanceCriteria": "AllWithinDistance",
-                            "isFinalNotification": "false,",
-                            "link": {
-                              "rel": "DistanceNotificationSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/distance/sub123"
-                            },
-                            "terminalLocation": [
-                              {
-                                "address": "acr:10.0.0.1",
-                                "currentLocation": {
-                                  "accuracy": 100,
-                                  "altitude": 1001,
-                                  "latitude": -80.86302,
-                                  "longitude": 41.277306,
-                                  "timestamp": {
-                                    "seconds": 1483231138,
-                                    "nanoSeconds\"": 0
-                                  }
-                                },
-                                "locationRetrievalStatus": "Retrieved"
+                        "examples": [
+                          {
+                            "subscriptionNotification": {
+                              "distanceCriteria": "AllWithinDistance",
+                              "isFinalNotification": "false,",
+                              "link": {
+                                "rel": "DistanceNotificationSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/distance/sub123"
                               },
-                              {
-                                "address": "acr:10.0.0.2",
-                                "currentLocation": {
-                                  "accuracy": 100,
-                                  "altitude": 1001,
-                                  "latitude": -80.86301,
-                                  "longitude": 41.277306,
-                                  "timestamp": {
-                                    "seconds": 1483231138,
-                                    "nanoSeconds\"": 0
-                                  }
+                              "terminalLocation": [
+                                {
+                                  "address": "acr:10.0.0.1",
+                                  "currentLocation": {
+                                    "accuracy": 100,
+                                    "altitude": 1001,
+                                    "latitude": -80.86302,
+                                    "longitude": 41.277306,
+                                    "timestamp": {
+                                      "seconds": 1483231138,
+                                      "nanoSeconds\"": 0
+                                    }
+                                  },
+                                  "locationRetrievalStatus": "Retrieved"
                                 },
-                                "locationRetrievalStatus": "Retrieved"
-                              }
-                            ]
+                                {
+                                  "address": "acr:10.0.0.2",
+                                  "currentLocation": {
+                                    "accuracy": 100,
+                                    "altitude": 1001,
+                                    "latitude": -80.86301,
+                                    "longitude": 41.277306,
+                                    "timestamp": {
+                                      "seconds": 1483231138,
+                                      "nanoSeconds\"": 0
+                                    }
+                                  },
+                                  "locationRetrievalStatus": "Retrieved"
+                                }
+                              ]
+                            }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -1017,26 +1039,28 @@
                       "$ref": "#/components/schemas/DistanceNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "distanceNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
-                      "checkImmediate": true,
-                      "criteria": "AllWithinDistance",
-                      "distance": 100,
-                      "frequency": 10,
-                      "referenceAddress": "acr:10.0.0.3",
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                  "examples": [
+                    {
+                      "distanceNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "monitoredAddress": [
+                          "acr:10.0.0.1",
+                          "acr:10.0.0.2"
+                        ],
+                        "checkImmediate": true,
+                        "criteria": "AllWithinDistance",
+                        "distance": 100,
+                        "frequency": 10,
+                        "referenceAddress": "acr:10.0.0.3",
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1081,26 +1105,28 @@
                     "$ref": "#/components/schemas/DistanceNotificationSubscription"
                   }
                 },
-                "example": {
-                  "distanceNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "monitoredAddress": [
-                      "acr:10.0.0.1",
-                      "acr:10.0.0.2"
-                    ],
-                    "checkImmediate": true,
-                    "criteria": "AllWithinDistance",
-                    "distance": 100,
-                    "frequency": 10,
-                    "referenceAddress": "acr:10.0.0.3",
-                    "trackingAccuracy": 10,
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                "examples": [
+                  {
+                    "distanceNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "monitoredAddress": [
+                        "acr:10.0.0.1",
+                        "acr:10.0.0.2"
+                      ],
+                      "checkImmediate": true,
+                      "criteria": "AllWithinDistance",
+                      "distance": 100,
+                      "frequency": 10,
+                      "referenceAddress": "acr:10.0.0.3",
+                      "trackingAccuracy": 10,
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -1122,26 +1148,28 @@
                       "$ref": "#/components/schemas/DistanceNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "distanceNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
-                      "checkImmediate": true,
-                      "criteria": "AllWithinDistance",
-                      "distance": 100,
-                      "frequency": 10,
-                      "referenceAddress": "acr:10.0.0.3",
-                      "trackingAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                  "examples": [
+                    {
+                      "distanceNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "monitoredAddress": [
+                          "acr:10.0.0.1",
+                          "acr:10.0.0.2"
+                        ],
+                        "checkImmediate": true,
+                        "criteria": "AllWithinDistance",
+                        "distance": 100,
+                        "frequency": 10,
+                        "referenceAddress": "acr:10.0.0.3",
+                        "trackingAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/distance/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1228,24 +1256,26 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "periodicNotificationSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "callbackReference": {
-                            "callbackData": "1234",
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "address": "acr:10.0.0.1",
-                          "frequency": 10,
-                          "requestedAccuracy": 10,
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "periodicNotificationSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "callbackReference": {
+                              "callbackData": "1234",
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "address": "acr:10.0.0.1",
+                            "frequency": 10,
+                            "requestedAccuracy": 10,
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1271,18 +1301,20 @@
                     "$ref": "#/components/schemas/PeriodicNotificationSubscription"
                   }
                 },
-                "example": {
-                  "periodicNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "frequency": 10,
-                    "requestedAccuracy": 10
+                "examples": [
+                  {
+                    "periodicNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "frequency": 10,
+                      "requestedAccuracy": 10
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -1299,19 +1331,21 @@
                       "$ref": "#/components/schemas/PeriodicNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "periodicNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "frequency": 10,
-                      "requestedAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                  "examples": [
+                    {
+                      "periodicNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "frequency": 10,
+                        "requestedAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1354,29 +1388,31 @@
                             "$ref": "#/components/schemas/SubscriptionNotification"
                           }
                         },
-                        "example": {
-                          "subscriptionNotification": {
-                            "isFinalNotification": "false,",
-                            "link": {
-                              "rel": "PeriodicNotificationSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/periodic/sub123"
-                            },
-                            "terminalLocation": {
-                              "address": "acr:10.0.0.1",
-                              "currentLocation": {
-                                "accuracy": 100,
-                                "altitude": 1001,
-                                "latitude": -80.86302,
-                                "longitude": 41.277306,
-                                "timestamp": {
-                                  "seconds": 1483231138,
-                                  "nanoSeconds\"": 0
-                                }
+                        "examples": [
+                          {
+                            "subscriptionNotification": {
+                              "isFinalNotification": "false,",
+                              "link": {
+                                "rel": "PeriodicNotificationSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/periodic/sub123"
                               },
-                              "locationRetrievalStatus": "Retrieved"
+                              "terminalLocation": {
+                                "address": "acr:10.0.0.1",
+                                "currentLocation": {
+                                  "accuracy": 100,
+                                  "altitude": 1001,
+                                  "latitude": -80.86302,
+                                  "longitude": 41.277306,
+                                  "timestamp": {
+                                    "seconds": 1483231138,
+                                    "nanoSeconds\"": 0
+                                  }
+                                },
+                                "locationRetrievalStatus": "Retrieved"
+                              }
                             }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -1421,19 +1457,21 @@
                       "$ref": "#/components/schemas/PeriodicNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "periodicNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "frequency": 10,
-                      "requestedAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                  "examples": [
+                    {
+                      "periodicNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "frequency": 10,
+                        "requestedAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1478,19 +1516,21 @@
                     "$ref": "#/components/schemas/PeriodicNotificationSubscription"
                   }
                 },
-                "example": {
-                  "periodicNotificationSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "callbackData": "1234",
-                      "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "frequency": 10,
-                    "requestedAccuracy": 10,
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                "examples": [
+                  {
+                    "periodicNotificationSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "callbackData": "1234",
+                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "frequency": 10,
+                      "requestedAccuracy": 10,
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -1512,19 +1552,21 @@
                       "$ref": "#/components/schemas/PeriodicNotificationSubscription"
                     }
                   },
-                  "example": {
-                    "periodicNotificationSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "callbackData": "1234",
-                        "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "frequency": 10,
-                      "requestedAccuracy": 10,
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                  "examples": [
+                    {
+                      "periodicNotificationSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "callbackData": "1234",
+                          "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "frequency": 10,
+                        "requestedAccuracy": 10,
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/periodic/subscription123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1611,35 +1653,37 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "userTrackingSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/subscription123",
-                          "callbackReference": {
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "userTrackingSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/subscription123",
+                            "callbackReference": {
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "address": "acr:192.0.2.1",
+                            "userEventCriteria": [
+                              "Transferring"
+                            ]
                           },
-                          "address": "acr:192.0.2.1",
-                          "userEventCriteria": [
-                            "Transferring"
-                          ]
-                        },
-                        {
-                          "clientCorrelator": "0124",
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/subscription124",
-                          "callbackReference": {
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "address": "acr:192.0.2.2",
-                          "userEventCriteria": [
-                            "Transferring"
-                          ]
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking"
+                          {
+                            "clientCorrelator": "0124",
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/subscription124",
+                            "callbackReference": {
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "address": "acr:192.0.2.2",
+                            "userEventCriteria": [
+                              "Transferring"
+                            ]
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1665,18 +1709,20 @@
                     "$ref": "#/components/schemas/UserTrackingSubscription"
                   }
                 },
-                "example": {
-                  "userTrackingSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ]
+                "examples": [
+                  {
+                    "userTrackingSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "userEventCriteria": [
+                        "Transferring"
+                      ]
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -1693,19 +1739,21 @@
                       "$ref": "#/components/schemas/UserTrackingSubscription"
                     }
                   },
-                  "example": {
-                    "userTrackingSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                  "examples": [
+                    {
+                      "userTrackingSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1748,24 +1796,26 @@
                             "$ref": "#/components/schemas/ZonalPresenceNotification"
                           }
                         },
-                        "example": {
-                          "zonalPresenceNotification": {
-                            "clientCorrelator": "0123",
-                            "zoneId": "zone01",
-                            "address": "acr:10.0.0.1",
-                            "userEventType": "Transferring",
-                            "currentAccessPointId": "ap2",
-                            "previousAccessPointId": "ap1",
-                            "timestamp": {
-                              "seconds": 1483231138,
-                              "nanoseconds": 0
-                            },
-                            "link": {
-                              "rel": "UserTrackingSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                        "examples": [
+                          {
+                            "zonalPresenceNotification": {
+                              "clientCorrelator": "0123",
+                              "zoneId": "zone01",
+                              "address": "acr:10.0.0.1",
+                              "userEventType": "Transferring",
+                              "currentAccessPointId": "ap2",
+                              "previousAccessPointId": "ap1",
+                              "timestamp": {
+                                "seconds": 1483231138,
+                                "nanoseconds": 0
+                              },
+                              "link": {
+                                "rel": "UserTrackingSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                              }
                             }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -1810,19 +1860,21 @@
                       "$ref": "#/components/schemas/UserTrackingSubscription"
                     }
                   },
-                  "example": {
-                    "userTrackingSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "address": "acr:10.0.0.1",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                  "examples": [
+                    {
+                      "userTrackingSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -1867,19 +1919,21 @@
                     "$ref": "#/components/schemas/UserTrackingSubscription"
                   }
                 },
-                "example": {
-                  "userTrackingSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                "examples": [
+                  {
+                    "userTrackingSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "address": "acr:10.0.0.1",
+                      "userEventCriteria": [
+                        "Transferring"
+                      ],
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -2000,35 +2054,37 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "zonalTrafficSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/subscription123",
-                          "callbackReference": {
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "zonalTrafficSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/subscription123",
+                            "callbackReference": {
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "zoneId": "zone01",
+                            "userEventCriteria": [
+                              "Transferring"
+                            ]
                           },
-                          "zoneId": "zone01",
-                          "userEventCriteria": [
-                            "Transferring"
-                          ]
-                        },
-                        {
-                          "clientCorrelator": "0124",
-                          "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/subscription124",
-                          "callbackReference": {
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "zoneId": "zone02",
-                          "userEventCriteria": [
-                            "Transferring"
-                          ]
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic"
+                          {
+                            "clientCorrelator": "0124",
+                            "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/subscription124",
+                            "callbackReference": {
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "zoneId": "zone02",
+                            "userEventCriteria": [
+                              "Transferring"
+                            ]
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2054,18 +2110,20 @@
                     "$ref": "#/components/schemas/ZonalTrafficSubscription"
                   }
                 },
-                "example": {
-                  "zonalTrafficSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ]
+                "examples": [
+                  {
+                    "zonalTrafficSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "zoneId": "zone01",
+                      "userEventCriteria": [
+                        "Transferring"
+                      ]
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -2082,19 +2140,21 @@
                       "$ref": "#/components/schemas/ZonalTrafficSubscription"
                     }
                   },
-                  "example": {
-                    "zonalTrafficSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "zoneId": "zone01",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                  "examples": [
+                    {
+                      "zonalTrafficSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2137,24 +2197,26 @@
                             "$ref": "#/components/schemas/ZonalPresenceNotification"
                           }
                         },
-                        "example": {
-                          "zonalPresenceNotification": {
-                            "clientCorrelator": "0123",
-                            "zoneId": "zone01",
-                            "address": "acr:10.0.0.1",
-                            "userEventType": "Transferring",
-                            "currentAccessPointId": "ap2",
-                            "previousAccessPointId": "ap1",
-                            "timestamp": {
-                              "seconds": 1483231138,
-                              "nanoseconds": 0
-                            },
-                            "link": {
-                              "rel": "ZonalTrafficSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                        "examples": [
+                          {
+                            "zonalPresenceNotification": {
+                              "clientCorrelator": "0123",
+                              "zoneId": "zone01",
+                              "address": "acr:10.0.0.1",
+                              "userEventType": "Transferring",
+                              "currentAccessPointId": "ap2",
+                              "previousAccessPointId": "ap1",
+                              "timestamp": {
+                                "seconds": 1483231138,
+                                "nanoseconds": 0
+                              },
+                              "link": {
+                                "rel": "ZonalTrafficSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                              }
                             }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -2199,19 +2261,21 @@
                       "$ref": "#/components/schemas/ZonalTrafficSubscription"
                     }
                   },
-                  "example": {
-                    "zonalTrafficSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "zoneId": "zone01",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                  "examples": [
+                    {
+                      "zonalTrafficSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2256,19 +2320,21 @@
                     "$ref": "#/components/schemas/ZonalTrafficSubscription"
                   }
                 },
-                "example": {
-                  "zonalTrafficSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                "examples": [
+                  {
+                    "zonalTrafficSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "zoneId": "zone01",
+                      "userEventCriteria": [
+                        "Transferring"
+                      ],
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -2389,25 +2455,27 @@
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
                     }
                   },
-                  "example": {
-                    "notificationSubscriptionList": {
-                      "zoneStatusSubscription": [
-                        {
-                          "clientCorrelator": "0123",
-                          "resourceURL": "http://example.com/exampleAPI/location/v2/subscriptions/zoneStatus/subscription123",
-                          "callbackReference": {
-                            "notifyURL": "http://clientApp.example.com/location_notifications/123456"
-                          },
-                          "zoneId": "zone01",
-                          "numberOfUsersZoneThreshold": 500,
-                          "operationStatus": [
-                            "Serviceable"
-                          ]
-                        }
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus"
+                  "examples": [
+                    {
+                      "notificationSubscriptionList": {
+                        "zoneStatusSubscription": [
+                          {
+                            "clientCorrelator": "0123",
+                            "resourceURL": "http://example.com/exampleAPI/location/v2/subscriptions/zoneStatus/subscription123",
+                            "callbackReference": {
+                              "notifyURL": "http://clientApp.example.com/location_notifications/123456"
+                            },
+                            "zoneId": "zone01",
+                            "numberOfUsersZoneThreshold": 500,
+                            "operationStatus": [
+                              "Serviceable"
+                            ]
+                          }
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2433,19 +2501,21 @@
                     "$ref": "#/components/schemas/ZoneStatusSubscription"
                   }
                 },
-                "example": {
-                  "zoneStatusSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": [
-                      "Serviceable"
-                    ]
+                "examples": [
+                  {
+                    "zoneStatusSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "zoneId": "zone01",
+                      "numberOfUsersZoneThreshold": 500,
+                      "operationStatus": [
+                        "Serviceable"
+                      ]
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -2462,20 +2532,22 @@
                       "$ref": "#/components/schemas/ZoneStatusSubscription"
                     }
                   },
-                  "example": {
-                    "zoneStatusSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "zoneId": "zone01",
-                      "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": [
-                        "Serviceable"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                  "examples": [
+                    {
+                      "zoneStatusSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "numberOfUsersZoneThreshold": 500,
+                        "operationStatus": [
+                          "Serviceable"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2518,24 +2590,26 @@
                             "$ref": "#/components/schemas/ZoneStatusNotification"
                           }
                         },
-                        "example": {
-                          "zoneStatusNotification": {
-                            "clientCorrelator": "0123",
-                            "zoneId": "zone01",
-                            "accessPointId": "poa1",
-                            "operationStatus": "Serviceable",
-                            "numberOfUsersInZone": "20",
-                            "numberOfUsersInAP": "12",
-                            "timestamp": {
-                              "seconds": 1483231138,
-                              "nanoseconds": 0
-                            },
-                            "link": {
-                              "rel": "ZoneStatusSubscription",
-                              "href": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                        "examples": [
+                          {
+                            "zoneStatusNotification": {
+                              "clientCorrelator": "0123",
+                              "zoneId": "zone01",
+                              "accessPointId": "poa1",
+                              "operationStatus": "Serviceable",
+                              "numberOfUsersInZone": "20",
+                              "numberOfUsersInAP": "12",
+                              "timestamp": {
+                                "seconds": 1483231138,
+                                "nanoseconds": 0
+                              },
+                              "link": {
+                                "rel": "ZoneStatusSubscription",
+                                "href": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                              }
                             }
                           }
-                        }
+                        ]
                       }
                     }
                   }
@@ -2580,20 +2654,22 @@
                       "$ref": "#/components/schemas/ZoneStatusSubscription"
                     }
                   },
-                  "example": {
-                    "zoneStatusSubscription": {
-                      "clientCorrelator": "0123",
-                      "callbackReference": {
-                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                      },
-                      "zoneId": "zone01",
-                      "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": [
-                        "Serviceable"
-                      ],
-                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                  "examples": [
+                    {
+                      "zoneStatusSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "numberOfUsersZoneThreshold": 500,
+                        "operationStatus": [
+                          "Serviceable"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                      }
                     }
-                  }
+                  ]
                 }
               }
             }
@@ -2638,20 +2714,22 @@
                     "$ref": "#/components/schemas/ZoneStatusSubscription"
                   }
                 },
-                "example": {
-                  "zoneStatusSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": [
-                      "Serviceable"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                "examples": [
+                  {
+                    "zoneStatusSubscription": {
+                      "clientCorrelator": "0123",
+                      "callbackReference": {
+                        "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                      },
+                      "zoneId": "zone01",
+                      "numberOfUsersZoneThreshold": 500,
+                      "operationStatus": [
+                        "Serviceable"
+                      ],
+                      "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                    }
                   }
-                }
+                ]
               }
             }
           }
