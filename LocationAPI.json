@@ -1954,20 +1954,22 @@
                     "userTrackingSubscription": {
                       "$ref": "#/components/schemas/UserTrackingSubscription"
                     }
-                  }
-                },
-                "example": {
-                  "userTrackingSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "address": "acr:10.0.0.1",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
-                  }
+                  },
+                  "examples": [
+                    {
+                      "userTrackingSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "address": "acr:10.0.0.1",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -2355,20 +2357,22 @@
                     "zonalTrafficSubscription": {
                       "$ref": "#/components/schemas/ZonalTrafficSubscription"
                     }
-                  }
-                },
-                "example": {
-                  "zonalTrafficSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "userEventCriteria": [
-                      "Transferring"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
-                  }
+                  },
+                  "examples": [
+                    {
+                      "zonalTrafficSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "userEventCriteria": [
+                          "Transferring"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -2750,21 +2754,23 @@
                     "zoneStatusSubscription": {
                       "$ref": "#/components/schemas/ZoneStatusSubscription"
                     }
-                  }
-                },
-                "example": {
-                  "zoneStatusSubscription": {
-                    "clientCorrelator": "0123",
-                    "callbackReference": {
-                      "notifyURL": "http://my.callback.com/location_notifications/some-id"
-                    },
-                    "zoneId": "zone01",
-                    "numberOfUsersZoneThreshold": 500,
-                    "operationStatus": [
-                      "Serviceable"
-                    ],
-                    "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
-                  }
+                  },
+                  "examples": [
+                    {
+                      "zoneStatusSubscription": {
+                        "clientCorrelator": "0123",
+                        "callbackReference": {
+                          "notifyURL": "http://my.callback.com/location_notifications/some-id"
+                        },
+                        "zoneId": "zone01",
+                        "numberOfUsersZoneThreshold": 500,
+                        "operationStatus": [
+                          "Serviceable"
+                        ],
+                        "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
+                      }
+                    }
+                  ]
                 }
               }
             }
@@ -2922,16 +2928,18 @@
         "content": {
           "application/problem+json": {
             "schema": {
-              "$ref": "#/components/schemas/ProblemDetails"
-            },
-            "example": {
-              "application/problem+json": {
-                "type": "https://meAppServer.example.com/rni/v2/probs/too-many targets",
-                "title": "Too many targets",
-                "status": "422",
-                "detail": "The target area for the request is considered too large",
-                "instance": "/meAppClient.example.com/77777/msgs/abc"
-              }
+              "$ref": "#/components/schemas/ProblemDetails",
+              "examples": [
+                {
+                  "application/problem+json": {
+                    "type": "https://meAppServer.example.com/rni/v2/probs/too-many targets",
+                    "title": "Too many targets",
+                    "status": "422",
+                    "detail": "The target area for the request is considered too large",
+                    "instance": "/meAppClient.example.com/77777/msgs/abc"
+                  }
+                }
+              ]
             }
           }
         }
