@@ -1796,61 +1796,61 @@ paths:
       x-swagger-router-controller: 'subscriptions'
 components:
   responses:
-    200:
+    '200':
       description: 'OK'
-    204:
+    '204':
       description: 'No Content'
-    400:
+    '400':
       description: 'Bad Request : used to indicate that incorrect parameters were passed to the request.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    401:
+    '401':
       description: 'Unauthorized :  used when the client did not submit credentials.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    403:
+    '403':
       description: 'Forbidden :  operation is not allowed given the current status of the resource.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    404:
+    '404':
       description: 'Not Found :  used when a client provided a URI that cannot be mapped to a valid resource URI.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    406:
+    '406':
       description: 'Not Acceptable : used to indicate that the server cannot provide the any of the content formats supported by the client.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    412:
+    '412':
       description: 'Precondition failed :  used when a condition has failed during conditional requests, e.g. when
         using ETags to avoid write conflicts when using PUT'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    414:
+    '414':
       description: 'URI Too Long : used to indicate that the server is refusing to process the request because the request URI is
         longer than the server is willing or able to process.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    415:
+    '415':
       description: 'Unsupported Media Type :  used to indicate that the server or the client does not support the content type of the entity body.'
       content:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    422:
+    '422':
       description: 'Unprocessable Entity : used to indicate that the server understands the content type of the request entity and that the
         syntax of the request entity is correct but that the server is unable to process the contained instructions. This error condition can occur if an
         JSON request body is syntactically correct but semantically incorrect, for example if the target area for the request is considered too large. This
@@ -1859,7 +1859,7 @@ components:
         application/problem+json:
           schema:
             $ref: '#/components/schemas/ProblemDetails'
-    429:
+    '429':
       description: 'Too Many Requests : used when a rate limiter has triggered.'
       content:
         application/problem+json:
