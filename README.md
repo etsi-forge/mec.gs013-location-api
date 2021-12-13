@@ -4,8 +4,8 @@ This repository contains OpenAPIs descriptions for the interfaces specified in E
 
 ## Online resources
 
-* [Navigate the API in the browser](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/rep/mec/gs013-location-api/raw/v2.1.1/LocationAPI.yaml).
-* [Edit the API online](https://forge.etsi.org/swagger/editor/?url=https://forge.etsi.org/rep/mec/gs013-location-api/raw/v2.1.1/LocationAPI.yaml).
+* [Navigate the API in the browser](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/rep/mec/gs013-location-api/raw/stf606-draft/LocationAPI.yaml).
+* [Edit the API online](https://forge.etsi.org/swagger/editor/?url=https://forge.etsi.org/rep/mec/gs013-location-api/raw/stf606-draft/LocationAPI.yaml).
 
 ## License
 
