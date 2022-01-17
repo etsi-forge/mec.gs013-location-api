@@ -5,7 +5,7 @@
       "url": "https://forge.etsi.org/rep/mec/gs013-location-api"
     },
     "title": "ETSI GS MEC 013 - Location API",
-    "version": "2.1.1",
+    "version": "2.2.1",
     "description": "The ETSI MEC ISG MEC013 Location API described using OpenAPI.",
     "license": {
       "name": "BSD-3-Clause",
@@ -13,8 +13,8 @@
     }
   },
   "externalDocs": {
-    "description": "ETSI MEC013 V2.1.1 Location API",
-    "url": "http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/02.01.01_60/gs_mec013v020101p.pdf"
+    "description": "ETSI MEC013 V2.2.1 Location API",
+    "url": "http://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/02.02.01_60/gs_mec013v020201p.pdf"
   },
   "servers": [
     {
@@ -29,9 +29,7 @@
   "paths": {
     "/queries/distance": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "UE Distance Lookup of a specific UE",
         "description": "UE Distance Lookup between terminals or a terminal and a location",
         "operationId": "distanceGET",
@@ -89,9 +87,7 @@
     },
     "/queries/users": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "UE Location Lookup of a specific UE or group of UEs",
         "description": "UE Location Lookup of a specific UE or group of UEs",
         "operationId": "usersGET",
@@ -146,9 +142,7 @@
     },
     "/queries/zones": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Zones information Lookup",
         "description": "Used to get a list of identifiers for zones authorized for use by the application.",
         "operationId": "zonesGET",
@@ -192,9 +186,7 @@
     },
     "/queries/zones/{zoneId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Zones information Lookup",
         "description": "Used to get the information for an authorized zone for use by the application.",
         "operationId": "zonesGetById",
@@ -243,9 +235,7 @@
     },
     "/queries/zones/{zoneId}/accessPoints": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Radio Node Location Lookup",
         "description": "Radio Node Location Lookup to retrieve a list of radio nodes associated to a zone.",
         "operationId": "apGET",
@@ -297,9 +287,7 @@
     },
     "/queries/zones/{zoneId}/accessPoints/{accessPointId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Radio Node Location Lookup",
         "description": "Radio Node Location Lookup to retrieve a radio node associated to a zone.",
         "operationId": "apByIdGET",
@@ -351,9 +339,7 @@
     },
     "/subscriptions/area/circle": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to area change notifications",
         "description": "This operation is used for retrieving all active subscriptions to area change notifications.",
         "operationId": "areaCircleSubListGET",
@@ -364,9 +350,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -404,9 +388,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for area change notification",
         "description": "Creates a subscription to the Location Service for an area change notification.",
         "operationId": "areaCircleSubPOST",
@@ -563,9 +545,7 @@
     },
     "/subscriptions/area/circle/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "areaCircleSubGET",
@@ -581,9 +561,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "circleNotificationSubscription"
-                  ],
+                  "required": ["circleNotificationSubscription"],
                   "properties": {
                     "circleNotificationSubscription": {
                       "$ref": "#/components/schemas/CircleNotificationSubscription"
@@ -635,9 +613,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "areaCircleSubPUT",
@@ -746,9 +722,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "areaCircleSubDELETE",
@@ -779,9 +753,7 @@
     },
     "/subscriptions/distance": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to distance change notifications",
         "description": "This operation is used for retrieving all active subscriptions to a distance change notifications.",
         "operationId": "distanceSubListGET",
@@ -792,9 +764,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -834,9 +804,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for distance change notification",
         "description": "Creates a subscription to the Location Service for a distance change notification.",
         "operationId": "distanceSubPOST",
@@ -860,10 +828,7 @@
                         "callbackData": "1234",
                         "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                       },
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
+                      "monitoredAddress": ["acr:10.0.0.1", "acr:10.0.0.2"],
                       "checkImmediate": true,
                       "criteria": "AllWithinDistance",
                       "distance": 100,
@@ -897,10 +862,7 @@
                           "callbackData": "1234",
                           "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                         },
-                        "monitoredAddress": [
-                          "acr:10.0.0.1",
-                          "acr:10.0.0.2"
-                        ],
+                        "monitoredAddress": ["acr:10.0.0.1", "acr:10.0.0.2"],
                         "checkImmediate": true,
                         "criteria": "AllWithinDistance",
                         "distance": 100,
@@ -1013,9 +975,7 @@
     },
     "/subscriptions/distance/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "distanceSubGET",
@@ -1031,9 +991,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "distanceNotificationSubscription"
-                  ],
+                  "required": ["distanceNotificationSubscription"],
                   "properties": {
                     "distanceNotificationSubscription": {
                       "$ref": "#/components/schemas/DistanceNotificationSubscription"
@@ -1047,10 +1005,7 @@
                           "callbackData": "1234",
                           "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                         },
-                        "monitoredAddress": [
-                          "acr:10.0.0.1",
-                          "acr:10.0.0.2"
-                        ],
+                        "monitoredAddress": ["acr:10.0.0.1", "acr:10.0.0.2"],
                         "checkImmediate": true,
                         "criteria": "AllWithinDistance",
                         "distance": 100,
@@ -1087,9 +1042,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "distanceSubPUT",
@@ -1113,10 +1066,7 @@
                         "callbackData": "1234",
                         "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                       },
-                      "monitoredAddress": [
-                        "acr:10.0.0.1",
-                        "acr:10.0.0.2"
-                      ],
+                      "monitoredAddress": ["acr:10.0.0.1", "acr:10.0.0.2"],
                       "checkImmediate": true,
                       "criteria": "AllWithinDistance",
                       "distance": 100,
@@ -1156,10 +1106,7 @@
                           "callbackData": "1234",
                           "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                         },
-                        "monitoredAddress": [
-                          "acr:10.0.0.1",
-                          "acr:10.0.0.2"
-                        ],
+                        "monitoredAddress": ["acr:10.0.0.1", "acr:10.0.0.2"],
                         "checkImmediate": true,
                         "criteria": "AllWithinDistance",
                         "distance": 100,
@@ -1202,9 +1149,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "distanceSubDELETE",
@@ -1235,9 +1180,7 @@
     },
     "/subscriptions/periodic": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to periodic notifications",
         "description": "This operation is used for retrieving all active subscriptions to periodic notifications.",
         "operationId": "periodicSubListGET",
@@ -1248,9 +1191,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -1283,9 +1224,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for periodic notification",
         "description": "Creates a subscription to the Location Service for a periodic notification.",
         "operationId": "periodicSubPOST",
@@ -1431,9 +1370,7 @@
     },
     "/subscriptions/periodic/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "periodicSubGET",
@@ -1449,9 +1386,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "periodicNotificationSubscription"
-                  ],
+                  "required": ["periodicNotificationSubscription"],
                   "properties": {
                     "periodicNotificationSubscription": {
                       "$ref": "#/components/schemas/PeriodicNotificationSubscription"
@@ -1498,9 +1433,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "periodicSubPUT",
@@ -1599,9 +1532,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "periodicSubDELETE",
@@ -1632,9 +1563,7 @@
     },
     "/subscriptions/userTracking": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to user tracking notifications",
         "description": "This operation is used for retrieving all active subscriptions to user tracking notifications.",
         "operationId": "userTrackingSubListGET",
@@ -1645,9 +1574,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -1664,9 +1591,7 @@
                               "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                             },
                             "address": "acr:192.0.2.1",
-                            "userEventCriteria": [
-                              "Transferring"
-                            ]
+                            "userEventCriteria": ["Transferring"]
                           },
                           {
                             "clientCorrelator": "0124",
@@ -1675,9 +1600,7 @@
                               "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                             },
                             "address": "acr:192.0.2.2",
-                            "userEventCriteria": [
-                              "Transferring"
-                            ]
+                            "userEventCriteria": ["Transferring"]
                           }
                         ],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking"
@@ -1691,9 +1614,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for user tracking notification",
         "description": "Creates a subscription to the Location Service for user tracking change notification.",
         "operationId": "userTrackingSubPOST",
@@ -1717,9 +1638,7 @@
                         "notifyURL": "http://my.callback.com/location_notifications/some-id"
                       },
                       "address": "acr:10.0.0.1",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ]
+                      "userEventCriteria": ["Transferring"]
                     }
                   }
                 ]
@@ -1747,9 +1666,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "address": "acr:10.0.0.1",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
                       }
                     }
@@ -1834,9 +1751,7 @@
     },
     "/subscriptions/userTracking/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "userTrackingSubGET",
@@ -1852,9 +1767,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "userTrackingSubscription"
-                  ],
+                  "required": ["userTrackingSubscription"],
                   "properties": {
                     "userTrackingSubscription": {
                       "$ref": "#/components/schemas/UserTrackingSubscription"
@@ -1868,9 +1781,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "address": "acr:10.0.0.1",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
                       }
                     }
@@ -1901,9 +1812,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "userTrackingSubPUT",
@@ -1927,9 +1836,7 @@
                         "notifyURL": "http://my.callback.com/location_notifications/some-id"
                       },
                       "address": "acr:10.0.0.1",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
+                      "userEventCriteria": ["Transferring"],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
                     }
                   }
@@ -1963,9 +1870,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "address": "acr:10.0.0.1",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/userTracking/sub123"
                       }
                     }
@@ -2002,9 +1907,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "userTrackingSubDELETE",
@@ -2035,9 +1938,7 @@
     },
     "/subscriptions/zonalTraffic": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to zonal traffic notifications",
         "description": "This operation is used for retrieving all active subscriptions to zonal traffic change notifications.",
         "operationId": "zonalTrafficSubListGET",
@@ -2048,9 +1949,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -2067,9 +1966,7 @@
                               "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                             },
                             "zoneId": "zone01",
-                            "userEventCriteria": [
-                              "Transferring"
-                            ]
+                            "userEventCriteria": ["Transferring"]
                           },
                           {
                             "clientCorrelator": "0124",
@@ -2078,9 +1975,7 @@
                               "notifyURL": "http://clientApp.example.com/location_notifications/123456"
                             },
                             "zoneId": "zone02",
-                            "userEventCriteria": [
-                              "Transferring"
-                            ]
+                            "userEventCriteria": ["Transferring"]
                           }
                         ],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic"
@@ -2094,9 +1989,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for zonal traffic notification",
         "description": "Creates a subscription to the Location Service for zonal traffic change notification.",
         "operationId": "zonalTrafficSubPOST",
@@ -2120,9 +2013,7 @@
                         "notifyURL": "http://my.callback.com/location_notifications/some-id"
                       },
                       "zoneId": "zone01",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ]
+                      "userEventCriteria": ["Transferring"]
                     }
                   }
                 ]
@@ -2150,9 +2041,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "zoneId": "zone01",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
                       }
                     }
@@ -2237,9 +2126,7 @@
     },
     "/subscriptions/zonalTraffic/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "zonalTrafficSubGET",
@@ -2255,9 +2142,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "zonalTrafficSubscription"
-                  ],
+                  "required": ["zonalTrafficSubscription"],
                   "properties": {
                     "zonalTrafficSubscription": {
                       "$ref": "#/components/schemas/ZonalTrafficSubscription"
@@ -2271,9 +2156,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "zoneId": "zone01",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
                       }
                     }
@@ -2304,9 +2187,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "zonalTrafficSubPUT",
@@ -2330,9 +2211,7 @@
                         "notifyURL": "http://my.callback.com/location_notifications/some-id"
                       },
                       "zoneId": "zone01",
-                      "userEventCriteria": [
-                        "Transferring"
-                      ],
+                      "userEventCriteria": ["Transferring"],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
                     }
                   }
@@ -2366,9 +2245,7 @@
                           "notifyURL": "http://my.callback.com/location_notifications/some-id"
                         },
                         "zoneId": "zone01",
-                        "userEventCriteria": [
-                          "Transferring"
-                        ],
+                        "userEventCriteria": ["Transferring"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zonalTraffic/sub123"
                       }
                     }
@@ -2405,9 +2282,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "zonalTrafficSubDELETE",
@@ -2438,9 +2313,7 @@
     },
     "/subscriptions/zoneStatus": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieves all active subscriptions to zone status notifications",
         "description": "This operation is used for retrieving all active subscriptions to zone status change notifications.",
         "operationId": "zoneStatusSubListGET",
@@ -2451,9 +2324,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "notificationSubscriptionList"
-                  ],
+                  "required": ["notificationSubscriptionList"],
                   "properties": {
                     "notificationSubscriptionList": {
                       "$ref": "#/components/schemas/NotificationSubscriptionList"
@@ -2471,9 +2342,7 @@
                             },
                             "zoneId": "zone01",
                             "numberOfUsersZoneThreshold": 500,
-                            "operationStatus": [
-                              "Serviceable"
-                            ]
+                            "operationStatus": ["Serviceable"]
                           }
                         ],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus"
@@ -2487,9 +2356,7 @@
         }
       },
       "post": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Creates a subscription for zone status notification",
         "description": "Creates a subscription to the Location Service for zone status change notification.",
         "operationId": "zoneStatusSubPOST",
@@ -2514,9 +2381,7 @@
                       },
                       "zoneId": "zone01",
                       "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": [
-                        "Serviceable"
-                      ]
+                      "operationStatus": ["Serviceable"]
                     }
                   }
                 ]
@@ -2545,9 +2410,7 @@
                         },
                         "zoneId": "zone01",
                         "numberOfUsersZoneThreshold": 500,
-                        "operationStatus": [
-                          "Serviceable"
-                        ],
+                        "operationStatus": ["Serviceable"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                       }
                     }
@@ -2632,9 +2495,7 @@
     },
     "/subscriptions/zoneStatus/{subscriptionId}": {
       "get": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Retrieve subscription information",
         "description": "Get subscription information.",
         "operationId": "zoneStatusSubGET",
@@ -2650,9 +2511,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "required": [
-                    "zoneStatusSubscription"
-                  ],
+                  "required": ["zoneStatusSubscription"],
                   "properties": {
                     "zoneStatusSubscription": {
                       "$ref": "#/components/schemas/ZoneStatusSubscription"
@@ -2667,9 +2526,7 @@
                         },
                         "zoneId": "zone01",
                         "numberOfUsersZoneThreshold": 500,
-                        "operationStatus": [
-                          "Serviceable"
-                        ],
+                        "operationStatus": ["Serviceable"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                       }
                     }
@@ -2700,9 +2557,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "put": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Updates a subscription information",
         "description": "Updates a subscription.",
         "operationId": "zoneStatusSubPUT",
@@ -2727,9 +2582,7 @@
                       },
                       "zoneId": "zone01",
                       "numberOfUsersZoneThreshold": 500,
-                      "operationStatus": [
-                        "Serviceable"
-                      ],
+                      "operationStatus": ["Serviceable"],
                       "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                     }
                   }
@@ -2764,9 +2617,7 @@
                         },
                         "zoneId": "zone01",
                         "numberOfUsersZoneThreshold": 500,
-                        "operationStatus": [
-                          "Serviceable"
-                        ],
+                        "operationStatus": ["Serviceable"],
                         "resourceURL": "http://meAppServer.example.com/location/v2/subscriptions/zoneStatus/sub123"
                       }
                     }
@@ -2803,9 +2654,7 @@
         "x-swagger-router-controller": "subscriptions"
       },
       "delete": {
-        "tags": [
-          "location"
-        ],
+        "tags": ["location"],
         "summary": "Cancel a subscription",
         "description": "Method to delete a subscription.",
         "operationId": "zoneStatusSubDELETE",
@@ -3149,10 +2998,7 @@
             "x-etsi-mec-origin-type": "string"
           }
         },
-        "required": [
-          "zoneId",
-          "resourceURL"
-        ],
+        "required": ["zoneId", "resourceURL"],
         "type": "object"
       },
       "CallbackReference": {
@@ -3173,9 +3019,7 @@
             "x-etsi-mec-origin-type": "anyURI"
           }
         },
-        "required": [
-          "notifyURL"
-        ],
+        "required": ["notifyURL"],
         "type": "object"
       },
       "CircleNotificationSubscription": {
@@ -3419,10 +3263,7 @@
         "type": "object"
       },
       "EnteringLeavingCriteria": {
-        "enum": [
-          "Entering",
-          "Leaving"
-        ],
+        "enum": ["Entering", "Leaving"],
         "type": "string"
       },
       "Link": {
@@ -3438,10 +3279,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "rel",
-          "href"
-        ],
+        "required": ["rel", "href"],
         "type": "object"
       },
       "LocationInfo": {
@@ -3578,29 +3416,18 @@
                 "x-etsi-mec-origin-type": "UnsignedInt"
               }
             },
-            "required": [
-              "velocityType",
-              "bearing",
-              "horizontalSpeed"
-            ],
+            "required": ["velocityType", "bearing", "horizontalSpeed"],
             "type": "object",
             "x-etsi-mec-cardinality": "0..1",
             "x-etsi-mec-origin-type": "Structure (inlined)"
           }
         },
-        "required": [
-          "latitude",
-          "longitude",
-          "shape"
-        ],
+        "required": ["latitude", "longitude", "shape"],
         "type": "object",
         "x-etsi-ref": "6.5.3"
       },
       "NotificationFormat": {
-        "enum": [
-          "XML",
-          "JSON"
-        ],
+        "enum": ["XML", "JSON"],
         "type": "string"
       },
       "NotificationSubscriptionList": {
@@ -3673,19 +3500,13 @@
             "x-etsi-mec-origin-type": "ZoneStatusSubscription"
           }
         },
-        "required": [
-          "resourceURL"
-        ],
+        "required": ["resourceURL"],
         "type": "object",
         "x-etsi-notes": "NOTE 1:\tAs specified in [5], clause 5.2.2.8.\nNOTE 2: \tAs specified in [6], clause 5.2.2.7.",
         "x-etsi-ref": "6.3.3"
       },
       "OperationStatus": {
-        "enum": [
-          "Serviceable",
-          "Unserviceable",
-          "Unknown"
-        ],
+        "enum": ["Serviceable", "Unserviceable", "Unknown"],
         "type": "string"
       },
       "PeriodicNotificationSubscription": {
@@ -3796,11 +3617,7 @@
         "type": "object"
       },
       "RetrievalStatus": {
-        "enum": [
-          "Retrieved",
-          "NotRetrieved",
-          "Error"
-        ],
+        "enum": ["Retrieved", "NotRetrieved", "Error"],
         "type": "string"
       },
       "ServiceError": {
@@ -3828,43 +3645,7 @@
             "x-etsi-mec-origin-type": "string"
           }
         },
-        "required": [
-          "messageId",
-          "text"
-        ],
-        "type": "object"
-      },
-      "SubscriptionCancellationNotification": {
-        "description": "A type containing the subscription cancellation notification.",
-        "properties": {
-          "address": {
-            "description": "Address of terminal if the error applies to an individual terminal.",
-            "type": "string",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "anyURI"
-          },
-          "callbackData": {
-            "description": "CallbackData if passed by the application in the receiptRequest element during the associated subscription operation",
-            "type": "string",
-            "x-etsi-mec-cardinality": "0..1",
-            "x-etsi-mec-origin-type": "string"
-          },
-          "link": {
-            "description": "Link to other resources that are in relationship with the resource.",
-            "items": {
-              "$ref": "#/components/schemas/Link"
-            },
-            "type": "array",
-            "x-etsi-mec-cardinality": "0..N",
-            "x-etsi-mec-origin-type": "Link"
-          },
-          "reason": {
-            "$ref": "#/components/schemas/ServiceError"
-          }
-        },
-        "required": [
-          "terminalLocation"
-        ],
+        "required": ["messageId", "text"],
         "type": "object"
       },
       "SubscriptionNotification": {
@@ -3907,9 +3688,7 @@
             "x-etsi-mec-origin-type": "TerminalLocation"
           }
         },
-        "required": [
-          "terminalLocation"
-        ],
+        "required": ["terminalLocation"],
         "type": "object"
       },
       "TerminalDistance": {
@@ -3931,9 +3710,7 @@
             "$ref": "#/components/schemas/TimeStamp"
           }
         },
-        "required": [
-          "distance"
-        ],
+        "required": ["distance"],
         "type": "object"
       },
       "TerminalLocation": {
@@ -3955,20 +3732,8 @@
             "$ref": "#/components/schemas/RetrievalStatus"
           }
         },
-        "required": [
-          "address",
-          "locationRetrievalStatus"
-        ],
+        "required": ["address", "locationRetrievalStatus"],
         "type": "object"
-      },
-      "TerminalLocationList": {
-        "description": "Collection of the terminal locations.",
-        "items": {
-          "$ref": "#/components/schemas/TerminalLocation"
-        },
-        "type": "array",
-        "x-etsi-mec-cardinality": "1..N",
-        "x-etsi-mec-origin-type": "TerminalLocation"
       },
       "TimeStamp": {
         "properties": {
@@ -3987,19 +3752,12 @@
             "x-etsi-mec-origin-type": "Uint32"
           }
         },
-        "required": [
-          "seconds",
-          "nanoSeconds"
-        ],
+        "required": ["seconds", "nanoSeconds"],
         "type": "object",
         "x-etsi-ref": "6.5.2"
       },
       "UserEventType": {
-        "enum": [
-          "Entering",
-          "Leaving",
-          "Transferring"
-        ],
+        "enum": ["Entering", "Leaving", "Transferring"],
         "type": "string"
       },
       "UserInfo": {
@@ -4036,7 +3794,7 @@
             "description": "Self-referring URL, see note 1.",
             "type": "string",
             "x-etsi-mec-cardinality": "1",
-            "x-etsi-mec-origin-type": "String"
+            "x-etsi-mec-origin-type": "AnyURI"
           },
           "timestamp": {
             "$ref": "#/components/schemas/TimeStamp"
@@ -4078,9 +3836,7 @@
             "x-etsi-mec-origin-type": "UserInfo"
           }
         },
-        "required": [
-          "resourceURL"
-        ],
+        "required": ["resourceURL"],
         "type": "object"
       },
       "UserTrackingSubscription": {
@@ -4117,10 +3873,7 @@
             "x-etsi-mec-origin-type": "UserEventType"
           }
         },
-        "required": [
-          "callbackReference",
-          "address"
-        ],
+        "required": ["callbackReference", "address"],
         "type": "object"
       },
       "ZonalPresenceNotification": {
@@ -4236,10 +3989,7 @@
             "x-etsi-mec-origin-type": "string"
           }
         },
-        "required": [
-          "callbackReference",
-          "zoneId"
-        ],
+        "required": ["callbackReference", "zoneId"],
         "type": "object"
       },
       "ZoneInfo": {
@@ -4302,9 +4052,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "resourceURL"
-        ],
+        "required": ["resourceURL"],
         "type": "object"
       },
       "ZoneStatusNotification": {
@@ -4356,10 +4104,7 @@
             "x-etsi-mec-origin-type": "string"
           }
         },
-        "required": [
-          "zoneId",
-          "timestamp"
-        ],
+        "required": ["zoneId", "timestamp"],
         "type": "object"
       },
       "ZoneStatusSubscription": {
@@ -4408,10 +4153,7 @@
             "x-etsi-mec-origin-type": "string"
           }
         },
-        "required": [
-          "callbackReference",
-          "zoneId"
-        ],
+        "required": ["callbackReference", "zoneId"],
         "type": "object"
       }
     }
