@@ -5,7 +5,7 @@ This repository contains OpenAPIs descriptions for the interfaces specified in E
 ## Online resources
 
 * [Specification Document](https://www.etsi.org/deliver/etsi_gs/MEC/001_099/013/02.02.01_60/gs_MEC013v020201p.pdf)
-* [Navigate the API in the browser](https://redocly.github.io/redoc/?url=https://forge.etsi.org/rep/mec/gs013-location-api/-/raw/v2.2.1/LocationAPI.yaml)
+* [Navigate the API in the browser](https://redocly.github.io/redoc/?url=https://forge.etsi.org/rep/mec/gs013-location-api/raw/v2.2.1/LocationAPI.yaml&nocors)
 
 ## License
 
